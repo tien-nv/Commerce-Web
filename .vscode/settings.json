@@ -1,7 +1,0 @@
-{
-    "git.allowForcePush": true,
-    "git.autofetch": true,
-    "git.enableCommitSigning": true,
-    "git.enableSmartCommit": true,
-    "git.fetchOnPull": true
-}
