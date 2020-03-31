@@ -1,3 +1,12 @@
+body{
+    background: #ddd repeat left top !important;
+    font-weight: 300;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
 div{
     margin: 0;
     padding: 0;
@@ -73,9 +82,8 @@ div{
 }
 
 .headerBar-nav {
-    background: #FFF;
-    border-top: 1px solid #ececec;
-    border-bottom: 1px solid #ECECEC;
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #fff;
 }
 
 .headerBar-navInner {
@@ -84,7 +92,7 @@ div{
 }
 
 .headerBar-navInner>.Popup {
-    border-right: 1px solid #ECECEC;
+    border-right: 1px solid #fff;
     position: relative;
     width: 244px;
     box-sizing: border-box;
