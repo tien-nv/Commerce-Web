@@ -1,0 +1,115 @@
+div{
+    margin: 0;
+    padding: 0;
+}
+
+.pageWidth{
+    padding-right: 25px;
+    padding-left: 25px;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 1200px;
+}
+
+.headerBar{
+    display: flex;
+    padding: 15px 0 15px 0;
+    align-items: center;
+    height: 80px;
+    box-sizing: border-box;
+}
+
+.headerBar .iconImg{
+    width: 40px;
+    height: 40px;
+}
+
+.headerBar .findForm{
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    flex: 1;
+    margin-left: 50px;
+}
+
+.headerBar .findForm .selection{
+    display: inline-flex;
+    margin-top: 15px;
+    min-width: 725px;
+}
+
+.headerBar .findForm .inputColor{
+    background-color: #e5e5e5;
+}
+
+.headerBar .findForm .searchColor{
+    background-color: #dd512a;
+    border: #dd512a;
+}
+
+.headerBar-right{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.headerBar-right .headerBar-register{
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+    margin-right: 22px;
+}
+
+.headerBar-right .headerBar-login{
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+    margin-right: 22px;
+}
+
+.headerBar-right .searchColor{
+    background-color: #dd512a;
+    border: #dd512a;
+}
+
+.headerBar-nav {
+    background: #FFF;
+    border-top: 1px solid #ececec;
+    border-bottom: 1px solid #ECECEC;
+}
+
+.headerBar-navInner {
+    display: flex;
+    align-items: center;
+}
+
+.headerBar-navInner>.Popup {
+    border-right: 1px solid #ECECEC;
+    position: relative;
+    width: 244px;
+    box-sizing: border-box;
+    padding: 12px 22px;
+    position: relative;;
+}
+
+.headerBar-navInner>* {
+    padding: 12px 15px;
+    line-height: 26px;
+    box-sizing: border-box;
+    height: 50px;
+}
+
+.headerBar-navInner .headerBar-navListCat {
+    color: #DD512A;
+}
+
+
+@media(max-width:800px){
+    .pageWidth{ /*Nếu độ rộng của thiết bị tối đa là 800px thì thu ngắn div lại*/
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+    .headerBar .findForm .selection{
+        min-width: 120px;
+    }
+}
