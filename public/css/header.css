@@ -160,6 +160,7 @@ div{
     z-index: 9999;
 }
 
+
 .popupHeading {
     font-size: 24px;
     font-weight: 500;
@@ -219,6 +220,16 @@ div{
     right: 5%;
     background: #fff;
     text-align: center;
+}
+
+.my-alert-input{
+    padding: 0;
+    color: red;
+    display: none;
+}
+
+input:focus{
+    border: 1px solid #ced4da;
 }
 
 .dropdown {

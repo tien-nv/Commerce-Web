@@ -1,2 +1,0 @@
-This folder is in oder to up library or framework in the project.
-If need to install some framework please required here.

@@ -4,11 +4,11 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>PornHub of VietNamese</title>
-        <link rel="stylesheet" href="../public/css/header.css">
-        <link rel="stylesheet" href="../bin/bootstrap441/css/bootstrap.min.css">
-        <script src="../bin/bootstrap441/js/bootstrap.min.js"></script>
-        <script src="../bin/jquery341/jquery.min.js"></script>
-        <script src="../public/js/header.js"></script>
+        <script src="..\\bin\\jquery341\\jquery.min.js"></script>
+        <link rel="stylesheet" href="..\\bin\\bootstrap441\\css\\bootstrap.min.css">
+        <script src="..\\bin\\bootstrap441\\js\\bootstrap.min.js"></script>
+        <link rel="stylesheet" href="..\\public\\css\\header.css">
+        <script src="..\\public\\js\\header.js"></script>
     </head>
     <body>
         <header>
@@ -30,51 +30,57 @@
                             <a href="#"><button class="btn btn-primary searchColor">Đăng bán</button></a>
                         </div>
                         <div id="overlayRegister">
-                            <form action="#" method="post" class="formContentPopup" id="registerForm">
+                            <form action="#" onsubmit="return validateRegister()" method="post" class="formContentPopup" name="registerForm" id="registerForm">
                                 <h3 class="popupHeading">Đăng kí tài khoản mới</h3>
                                 <div>
-                                    <input type="email" name="emailRegister" id="emailRegister" class="form-control" placeholder="Email">
+                                    <span class="my-alert-input" id="emailRegister"></span>
+                                    <input type="email" name="emailRegister" class="form-control" placeholder="Email">
                                 </div>
                                 <div>
-                                    <input type="password" name="passwordRegister" id="passwordRegister" class="form-control" placeholder="Mật khẩu">
+                                    <span class="my-alert-input" id="passwordRegister"></span>
+                                    <input type="password" name="passwordRegister" class="form-control" placeholder="Mật khẩu">
                                 </div>
                                 <div>
-                                    <input type="password" name="checkPasswordRegister" id="checkPasswordRegister" class="form-control" placeholder="Xác nhận mật khẩu">
+                                    <span class="my-alert-input" id="checkPasswordRegister"></span>
+                                    <input type="password" name="checkPasswordRegister" class="form-control" placeholder="Xác nhận mật khẩu">
                                 </div>
                                 <div class="divider">
                                     <span>Một số thông tin khác</span>
                                 </div>
+                                <span class="my-alert-input" id="birthday"></span>
                                 <label for="birthday">Ngày sinh:</label>
                                 <div>
-                                    <input type="date" name="birthday" id="birthday" class="form-control" style="margin: 0 0 10px 0;">
+                                    <input type="date" name="birthday" class="form-control" style="margin: 0 0 10px 0;">
                                 </div>
                                 <label for="sel1">Giới tính:</label>
-                                <select class="form-control" id="sel1" name="sellist1">
+                                <select class="form-control" id="sel1" name="sellist1" required>
                                     <option value="1">nam</option>
                                     <option value="0">nữ</option>
                                     <option value="-1">không muốn nói</option>
                                 </select>
                                 <div>
                                     <button type="submit" class="btn btn-primary setColor">Đăng kí tài khoản</button>
-                                    <a class="btn btn-primary setColor" style="color: white;margin-left: 30px;" onclick="offRegister()">Cancel</a>
+                                    <button type="button" class="btn btn-primary setColor" onclick="offRegister()">Cancel</button>
                                 </div>
                             </form>
                         </div>
                         <div id="overlayLogin">
-                            <form action="#" method="post" class="formContentPopup" id="loginForm">
+                            <form action="#" onsubmit="return validateLogin()" method="post" name="loginForm" class="formContentPopup" id="loginForm">
                                 <h3 class="popupHeading">Đăng nhập vào tài khoản</h3>
                                 <div>
-                                    <input type="email" name="emailLogin" id="emailLogin" class="form-control" placeholder="Email">
+                                    <span class="my-alert-input" id="emailLogin"></span>
+                                    <input type="text" name="emailLogin" class="form-control" placeholder="Email">
                                 </div>
                                 <div>
-                                    <input type="password" name="passwordLogin" id="passwordLogin" class="form-control" placeholder="Mật khẩu">
+                                    <span class="my-alert-input" id="passwordLogin"></span>
+                                    <input type="password" name="passwordLogin" class="form-control" placeholder="Mật khẩu">
                                 </div>
                                 <div class="divider">
                                     <a href="#">Quên mật khẩu?</a>
                                 </div>
                                 <div>
                                     <button type="submit" class="btn btn-primary setColor">Đăng nhập tài khoản</button>
-                                    <a class="btn btn-primary setColor" style="color: white;margin-left: 30px;" onclick="offLogin()">Cancel</a>
+                                    <button type="button" class="btn btn-primary setColor" onclick="offLogin()" >Cancel</button>
                                 </div>
                             </form>
                         </div>
