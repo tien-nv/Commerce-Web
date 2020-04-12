@@ -7,8 +7,8 @@
         <script src="..\\bin\\jquery341\\jquery.min.js"></script>
         <link rel="stylesheet" href="..\\bin\\bootstrap441\\css\\bootstrap.min.css">
         <script src="..\\bin\\bootstrap441\\js\\bootstrap.min.js"></script>
-        <link rel="stylesheet" href="..\\public\\css\\header.css">
-        <script src="..\\public\\js\\header.js"></script>
+        <link rel="stylesheet" href="css\\header.css">
+        <script src="js\\header.js"></script>
     </head>
     <body>
         <header>
@@ -16,7 +16,7 @@
                 <div class="pageWidth">
                     <div class="headerBar">
                         <a href="#">
-                            <img src="..\\public\\img\\iconHome.png" alt="Commerce_Web" class="iconImg">
+                            <img src="img\\iconHome.png" alt="Commerce_Web" class="iconImg">
                         </a>
                         <form action="#" method="post" class="findForm">
                                 <div class="form-group selection">
@@ -30,7 +30,7 @@
                             <a href="#"><button class="btn btn-primary searchColor">Đăng bán</button></a>
                         </div>
                         <div id="overlayRegister">
-                            <form action="#" onsubmit="return validateRegister()" method="post" class="formContentPopup" name="registerForm" id="registerForm">
+                            <form action="/routes/controlRegister.php" onsubmit="return validateRegister()" method="post" class="formContentPopup" name="registerForm" id="registerForm">
                                 <h3 class="popupHeading">Đăng kí tài khoản mới</h3>
                                 <div>
                                     <span class="my-alert-input" id="emailRegister"></span>
@@ -69,7 +69,7 @@
                             </form>
                         </div>
                         <div id="overlayLogin">
-                            <form action="#" onsubmit="return validateLogin()" method="post" name="loginForm" class="formContentPopup" id="loginForm">
+                            <form action="/routes/controlLogin.php" onsubmit="return validateLogin()" method="post" name="loginForm" class="formContentPopup" id="loginForm">
                                 <h3 class="popupHeading">Đăng nhập vào tài khoản</h3>
                                 <div>
                                     <span class="my-alert-input" id="usernameLogin"></span>
