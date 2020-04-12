@@ -23,7 +23,7 @@ function offLogin(){
 
 //login and register
 var regEmail = /[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}/i; //dấu cộng là xuất hiện 1 lần
-var regUserName = /^([a-zA-Z0-9]{1,5})([\\._]{0,1})([a-zA-Z0-9]{1,10})$/;
+var regUserName = /^([a-zA-Z0-9]{1,})([\\._]{0,1})([a-zA-Z0-9]{1,10})$/;
 var regPass = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$/;
 //check dữ liệu nhập vào register
 var mess = [
