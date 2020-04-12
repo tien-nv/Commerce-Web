@@ -19,7 +19,11 @@ function offLogin(){
     document.getElementById("overlayLogin").style.display = "none";
 }
 
-var regEmail = /[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}/i;
+
+
+//login and register
+var regEmail = /[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}/i; //dấu cộng là xuất hiện 1 lần
+var regUserName = /^([a-zA-Z0-9]{1,5})([\\._]{0,1})([a-zA-Z0-9]{1,10})$/;
 var regPass = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$/;
 //check dữ liệu nhập vào register
 var mess = [
@@ -29,7 +33,8 @@ var mess = [
         "password phải có 8 kí tự trở lên gồm cả số và chữ, 1 kí tự viết hoa",
         //register message
         "password không khớp",
-        "Ngày tháng không hợp lệ"
+        "Ngày tháng không hợp lệ",
+        "Username từ  chỉ được chứa các kí tự chữ số và dấu . -, tối đa 16 kí tự và kết thúc bằng chữ hoặc số"
     ];
 
 function checkField(nameForm,nameElement,reg,number,show){
@@ -85,13 +90,14 @@ function checkDate(){
 }
 
 function validateLogin(){
-    if(!checkField("loginForm","emailLogin",regEmail,1,onLogin())) return false;
+    if(!checkField("loginForm","usernameLogin",regUserName,5,onLogin())) return false;
     if(!checkField("loginForm","passwordLogin",regPass,2,onLogin())) return false;
     return true;
 }
 
 function validateRegister(){
     if(!checkField("registerForm","emailRegister",regEmail,1,onRegister())) return false;
+    if(!checkField("registerForm","userRegister",regUserName,5,onRegister())) return false;
     if(!checkField("registerForm","passwordRegister",regPass,2,onRegister())) return false;
     if(!checkField("registerForm","checkPasswordRegister",regPass,2,onRegister())) return false;
     let pass = document.forms["registerForm"]["passwordRegister"].value;
