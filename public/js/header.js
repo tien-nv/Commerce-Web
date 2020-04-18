@@ -1,21 +1,21 @@
 //hiển thị đè thông tin đăng kí
 
-function onRegister(){
-    document.getElementById("overlayRegister").style.display= "block";
+function onRegister() {
+    document.getElementById("overlayRegister").style.display = "block";
 }
 
-function offRegister(){
+function offRegister() {
     document.getElementById("overlayRegister").style.display = "none";
 }
 
 
 //hiển thị thông tin đăng nhập
 
-function onLogin(){
-    document.getElementById("overlayLogin").style.display= "block";
+function onLogin() {
+    document.getElementById("overlayLogin").style.display = "block";
 }
 
-function offLogin(){
+function offLogin() {
     document.getElementById("overlayLogin").style.display = "none";
 }
 
@@ -25,30 +25,32 @@ function offLogin(){
 var regEmail = /[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}/i; //dấu cộng là xuất hiện 1 lần
 var regUserName = /^([a-zA-Z0-9]{1,})([\\._]{0,1})([a-zA-Z0-9]{1,10})$/;
 var regPass = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$/;
+var regPhone = /((09|03|07|08|05)+([0-9]{8})\b)/g;
 //check dữ liệu nhập vào register
 var mess = [
-        "Trường này không thể để trống",
-        //login message
-        "Email không hợp lệ",
-        "password phải có 8 kí tự trở lên gồm cả số và chữ, 1 kí tự viết hoa",
-        //register message
-        "password không khớp",
-        "Ngày tháng không hợp lệ",
-        "Username từ  chỉ được chứa các kí tự chữ số và dấu . -, tối đa 16 kí tự và kết thúc bằng chữ hoặc số"
-    ];
+    "Trường này không thể để trống",
+    //login message
+    "Email không hợp lệ",
+    "password phải có 8 kí tự trở lên gồm cả số và chữ, 1 kí tự viết hoa",
+    //register message
+    "password không khớp",
+    "Ngày tháng không hợp lệ",
+    "Username từ  chỉ được chứa các kí tự chữ số và dấu . -, tối đa 16 kí tự và kết thúc bằng chữ hoặc số",
+    "Số điện thoại không hợp lệ hoặc đã được sử dụng"
+];
 
-function checkField(nameForm,nameElement,reg,number,show){
+function checkField(nameForm, nameElement, reg, number, show) {
     let val = document.forms[nameForm][nameElement].value;
-    document.forms[nameForm][nameElement].onclick = function (){
+    document.forms[nameForm][nameElement].onclick = function() {
         document.getElementById(nameElement).style.display = "none";
     };
-    if(val.length == 0){
+    if (val.length == 0) {
         show;
         document.getElementById(nameElement).innerHTML = mess[0];
         document.getElementById(nameElement).style.display = "block";
         return false;
     }
-    if(!reg.test(val)){
+    if (!reg.test(val)) {
         show;
         document.getElementById(nameElement).innerHTML = mess[number];
         document.getElementById(nameElement).style.display = "block";
@@ -57,58 +59,59 @@ function checkField(nameForm,nameElement,reg,number,show){
     return true;
 }
 
-function checkDate(){
+function checkDate() {
     let birthday = document.forms["registerForm"]["birthday"].value;
-    let year = birthday.substring(0,4);
-    let month = birthday.substring(5,7);
-    let day = birthday.substring(8,10);
-        if(month > 0 && month <= 12){
-            if(month == 2){
-                if((((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0))){
-                    if(day <= 29) return true;
-                    else return false;
-                }else{
-                    if(day <= 28) return true;
-                    else return false;
-                }
-            }
-            if(month <= 7 && month % 2 == 1 ){ // 1 3 5 7 9 11
-                if(day <= 31) return true;
+    let year = birthday.substring(0, 4);
+    let month = birthday.substring(5, 7);
+    let day = birthday.substring(8, 10);
+    if (month > 0 && month <= 12) {
+        if (month == 2) {
+            if ((((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0))) {
+                if (day <= 29) return true;
                 else return false;
-            }else if(month <= 7 && month % 2 == 0){
-                if(day <= 30) return true;
-                else return false;
-            }
-            if(month >= 8 && month %2 == 0){
-                if(day <= 31) return true;
-                else return false;
-            }else if(month >= 8 && month % 2 == 1){
-                if(day <= 30) return true;
+            } else {
+                if (day <= 28) return true;
                 else return false;
             }
         }
+        if (month <= 7 && month % 2 == 1) { // 1 3 5 7 9 11
+            if (day <= 31) return true;
+            else return false;
+        } else if (month <= 7 && month % 2 == 0) {
+            if (day <= 30) return true;
+            else return false;
+        }
+        if (month >= 8 && month % 2 == 0) {
+            if (day <= 31) return true;
+            else return false;
+        } else if (month >= 8 && month % 2 == 1) {
+            if (day <= 30) return true;
+            else return false;
+        }
+    }
 }
 
-function validateLogin(){
-    if(!checkField("loginForm","usernameLogin",regUserName,5,onLogin())) return false;
-    if(!checkField("loginForm","passwordLogin",regPass,2,onLogin())) return false;
+function validateLogin() {
+    if (!checkField("loginForm", "usernameLogin", regUserName, 5, onLogin())) return false;
+    if (!checkField("loginForm", "passwordLogin", regPass, 2, onLogin())) return false;
     return true;
 }
 
-function validateRegister(){
-    if(!checkField("registerForm","emailRegister",regEmail,1,onRegister())) return false;
-    if(!checkField("registerForm","userRegister",regUserName,5,onRegister())) return false;
-    if(!checkField("registerForm","passwordRegister",regPass,2,onRegister())) return false;
-    if(!checkField("registerForm","checkPasswordRegister",regPass,2,onRegister())) return false;
+function validateRegister() {
+    if (!checkField("registerForm", "emailRegister", regEmail, 1, onRegister())) return false;
+    if (!checkField("registerForm", "userRegister", regUserName, 5, onRegister())) return false;
+    if (!checkField("registerForm", "phoneRegister", regPhone, 6, onRegister())) return false;
+    if (!checkField("registerForm", "passwordRegister", regPass, 2, onRegister())) return false;
+    if (!checkField("registerForm", "checkPasswordRegister", regPass, 2, onRegister())) return false;
     let pass = document.forms["registerForm"]["passwordRegister"].value;
     let pass_ = document.forms["registerForm"]["checkPasswordRegister"].value;
-    if(pass != pass_){
+    if (pass != pass_) {
         document.getElementById("checkPasswordRegister").style.display = "block";
         document.getElementById("checkPasswordRegister").innerHTML = mess[3];
         return false;
     }
-    if(checkDate() == false){
-        document.forms["registerForm"]["birthday"].onclick = function (){
+    if (checkDate() == false) {
+        document.forms["registerForm"]["birthday"].onclick = function() {
             document.getElementById("birthday").style.display = "none";
         };
         document.getElementById("birthday").style.display = "block";
@@ -119,3 +122,13 @@ function validateRegister(){
 }
 
 //ckech dữ liệu nhập vào login
+
+// xử lý reponsive navbar
+function showNavBar() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+        x.className += " responsive";
+    } else {
+        x.className = "topnav";
+    }
+}

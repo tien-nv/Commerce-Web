@@ -9,6 +9,6 @@ class LoginController extends Controller{
     }
     public function getLogin(Request $request){
         $userName = $_POST['usernameLogin'];
-        return view('homeUser',compact('userName'));
+        return view('home',compact('userName'));
     }
 }
