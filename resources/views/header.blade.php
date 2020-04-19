@@ -102,7 +102,7 @@
                             <input type="password" name="passwordAdminLogin" class="form-control" placeholder="Mật khẩu">
                         </div>
                         <div class="divider">
-                            <a href="#loginForm" onclick="offAdminLogin();onLogin();">Không phải Admin?</a>
+                            <a href="javascript:void(0)" onclick="offAdminLogin();onLogin();">Không phải Admin?</a>
                         </div>
                         <div>
                             <button type="submit" class="btn btn-primary setColor">Đăng nhập tài khoản</button>
