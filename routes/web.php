@@ -16,3 +16,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/','HomeController@getHomeView');
 
 Route::post('/login','LoginController@getLogin');
+
+Route::post('/adminlogin','LoginController@getAdminLogin');

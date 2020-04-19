@@ -19,6 +19,15 @@ function offLogin() {
     document.getElementById("overlayLogin").style.display = "none";
 }
 
+//hiển thị thông tin đăng nhập cho admin
+
+function onAdminLogin() {
+    document.getElementById("overlayAdminLogin").style.display = "block";
+}
+
+function offAdminLogin() {
+    document.getElementById("overlayAdminLogin").style.display = "none";
+}
 
 
 //login and register
@@ -94,6 +103,12 @@ function checkDate() {
 function validateLogin() {
     if (!checkField("loginForm", "usernameLogin", regUserName, 5, onLogin())) return false;
     if (!checkField("loginForm", "passwordLogin", regPass, 2, onLogin())) return false;
+    return true;
+}
+
+function validateAdminLogin() {
+    if (!checkField("loginAdminForm", "adminLogin", regUserName, 5, onAdminLogin())) return false;
+    if (!checkField("loginAdminForm", "passwordAdminLogin", regPass, 2, onAdminLogin())) return false;
     return true;
 }
 

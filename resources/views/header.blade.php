@@ -14,8 +14,14 @@
                 </form>
                 @if(!isset($userName))
                 <div class="headerBar-right">
-                    <a href="#registerForm" class="headerBar-register" onclick="onRegister()">Đăng ký</a>
-                    <a href="#loginForm" class="headerBar-login" onclick="onLogin()">Đăng nhập</a>
+                    <a href="javascript:void(0)" class="headerBar-register" onclick="onRegister()">Đăng ký</a>
+                    <div class="my-dropdown">
+                        <span class="headerBar-login" >Đăng nhập</span>
+                        <div id="my-dropdown-content">
+                            <a href="javascript:void(0)" onclick="onLogin()">User Login</a>
+                            <a href="javascript:void(0)" onclick="onAdminLogin()">Admin Login</a>
+                        </div>
+                    </div>
                     <a href="#"><button class="btn btn-primary searchColor">Đăng bán</button></a>
                 </div>
                 <div id="overlayRegister">
@@ -65,7 +71,7 @@
                 <div id="overlayLogin">
                     <form action="{{ url('login') }}" onsubmit="return validateLogin()" method="post" name="loginForm" class="formContentPopup" id="loginForm">
                         {{ csrf_field() }}
-                        <h3 class="popupHeading">Đăng nhập vào tài khoản</h3>
+                        <h3 class="popupHeading">Đăng nhập như User</h3>
                         <div>
                             <span class="my-alert-input" id="usernameLogin"></span>
                             <input type="text" name="usernameLogin" class="form-control" placeholder="UserName">
@@ -80,6 +86,27 @@
                         <div>
                             <button type="submit" class="btn btn-primary setColor">Đăng nhập tài khoản</button>
                             <button type="button" class="btn btn-primary setColor" onclick="offLogin()">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+                <div id="overlayAdminLogin">
+                    <form action="{{ url('adminlogin') }}" onsubmit="return validateAdminLogin()" method="post" name="loginAdminForm" class="formContentPopup" id="loginAdminForm">
+                        {{ csrf_field() }}
+                        <h3 class="popupHeading">Đăng nhập như Admin</h3>
+                        <div>
+                            <span class="my-alert-input" id="adminLogin"></span>
+                            <input type="text" name="adminLogin" class="form-control" placeholder="Admin Name">
+                        </div>
+                        <div>
+                            <span class="my-alert-input" id="passwordAdminLogin"></span>
+                            <input type="password" name="passwordAdminLogin" class="form-control" placeholder="Mật khẩu">
+                        </div>
+                        <div class="divider">
+                            <a href="#loginForm" onclick="offAdminLogin();onLogin();">Không phải Admin?</a>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-primary setColor">Đăng nhập tài khoản</button>
+                            <button type="button" class="btn btn-primary setColor" onclick="offAdminLogin()">Cancel</button>
                         </div>
                     </form>
                 </div>
