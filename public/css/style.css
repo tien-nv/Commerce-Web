@@ -311,6 +311,7 @@ Theme Default CSS (body, link color, section, ...)
     .topnav {
         overflow: hidden;
         background-color: #3A3D42;
+        box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 8px 10px 1px rgba(0, 0, 0, 0.14);
     }
     
     .topnav a {
@@ -613,4 +614,62 @@ Theme Default CSS (body, link color, section, ...)
         .formContentPopup {
             width: 50%;
         }
+    }
+    /*-------------------------------------------
+            style for admin page
+
+    -----------------------------------------------/
+    /*--------------------------------------------
+    category:
+
+    -----------------------------------------------*/
+    
+    .admin_page {
+        width: auto;
+        padding: 40px;
+    }
+    
+    .admin_page .area {
+        border: 1px solid rgb(144, 146, 144);
+        padding: 20px;
+        box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 8px 10px 1px rgba(0, 0, 0, 0.14);
+        border-radius: 10px;
+        text-align: center;
+    }
+    
+    .admin_page label {
+        font-size: 25px;
+        font-weight: 600;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #dd512a;
+    }
+    
+    .admin_page option {
+        padding: 7px 0 7px 0;
+        border-top: 1px solid #ddd;
+        margin: 0 5px 0 5px;
+    }
+    
+    .admin_page select {
+        margin: 5px 0 10px 0;
+    }
+    
+    .admin_page .row {
+        margin-top: 70px;
+    }
+    
+    .admin_page button {
+        background-color: #FF4F4F;
+        border: #ff4f4f;
+    }
+    
+    .admin_page input {
+        padding: 10px;
+        margin: 30px 0 30px 0;
+    }
+    
+    .admin_page span {
+        text-align: left;
+        font-size: 20px;
+        font-weight: 400;
     }

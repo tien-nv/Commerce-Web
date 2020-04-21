@@ -13,7 +13,7 @@ class LoginController extends Controller{
 
     //funtion này check login của 1 admin
     public function getAdminLogin(Request $request){
-
+        $adminName = $_POST['adminLogin'];
         return view('adminpage',compact('adminName'));
     }
 }

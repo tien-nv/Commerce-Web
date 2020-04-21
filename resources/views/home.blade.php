@@ -3,13 +3,17 @@
 @section('title','Pornhub of VietNamese')
 
 @section('header')
-    @include('header')
+    @include('user_frontend/header')
 @endsection
 
 @section('content')
-    @include('content')
+    @include('user_frontend/content')
+@endsection
+
+@section('main')
+    @include('user_frontend/main')
 @endsection
 
 @section('footer')
-    @include('footer')
+    @include('user_frontend/footer')
 @endsection
