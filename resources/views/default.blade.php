@@ -11,7 +11,10 @@
     <link rel="stylesheet" href="bin\\bootstrap441\\css\\bootstrap.min.css">
     <script src="bin\\jquery341\\jquery.min.js"></script>
     <script src="bin\\bootstrap441\\js\\bootstrap.min.js"></script>
+    @section('addlib')
+    @show
     <link rel="stylesheet" href="css\\style.css">
+    
 </head>
 
 <body>

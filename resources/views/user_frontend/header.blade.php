@@ -16,7 +16,7 @@
                 <div class="headerBar-right">
                     <a href="javascript:void(0)" class="headerBar-register" onclick="onRegister()">Đăng ký</a>
                     <div class="my-dropdown">
-                        <span class="headerBar-login" >Đăng nhập</span>
+                        <span class="headerBar-login">Đăng nhập</span>
                         <div id="my-dropdown-content">
                             <a href="javascript:void(0)" onclick="onLogin()">User Login</a>
                             <a href="javascript:void(0)" onclick="onAdminLogin()">Admin Login</a>
@@ -25,7 +25,7 @@
                     <a href="#"><button class="btn btn-primary searchColor">Đăng bán</button></a>
                 </div>
                 <div id="overlayRegister">
-                    <form action="{{ url('register') }}" onsubmit="return validateRegister()" method="post" class="formContentPopup" name="registerForm" id="registerForm">
+                    <form action="{{ route('userRegister') }}" onsubmit="return validateRegister()" method="post" class="formContentPopup" name="registerForm" id="registerForm">
                         {{ csrf_field() }}
                         <h3 class="popupHeading">Đăng kí tài khoản mới</h3>
                         <div>
@@ -69,7 +69,7 @@
                     </form>
                 </div>
                 <div id="overlayLogin">
-                    <form action="{{ url('login') }}" onsubmit="return validateLogin()" method="post" name="loginForm" class="formContentPopup" id="loginForm">
+                    <form action="{{ route('/')}}" onsubmit="return validateLogin()" method="post" name="loginForm" class="formContentPopup" id="loginForm">
                         {{ csrf_field() }}
                         <h3 class="popupHeading">Đăng nhập như User</h3>
                         <div>
@@ -90,7 +90,7 @@
                     </form>
                 </div>
                 <div id="overlayAdminLogin">
-                    <form action="{{ url('adminlogin') }}" onsubmit="return validateAdminLogin()" method="post" name="loginAdminForm" class="formContentPopup" id="loginAdminForm">
+                    <form action="{{ route('adminLogin') }}" onsubmit="return validateAdminLogin()" method="post" name="loginAdminForm" class="formContentPopup" id="loginAdminForm">
                         {{ csrf_field() }}
                         <h3 class="popupHeading">Đăng nhập như Admin</h3>
                         <div>
@@ -112,7 +112,13 @@
                 </div>
                 @else
                 <div class="headerBar-right">
-                    <a href="#" class="headerBar-login" style="margin-right: 40px;color: green;">Welcome {{$userName }}</a>
+                    <div class="my-dropdown">
+                    <a href="javascript:void(0)" class="headerBar-login" style="margin-right: 40px;color: green;">Welcome {{$userName }}</a>
+                        <div id="my-dropdown-content">
+                            <a href="#">Profile user</a>
+                            <a href="#">Check out</a>
+                        </div>
+                    </div>
                     <a href="#"><button class="btn btn-primary searchColor">Đăng bán</button></a>
                 </div>
                 @endif

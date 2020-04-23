@@ -15,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/','HomeController@getHomeView');
 
-Route::post('/login','LoginController@getLogin');
+Route::post('/userRegister','LoginController@getLogin')->name('userRegister');
 
-Route::post('/adminlogin','LoginController@getAdminLogin');
+Route::post('/','LoginController@getLogin')->name('/');
+
+Route::post('/adminLogin','LoginController@getAdminLogin')->name('adminLogin');
+
+Route::get('/addProduct','adminController@addProduct')->name('addProduct');
