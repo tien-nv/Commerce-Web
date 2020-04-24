@@ -13,12 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/','HomeController@getHomeView');
+Route::get('/','LoginController@getHomeView');
 
-Route::post('/userRegister','LoginController@getLogin')->name('userRegister');
+Route::post('/userRegister','LoginController@getUserRegister')->name('userRegister');
 
-Route::post('/','LoginController@getLogin')->name('/');
+Route::post('/adminRegister','LoginController@getAdminRegister')->name('adminRegister');
+
+Route::post('/userLogin','LoginController@getUserLogin')->name('userLogin');
 
 Route::post('/adminLogin','LoginController@getAdminLogin')->name('adminLogin');
+
+Route::get('/logOutUser','LoginController@logOutUser')->name('logOutUser');
+
+Route::get('/logOutAdmin','LoginController@logOutAdmin')->name('logOutAdmin');
 
 Route::get('/addProduct','adminController@addProduct')->name('addProduct');

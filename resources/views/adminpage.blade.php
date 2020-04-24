@@ -6,7 +6,6 @@
 <script type="text/javascript" src="js\\admin.js"></script>
 @endsection
 
-
 @section('main')
 @include('admin_frontend/main')
 @endsection

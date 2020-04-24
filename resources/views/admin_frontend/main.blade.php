@@ -2,6 +2,17 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
+                <div class="my-dropdown">
+                    <label> <a href="javascript:void(0)" class="headerBar-login" style="margin-right: 40px;color: green;">Welcome {{$adminName }}</a></label>
+                    <div id="my-dropdown-content">
+                        <a href="#">Profile</a>
+                        <a href="{{route('logOutAdmin')}}">Check out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
                 <div class=" area">
                     <form action="javascript:void(0)">
                         <label for="sel1">Thêm sản phẩm</label>
@@ -98,7 +109,7 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
                 <div class="area">
                     <form action="{{ url('adminRegister') }}" onsubmit="return validateAdminRegister()" method="post" name="registerAdminForm" id="registerAdminForm">
-                        <!-- {{ csrf_field() }} -->
+                        {{ csrf_field() }}
                         <label>Thêm admin</label>
                         <div>
                             <span class="my-alert-input" id="adminRegister"></span>

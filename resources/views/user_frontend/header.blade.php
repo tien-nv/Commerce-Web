@@ -5,13 +5,19 @@
                 <a href="#">
                     <img src="img\\iconHome.png" alt="Commerce_Web" class="iconImg">
                 </a>
-                <form action="#" method="post" class="findForm">
+                <form action="javascript:void(0)" method="post" class="findForm" id="findForm" name="findForm">
                     {{ csrf_field() }}
+                    <!-- chỗ này dùng ajax -->
                     <div class="form-group selection">
                         <input type="search" class="form-control inputColor" id="search" placeholder="Tìm kiếm ?" name="search">
                         <button type="submit" class="btn btn-primary searchColor">Search</button>
                     </div>
                 </form>
+                @if(isset($result))
+                    <script>
+                        alert("something went wrong");
+                    </script>
+                @endif
                 @if(!isset($userName))
                 <div class="headerBar-right">
                     <a href="javascript:void(0)" class="headerBar-register" onclick="onRegister()">Đăng ký</a>
@@ -57,19 +63,21 @@
                             <input type="date" name="birthday" class="form-control" style="margin: 0 0 10px 0;">
                         </div>
                         <label for="sel1">Giới tính:</label>
-                        <select class="form-control" id="sel1" name="sellist1" required>
-                            <option value="1">nam</option>
-                            <option value="0">nữ</option>
-                            <option value="-1">không muốn nói</option>
+                        <select class="form-control" id="sel1" name="sel1" required>
+                            <option value="men">nam</option>
+                            <option value="women">nữ</option>
+                            <option value="not_all">không muốn nói</option>
                         </select>
-                        <div>
+                        <label for="address">Địa chỉ:</label>
+                        <textarea class="form-control" id="address" name="address" rows="3" placeholder="Địa chỉ nhận hàng" require></textarea>
+                        <div style="margin: 30px 0 0 0;">
                             <button type="submit" class="btn btn-primary setColor">Đăng kí tài khoản</button>
                             <button type="button" class="btn btn-primary setColor" onclick="offRegister()">Cancel</button>
                         </div>
                     </form>
                 </div>
                 <div id="overlayLogin">
-                    <form action="{{ route('/')}}" onsubmit="return validateLogin()" method="post" name="loginForm" class="formContentPopup" id="loginForm">
+                    <form action="{{ route('userLogin')}}" onsubmit="return validateLogin()" method="post" name="loginForm" class="formContentPopup" id="loginForm">
                         {{ csrf_field() }}
                         <h3 class="popupHeading">Đăng nhập như User</h3>
                         <div>
@@ -113,10 +121,10 @@
                 @else
                 <div class="headerBar-right">
                     <div class="my-dropdown">
-                    <a href="javascript:void(0)" class="headerBar-login" style="margin-right: 40px;color: green;">Welcome {{$userName }}</a>
+                        <a href="javascript:void(0)" class="headerBar-login" style="margin-right: 40px;color: green;">Welcome {{$userName }}</a>
                         <div id="my-dropdown-content">
                             <a href="#">Profile user</a>
-                            <a href="#">Check out</a>
+                            <a href="{{route('logOutUser')}}">Check out</a>
                         </div>
                     </div>
                     <a href="#"><button class="btn btn-primary searchColor">Đăng bán</button></a>
