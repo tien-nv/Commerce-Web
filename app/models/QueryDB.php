@@ -20,7 +20,7 @@ class QueryDB extends Model
             return false;
         }
         $sql = "INSERT INTO user (User_ID, User_Role, UserName, Password, Address, Mail, Phone)
-        VALUES ('NULL','$userRole','$userName','$password','$address','$email',$phone)";
+        VALUES (NULL,'".$userRole."','".$userName."','".$password."','".$address."','".$email."','".$phone."')";
         $accept = $connect->query($sql);
         $connect->close();
         return $accept;

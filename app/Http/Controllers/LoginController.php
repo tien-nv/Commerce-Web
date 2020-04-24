@@ -38,11 +38,8 @@ class LoginController extends Controller{
         
         $query = new QueryDB();
         $result = $query->addUser($userRole,$userName,$password,$address,$email,$phone);
-        // $result = $query->addUser()
-        // $result = $query->selectUser('user','UserName','Password','Mail');
         if($result){
-            // $userName = $result[1]['Mail'];
-            return view('home',compact('userName'));
+            return view('home',compact('userName','result'));
         }else{
             return view('home',compact('result'));
         }

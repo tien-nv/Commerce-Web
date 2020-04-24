@@ -13,9 +13,13 @@
                         <button type="submit" class="btn btn-primary searchColor">Search</button>
                     </div>
                 </form>
-                @if(isset($result))
+                @if(isset($result) && $result == false)
                     <script>
-                        alert("something went wrong");
+                        alert("something went wrong can't register");
+                    </script>
+                @elseif(isset($result) && $result == true)
+                    <script>
+                        alert("Success Register bạn đã đăng nhập thành công");
                     </script>
                 @endif
                 @if(!isset($userName))
