@@ -13,16 +13,21 @@
                         <button type="submit" class="btn btn-primary searchColor">Search</button>
                     </div>
                 </form>
-                @if(isset($result) && $result == false)
+                @if(isset($resultRegister) && $resultRegister === false)
                     <script>
                         alert("something went wrong can't register");
                     </script>
-                @elseif(isset($result) && $result == true)
+                @elseif(isset($resultRegister) && $resultRegister === true)
                     <script>
                         alert("Success Register bạn đã đăng nhập thành công");
                     </script>
                 @endif
-                @if(!isset($userName))
+                @if(isset($check) && $check === false)
+                    <script>
+                        alert("something went wrong username or password not true");
+                    </script>
+                @endif
+                @if(!isset($userName) ||(isset($check) && $check === false))
                 <div class="headerBar-right">
                     <a href="javascript:void(0)" class="headerBar-register" onclick="onRegister()">Đăng ký</a>
                     <div class="my-dropdown">
@@ -122,7 +127,7 @@
                         </div>
                     </form>
                 </div>
-                @else
+                @elseif(isset($userName) && ((isset($check) && $check === true) || (isset($resultRegister) && $resultRegister === true)))
                 <div class="headerBar-right">
                     <div class="my-dropdown">
                         <a href="javascript:void(0)" class="headerBar-login" style="margin-right: 40px;color: green;">Welcome {{$userName }}</a>

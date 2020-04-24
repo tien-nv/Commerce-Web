@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 
 use App\models\accountProcess; //sử dụng file này để lấy các kết quả query để check account
 use App\models\QueryDB;
-use ArrayObject;
 
 class LoginController extends Controller{
     /***************************************
@@ -19,8 +18,13 @@ class LoginController extends Controller{
             $userName = $_COOKIE['userName_cw'];
             $password = $_COOKIE['password_cw'];
             //gọi đến hàm kiểm tra
+            $check = accountProcess::checkUserLogin($userName,$password);
             // nếu hợp lệ
-            return view('home',compact('userName'));
+            if($check === true)
+                return view('home',compact('userName','check'));
+            else{
+                return view('home',compact('check'));
+            }
             // nếu không hợp lệ: return view('home');
         }
         
@@ -37,11 +41,13 @@ class LoginController extends Controller{
         $address = $request->input('address');
         
         $query = new QueryDB();
-        $result = $query->addUser($userRole,$userName,$password,$address,$email,$phone);
-        if($result){
-            return view('home',compact('userName','result'));
+        $resultRegister = $query->addUser($userRole,$userName,$password,$address,$email,$phone);
+        if($resultRegister){
+            //nếu thành công thì dadwndg nhập và hiện thị thông báo
+            return view('home',compact('userName','resultRegister'));
         }else{
-            return view('home',compact('result'));
+            // không thì hiện thị khoogn thành công
+            return view('home',compact('resultRegister'));
         }
     }
 
@@ -54,10 +60,12 @@ class LoginController extends Controller{
      *                  LOGIN FUNCTION
      -------------------------------------------------*/
     //funtion này check login của 1 username
-    public function getLogin(Request $request){
+    public function getUserLogin(Request $request){
         $userName = $request->input('usernameLogin');
         $password = $request->input('passwordLogin');
-
+        $check = accountProcess::checkUserLogin($userName,$password);
+        //nếu khong hợp lệ thì trả về thông báo khoogn hợp lệ
+        if($check === false) return view('home',compact('check'));
         //gọi hàm check tài khoản
         //nếu hợp lệ thì set cookies
         $cookie_username = 'userName_cw';
@@ -71,7 +79,7 @@ class LoginController extends Controller{
         $_SESSION['userName'] = $userName;
         $_SESSION['password'] = $password;
 
-        return view('home',compact('userName'));
+        return view('home',compact('userName','check'));
     }
 
     //funtion này check login của 1 admin
@@ -79,6 +87,7 @@ class LoginController extends Controller{
         $adminName = $request->input('adminLogin');
         $password = $request->input('passwordAdminLogin');
         //gọi hàm check account
+
         //nếu hợp lệ thì set sessions
         
         //set session
