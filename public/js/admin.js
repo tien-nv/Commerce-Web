@@ -14,7 +14,7 @@ function showValue(id) {
                     method: "GET",
                     data: { selected: val },
                     success: function(data) {
-                        alert(data);
+                        alert(typeof(data[2]));
                     },
                     error: function() {
                         alert("something went wrong!!!!" + val[0]);

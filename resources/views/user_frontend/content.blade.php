@@ -4,7 +4,7 @@
     <a href="#">Camera</a>
     <a href="#">Phone</a>
     <a href="#">Car</a>
-    <a href="#" class="shop-cart" title="View my shopping cart">
+    <a href="#" class="shop-cart" title="View shopping cart">
         <i class="fa fa-shopping-cart cart-icon"></i>
         <b>My Cart</b>
     </a>

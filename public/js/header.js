@@ -163,30 +163,3 @@ function showNavBar() {
         x.className = "topnav";
     }
 }
-
-
-
-
-
-//---------------------------------------------------------------------------
-//---------------------------------------------------------------------------
-// xử lý code ajax
-
-//ajax đăng nhập
-// function loginAjax(name, pass) {
-//     $(document).ready(function() {
-//         // var _token = $('input[name="_token"]').val();
-//         alert('clicked');
-//         $.ajax({
-//             url: "userLogin",
-//             method: "POST",
-//             data: { name: name, pass: pass },
-//             success: function(data) {
-//                 $("#login").innerHTML = 'Welcome ' + name;
-//             },
-//             error: function() {
-//                 alert('Something went wrong!!!!')
-//             }
-//         });
-//     });
-// }

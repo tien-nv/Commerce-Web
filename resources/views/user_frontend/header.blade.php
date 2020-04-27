@@ -2,30 +2,32 @@
     <div class="container-fluid">
         <div class="pageWidth">
             <div class="headerBar">
+                <div class="headerBar-left">
                 <a href="#">
                     <img src="img\\iconHome.png" alt="Commerce_Web" class="iconImg">
                 </a>
                 <form action="javascript:void(0)" method="post" class="findForm" id="findForm" name="findForm">
-                    {{ csrf_field() }}
                     <!-- chỗ này dùng ajax -->
+                    {{ csrf_field() }}
                     <div class="form-group selection">
                         <input type="search" class="form-control inputColor" id="search" placeholder="Tìm kiếm ?" name="search">
                         <button type="submit" class="btn btn-primary searchColor">Search</button>
                     </div>
                 </form>
+                </div>
                 @if(isset($resultRegister) && $resultRegister === false)
-                    <script>
-                        alert("something went wrong can't register");
-                    </script>
+                <script>
+                    alert("something went wrong can't register");
+                </script>
                 @elseif(isset($resultRegister) && $resultRegister === true)
-                    <script>
-                        alert("Success Register bạn đã đăng nhập thành công");
-                    </script>
+                <script>
+                    alert("Success Register bạn đã đăng nhập thành công");
+                </script>
                 @endif
                 @if(isset($check) && $check === false)
-                    <script>
-                        alert("something went wrong username or password not true");
-                    </script>
+                <script>
+                    alert("something went wrong!!! username or password not true");
+                </script>
                 @endif
                 @if(!isset($userName) ||(isset($check) && $check === false))
                 <div class="headerBar-right">
@@ -45,15 +47,15 @@
                         <h3 class="popupHeading">Đăng kí tài khoản mới</h3>
                         <div>
                             <span class="my-alert-input" id="emailRegister"></span>
-                            <input type="email" name="emailRegister" class="form-control" placeholder="Email">
+                            <input type="email" id="inputEmail" name="emailRegister" class="form-control" placeholder="Email" onkeyup="checkConflicUserRegister('#inputEmail','#emailRegister','mail')">
                         </div>
                         <div>
                             <span class="my-alert-input" id="userRegister"></span>
-                            <input type="text" name="userRegister" class="form-control" placeholder="UserName">
+                            <input type="text" id="inputUsername" name="userRegister" class="form-control" placeholder="UserName" onkeyup="checkConflicUserRegister('#inputUsername','#userRegister','username')">
                         </div>
                         <div>
                             <span class="my-alert-input" id="phoneRegister"></span>
-                            <input type="text" name="phoneRegister" class="form-control" placeholder="Phone number">
+                            <input type="text" id="inputPhone" name="phoneRegister" class="form-control" placeholder="Phone number" onkeyup="checkConflicUserRegister('#inputPhone','#phoneRegister','phone')">
                         </div>
                         <div>
                             <span class="my-alert-input" id="passwordRegister"></span>
@@ -87,8 +89,8 @@
                 </div>
                 <div id="overlayLogin">
                     <form action="{{ route('userLogin')}}" onsubmit="return validateLogin()" method="post" name="loginForm" class="formContentPopup" id="loginForm">
-                        {{ csrf_field() }}
-                        <h3 class="popupHeading">Đăng nhập như User</h3>
+                    {{ csrf_field() }}
+                    <h3 class="popupHeading">Đăng nhập như User</h3>
                         <div>
                             <span class="my-alert-input" id="usernameLogin"></span>
                             <input type="text" name="usernameLogin" class="form-control" placeholder="UserName">
@@ -143,3 +145,50 @@
         </div>
     </div>
 </header>
+<!-- script ajax -->
+<script>
+    //function ajax để check các trường mà người dùng nhập vào có bị trùng lặp hay không
+    //check từ database.
+    function checkConflicUserRegister(idInput, idError, field) {
+        var inputVal = $(idInput).val();
+        if (inputVal.length > 0) {
+            var _token = $('input[name="_token"]').val();
+
+            $.ajax({
+                url: "userInputRegister",
+                method: "post",
+                data: {
+                    _token: _token,
+                    inputVal: inputVal,
+                    field: field
+                },
+                // headers: {'X-CSRF-TOKEN': _token},
+                success: function(data) {
+                    $(idError).css("display", "block");
+                    if (data == 0) {
+                        // alert("ok");
+                        $(idError).css("color", "red");
+                        $(idError).text("Đã có người sử dụng cái này :)");
+                        $('#registerForm').onsub
+                    } else {
+                        $(idError).css("color", "green");
+                        $(idError).text('Cái này chưa ai dùng <3');
+                    }
+                },
+                error: function() {
+                    alert('Something went wrong!!!!')
+                }
+            });
+        } else {
+            $(idError).css("color", "red");
+            $(idError).css("display", "none");
+        }
+    }
+
+
+    //function khi người dùng click xem thêm thì query thêm
+
+
+
+    //function khi người dùng tìm kiếm một cái gì đó
+</script>

@@ -37,10 +37,18 @@ Theme Default CSS (body, link color, section, ...)
         padding-left: 1%;
         margin-right: auto;
         margin-left: auto;
-        max-width: 1200px;
+        max-width: auto;
     }
     
     .headerBar {
+        display: flex;
+        padding: 15px 0 15px 0;
+        align-items: center;
+        height: 80px;
+        box-sizing: border-box;
+    }
+    
+    .headerBar .headerBar-left {
         display: flex;
         padding: 15px 0 15px 0;
         align-items: center;
@@ -81,20 +89,22 @@ Theme Default CSS (body, link color, section, ...)
         display: flex;
         align-items: center;
         justify-content: space-between;
+        margin-left: 3%;
     }
     
     .headerBar-right .headerBar-register {
         font-size: 18px;
         font-weight: 500;
         letter-spacing: 0.2px;
-        margin-right: 22px;
+        margin-right: 25px;
+        margin-left: 50px;
     }
     
     .headerBar-right .headerBar-login {
         font-size: 18px;
         font-weight: 500;
         letter-spacing: 0.2px;
-        margin-right: 22px;
+        margin-right: 25px;
         color: #007bff;
     }
     
@@ -302,6 +312,90 @@ Theme Default CSS (body, link color, section, ...)
     input:focus {
         border: 1px solid #ced4da;
     }
+    
+    @media screen and (max-width:1100px) {
+        .pageWidth {
+            /*Nếu độ rộng của thiết bị tối đa là 800px thì thu ngắn div lại*/
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+        .headerBar {
+            display: block;
+            height: auto;
+        }
+        .headerBar .findForm {
+            margin-left: 5%;
+        }
+        .headerBar .findForm .selection {
+            min-width: 80vw;
+        }
+        .formContentPopup {
+            width: 50%;
+        }
+        .headerBar .headerBar-right {
+            width: 60vw;
+            margin-left: 18%;
+        }
+        .headerBar-right {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width:600px) {
+        .pageWidth {
+            /*Nếu độ rộng của thiết bị tối đa là 800px thì thu ngắn div lại*/
+            padding-right: 5px;
+            padding-left: 5px;
+        }
+        .headerBar {
+            display: block;
+            height: auto;
+        }
+        .headerBar .findForm {
+            margin-left: 20px;
+        }
+        .headerBar .findForm .selection {
+            min-width: 75vw;
+        }
+        .formContentPopup {
+            width: 70%;
+        }
+        .headerBar .headerBar-right {
+            width: 80vw;
+            margin-left: 1%;
+            margin-right: 0%;
+        }
+        .headerBar-right {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width:300px) {
+        .pageWidth {
+            /*Nếu độ rộng của thiết bị tối đa là 800px thì thu ngắn div lại*/
+            padding-right: 5px;
+            padding-left: 5px;
+        }
+        .headerBar {
+            display: block;
+            height: auto;
+        }
+        .headerBar .findForm {
+            margin-left: 20px;
+        }
+        .headerBar .findForm .selection {
+            min-width: 75vw;
+        }
+        .formContentPopup {
+            width: 90%;
+        }
+        .headerBar .headerBar-right {
+            width: 100%;
+        }
+        .headerBar-right {
+            margin-left: 0;
+        }
+    }
     /*----------------------------------------------------
                             content css
 ------------------------------------------------------*/
@@ -365,13 +459,17 @@ Theme Default CSS (body, link color, section, ...)
             display: block;
             text-align: left;
         }
+        .topnav .shop-cart {
+            margin-right: 0%;
+        }
     }
     /*-----------------------
 3.4 mainmenu my cart
 -------------------------*/
     
-    .shop-cart {
-        margin-inline-start: 45%;
+    .topnav .shop-cart {
+        float: right;
+        margin-right: 2%;
     }
     /*------------------------------------------------------
                             main css
@@ -379,33 +477,52 @@ Theme Default CSS (body, link color, section, ...)
     
     .main-component {
         margin: 30px 0 30px 0;
-        position: relative;
-        display: block;
     }
     
     .main-component .products {
-        width: auto;
-        height: 60vh;
+        display: inline-flex;
+        width: 100%;
+        height: auto;
+        flex-wrap: wrap;
+        align-items: center;
     }
     
-    .main-component .products .one-product {
-        background-color: rgb(250, 250, 250);
-        width: auto;
+    .main-component .products .thread_list {
+        padding: 7.5px;
+        flex-basis: 20%;
+        height: 430px;
+    }
+    
+    .main-component .one-product {
         font-size: 15px;
         font-weight: 700;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        border: 1px solid #555;
         box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 8px 10px 1px rgba(0, 0, 0, 0.14);
+        margin: 1%;
+        width: 100%;
+        flex-direction: column;
+        background: #fff;
+        border: 1px solid #e8ecf2;
+        height: 100%;
+        border-radius: 4px;
+        overflow: hidden;
     }
     
     .one-product img {
         width: 100%;
-        height: auto;
-        object-fit: contain;
+        height: 230px;
+        object-fit: cover;
+        background-position: center;
+        position: relative;
     }
     
     .one-product .product-content {
         color: #2D3035;
+        display: -webkit-flex;
+        flex-shrink: 1;
+        flex-direction: column;
+        flex: 1;
+        padding: 10px;
     }
     
     .product-content p {
@@ -414,6 +531,54 @@ Theme Default CSS (body, link color, section, ...)
     
     p i {
         padding: 0 5px 0 0;
+    }
+    
+    .product-content .content {
+        display: -webkit-flex;
+        flex-shrink: 1;
+        flex-direction: column;
+    }
+    
+    .product-content .content .user {
+        color: #007bff;
+        font-size: 12px;
+    }
+    
+    .product-content .content .name-product {
+        color: #555555;
+        font-size: 17px;
+    }
+    
+    .product-content .cost {
+        font-size: 22px;
+    }
+    
+    .main-component .other {
+        margin: 20px 0 10px 46%;
+    }
+    
+    @media(max-width:800px) {
+        .main-component .products .thread_list {
+            flex-basis: 50% !important;
+            padding: 4px;
+        }
+        /* .main-component .one-product {
+        flex-basis: 50% !important;
+    } */
+    }
+    
+    @media(max-width:300px) {
+        .main-component .products .thread_list {
+            flex-basis: 100% !important;
+            padding: 10px;
+        }
+    }
+    
+    @media(min-width:801px) and (max-width:1000px) {
+        .main-component .products .thread_list {
+            flex-basis: 33% !important;
+            padding: 10px;
+        }
     }
     /*----------------------------------------------------
     /*------------------------------------------------------
@@ -641,20 +806,6 @@ Theme Default CSS (body, link color, section, ...)
     
     .copy-right address a:hover {
         color: #fff;
-    }
-    
-    @media(max-width:800px) {
-        .pageWidth {
-            /*Nếu độ rộng của thiết bị tối đa là 800px thì thu ngắn div lại*/
-            padding-right: 15px;
-            padding-left: 15px;
-        }
-        .headerBar .findForm .selection {
-            min-width: 120px;
-        }
-        .formContentPopup {
-            width: 50%;
-        }
     }
     /*-------------------------------------------
             style for admin page

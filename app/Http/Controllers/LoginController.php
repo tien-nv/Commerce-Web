@@ -32,6 +32,24 @@ class LoginController extends Controller{
     /*************************************************
      *                  REGISTER FUNCTION
      **************************************************/
+    public function checkRegister(Request $request){
+        $inputVal = $request->get('inputVal');
+        $field = $request->get('field');
+        if($field === 'username'){
+            $respon = accountProcess::isUsernameOk($inputVal);
+            return $respon;
+        }
+        if($field === 'mail'){
+            $respon = accountProcess::isEmailOk($inputVal);
+            return $respon;
+        }
+        if($field === 'phone'){
+            $respon = accountProcess::isPhoneOk($inputVal);
+            return $respon;
+        }
+        return 0;
+    }
+
     public function getUserRegister(Request $request){
         $email = $request->input('emailRegister');
         $userName = $request->input('userRegister');

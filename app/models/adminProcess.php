@@ -8,6 +8,7 @@ class adminProcess extends Model
 {
     ////
     public function addProduct($data){
-        return $data;
+        $test = array("xin choa","bye",$data);
+        return $test;
     }
 }
