@@ -163,3 +163,20 @@ function showNavBar() {
         x.className = "topnav";
     }
 }
+
+
+// xử lý hiển thị chi tiết 1 sản phẩm
+function onProductDesc() {
+    $(document).ready(function() {
+        // alert("ok");
+        $("#product-description").css("display", "block");
+
+    });
+}
+
+
+function offProductDesc() {
+    $(document).ready(function() {
+        $("#product-description").css("display", "none");
+    })
+}
