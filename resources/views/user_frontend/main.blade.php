@@ -6,13 +6,13 @@
         <!-- một vòng for để show hàng của các sản phẩm -->
         <div id="row-products" class="products">
             <!-- một vòng for để show sản phẩm một row là -->
-            @for($i = 0;$i < 10;$i++) <div class="thread_list">
+            @for($i = 0;$i < 15;$i++) <div class="thread_list">
                 <div id="single-product" class="one-product ">
                     <!-- div show ảnh -->
                     <div>
                         <!-- thay các biến bắng {{}} -->
                         <a href="javascript:void(0)" onclick="onProductDesc()">
-                            <img src="img\\product1.jpg" alt="sản phẩm" title="ấn vào để xem chi tiết">
+                            <img src="img\\product2.jpg" alt="sản phẩm" title="ấn vào để xem chi tiết">
                         </a>
                     </div>
                     <!-- div show tiêu đề -->
@@ -31,91 +31,8 @@
                 </div>
         </div>
         @endfor
-        <div class="thread_list">
-            <div id="single-product" class="one-product ">
-                <!-- div show ảnh -->
-                <div>
-                    <img src="img\\product1.jpg" alt="sản phẩm">
-                </div>
-                <!-- div show tiêu đề -->
-                <div class="product-content">
-                    <div class="content">
-                        <p class="user">username người bán</p>
-                        <p class="name-product">tên sản phẩm</p>
-                    </div>
-                    <p class="cost">2.000.000 vnd</p>
-                    <p><i class="fa fa-map-marker"></i>Hà nội</p>
-                </div>
-            </div>
-        </div>
-        <div class="thread_list">
-            <div id="single-product" class="one-product ">
-                <!-- div show ảnh -->
-                <div>
-                    <img src="img\\product1.jpg" alt="sản phẩm">
-                </div>
-                <!-- div show tiêu đề -->
-                <div class="product-content">
-                    <div class="content">
-                        <p class="user">username người bán</p>
-                        <p class="name-product">tên sản phẩm</p>
-                    </div>
-                    <p class="cost">2.000.000</p>
-                    <p><i class="fa fa-map-marker"></i>Hà nội</p>
-                </div>
-            </div>
-        </div>
-        <div class="thread_list">
-            <div id="single-product" class="one-product ">
-                <!-- div show ảnh -->
-                <div>
-                    <img src="img\\product1.jpg" alt="sản phẩm">
-                </div>
-                <!-- div show tiêu đề -->
-                <div class="product-content">
-                    <div class="content">
-                        <p class="user">username người bán</p>
-                        <p class="name-product">tên sản phẩm</p>
-                    </div>
-                    <p class="cost">2.000.000</p>
-                    <p><i class="fa fa-map-marker"></i>Hà nội</p>
-                </div>
-            </div>
-        </div>
-        <div class="thread_list">
-            <div id="single-product" class="one-product ">
-                <!-- div show ảnh -->
-                <div>
-                    <img src="img\\product2.jpg" alt="sản phẩm">
-                </div>
-                <!-- div show tiêu đề -->
-                <div class="product-content">
-                    <div class="content">
-                        <p class="user">username người bán</p>
-                        <p class="name-product">tên sản phẩm</p>
-                    </div>
-                    <p class="cost">2.000.000</p>
-                    <p><i class="fa fa-map-marker"></i>Hà nội</p>
-                </div>
-            </div>
-        </div>
-        <div class="thread_list">
-            <div id="single-product" class="one-product ">
-                <!-- div show ảnh -->
-                <div>
-                    <a href="javascript:void(0)" onclick="onProductDesc()"><img src="img\\product1.jpg" alt="sản phẩm"></a>
-                </div>
-                <!-- div show tiêu đề -->
-                <div class="product-content">
-                    <div class="content">
-                        <p class="user">username người bán</p>
-                        <p class="name-product">tên sản phẩm</p>
-                    </div>
-                    <p class="cost">2.000.000</p>
-                    <p><i class="fa fa-map-marker"></i>Hà nội</p>
-                </div>
-            </div>
-        </div>
+        <!-- vị trí này để chèn thêm các sản phẩm sau khi click xem thêm -->
+        
     </div>
     <div class="other">
         <button type="button" class="btn btn-dark" id="seeMore" onclick="">XEM THÊM</button>

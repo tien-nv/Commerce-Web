@@ -7,119 +7,149 @@ use Illuminate\Http\Request;
 use App\models\accountProcess; //sử dụng file này để lấy các kết quả query để check account
 use App\models\QueryDB;
 
-class LoginController extends Controller{
+class LoginController extends Controller
+{
     /***************************************
      *              TRANG CHỦ FUNCTION
      ******************************************/
-    public function getHomeView(){
-        if(!isset($_COOKIE['userName_cw']) || !isset($_COOKIE['password_cw'])) { //userName_commerceWeb
+    public function getHomeView()
+    {
+        if (!isset($_COOKIE['userName_cw']) || !isset($_COOKIE['password_cw'])) { //userName_commerceWeb
             return view('home');
         } else {
             $userName = $_COOKIE['userName_cw'];
             $password = $_COOKIE['password_cw'];
+            $userName = decrypt($userName);
+            $password = decrypt($password); // ra plain text
+            
+            $password = hash("ripemd160",$password);
             //gọi đến hàm kiểm tra
-            $check = accountProcess::checkUserLogin($userName,$password);
+            $check = accountProcess::checkUserLogin($userName, $password);
             // nếu hợp lệ
-            if($check === true)
-                return view('home',compact('userName','check'));
-            else{
-                return view('home',compact('check'));
+            if ($check === true)
+                return view('home', compact('userName', 'check'));
+            else {
+                //hủy bỏ cookies
+                $cookie_username = 'userName_cw';
+                $cookie_password = 'password_cw';
+                setcookie($cookie_username, "", time() - 3600); //
+                //mật khẩu
+                setcookie($cookie_password, "", time() - 3600); //
+                return view('home', compact('check'));
             }
             // nếu không hợp lệ: return view('home');
         }
-        
     }
     /*************************************************
      *                  REGISTER FUNCTION
      **************************************************/
-    public function checkRegister(Request $request){
+    public function checkRegister(Request $request)
+    {
         $inputVal = $request->get('inputVal');
         $field = $request->get('field');
-        if($field === 'username'){
+        if ($field === 'username') {
             $respon = accountProcess::isUsernameOk($inputVal);
             return $respon;
         }
-        if($field === 'mail'){
+        if ($field === 'mail') {
             $respon = accountProcess::isEmailOk($inputVal);
             return $respon;
         }
-        if($field === 'phone'){
+        if ($field === 'phone') {
             $respon = accountProcess::isPhoneOk($inputVal);
             return $respon;
         }
         return 0;
     }
 
-    public function getUserRegister(Request $request){
+    public function getUserRegister(Request $request)
+    {
         $email = $request->input('emailRegister');
         $userName = $request->input('userRegister');
         $password = $request->input('passwordRegister');
         $phone = $request->input('phoneRegister');
         $userRole = $request->input('sel1');
         $address = $request->input('address');
-        
+
+
+        //mã hóa password người dùng rồi luuwu vào database để đảm bảo quyền riêng tư
+        $password = hash('ripemd160', $password);
         $query = new QueryDB();
-        $resultRegister = $query->addUser($userRole,$userName,$password,$address,$email,$phone);
-        if($resultRegister){
+        $resultRegister = $query->addUser($userRole, $userName, $password, $address, $email, $phone);
+        if ($resultRegister) {
             //nếu thành công thì dadwndg nhập và hiện thị thông báo
-            return view('home',compact('userName','resultRegister'));
-        }else{
+            return view('home', compact('userName', 'resultRegister'));
+        } else {
             // không thì hiện thị khoogn thành công
-            return view('home',compact('resultRegister'));
+            return view('home', compact('resultRegister'));
         }
     }
 
 
-    public function getAdminRegister(){
-
+    public function getAdminRegister()
+    {
     }
 
     /**************************************************
      *                  LOGIN FUNCTION
      -------------------------------------------------*/
     //funtion này check login của 1 username
-    public function getUserLogin(Request $request){
+    public function getUserLogin(Request $request)
+    {
         $userName = $request->input('usernameLogin');
-        $password = $request->input('passwordLogin');
-        $check = accountProcess::checkUserLogin($userName,$password);
+        $password_plaintext = $request->input('passwordLogin');
+        $password = hash("ripemd160",$password_plaintext);
+        $check = accountProcess::checkUserLogin($userName, $password);
         //nếu khong hợp lệ thì trả về thông báo khoogn hợp lệ
-        if($check === false) return view('home',compact('check'));
+        if ($check === false) return view('home', compact('check'));
         //gọi hàm check tài khoản
         //nếu hợp lệ thì set cookies
-        $cookie_username = 'userName_cw';
-        $cookie_password = 'password_cw';
-        setcookie($cookie_username, $userName, time() + (86400 * 30)); //1 day
-        //mật khẩu
-        setcookie($cookie_password, $password, time() + (86400 * 30)); //1 day
-        
         //set session
         session_start();
-        $_SESSION['userName'] = $userName;
-        $_SESSION['password'] = $password;
+        $_SESSION['userName_cw'] = $userName;
+        $_SESSION['password_cw'] = $password; //password này đã được mã hóa hash
 
-        return view('home',compact('userName','check'));
+        //mã hóa tên các trường
+        $cookie_username = 'userName_cw';
+        $cookie_password = 'password_cw';
+        // $cookie_username = encrypt($cookie_username);
+        // $cookie_password = encrypt($cookie_password);
+        //mã hóa username và password
+        $userName_encry = encrypt($userName);
+        $password_encry = encrypt($password_plaintext);
+
+        //đặt cookies là cái mã hóa
+        setcookie($cookie_username, $userName_encry, time() + (86400 * 30)); //1 day
+        //mật khẩu
+        
+        setcookie($cookie_password, $password_encry, time() + (86400 * 30)); //1 day
+
+        //trả về tên dạng plaintext
+        return view('home', compact('userName', 'check'));
     }
 
     //funtion này check login của 1 admin
-    public function getAdminLogin(Request $request){
+    public function getAdminLogin(Request $request)
+    {
         $adminName = $request->input('adminLogin');
         $password = $request->input('passwordAdminLogin');
         //gọi hàm check account
 
         //nếu hợp lệ thì set sessions
-        
+
         //set session
         session_start();
         $_SESSION['adminName'] = $adminName;
         $_SESSION['passwordAdmin'] = $password;
-        return view('adminpage',compact('adminName'));
+        return view('adminpage', compact('adminName'));
     }
 
     /*----------------------------------------------------------
                 LOGOUT FUNCTION
     -----------------------------------------------------------*/
     //logout function
-    public function logOutUser(){
+    public function logOutUser()
+    {
         //hủy bỏ session
         session_unset();
 
@@ -130,13 +160,12 @@ class LoginController extends Controller{
         //mật khẩu
         setcookie($cookie_password, "", time() - 3600); //
 
-        return(view('home'));
+        return (view('home'));
     }
 
-    public function logOutAdmin(){
+    public function logOutAdmin()
+    {
         session_unset();
-        return(view('home'));
+        return (view('home'));
     }
-
-
 }
