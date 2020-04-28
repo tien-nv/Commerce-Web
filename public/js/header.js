@@ -180,3 +180,69 @@ function offProductDesc() {
         $("#product-description").css("display", "none");
     })
 }
+
+// function next ảnh
+
+function prevImg() {
+    $(document).ready(function() {
+        var curr = currentSlide();
+        showSlides(curr - 1);
+        $('#big-img').slideUp(1).slideDown(1);
+    });
+}
+
+function nextImg() {
+    $(document).ready(function() {
+        var curr = currentSlide();
+        showSlides(curr + 1);
+        $('#big-img').slideUp(1).slideDown(1);
+    });
+}
+
+function showClickSlide(n) {
+    $(document).ready(function() {
+        showSlides(n);
+        $('#big-img').slideUp(1).slideDown(1);
+    });
+}
+
+function currentSlide() {
+    let bigImg = $('#big-img').attr('src');
+    let lengthBigImg = bigImg.length;
+    let listSmallImg = $('#list-img > #small-img');
+    var l = listSmallImg.length;
+    var temp;
+    for (var i = 0; i < l; i++) {
+        temp = listSmallImg[i].src.substring(listSmallImg[i].src.length - lengthBigImg, listSmallImg[i].src.length);
+        if (temp == bigImg) {
+            //next ảnh nếu chưa phải ảnh cuối
+            return i;
+        }
+    }
+}
+
+function showSlides(n) {
+    $(document).ready(function() {
+        var slides = $('#list-img > #small-img');
+        var dots = document.getElementsByClassName("dot");
+        for (var i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+
+        if (n > slides.length - 1) {
+            $('#big-img').attr('src', slides[0].src);
+            dots[0].className += " active";
+
+            return 0;
+        }
+        if (n < 0) {
+            $('#big-img').attr('src', slides[slides.length - 1].src);
+            dots[slides.length - 1].className += " active";
+            return slides.length - 1;
+        }
+        $('#big-img').attr('src', slides[n].src);
+        dots[n].className += " active";
+        return n;
+    });
+
+}

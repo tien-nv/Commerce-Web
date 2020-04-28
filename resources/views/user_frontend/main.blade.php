@@ -6,13 +6,14 @@
         <!-- một vòng for để show hàng của các sản phẩm -->
         <div id="row-products" class="products">
             <!-- một vòng for để show sản phẩm một row là -->
-            @for($i = 0;$i < 10;$i++) 
-            <div class="thread_list">
+            @for($i = 0;$i < 10;$i++) <div class="thread_list">
                 <div id="single-product" class="one-product ">
                     <!-- div show ảnh -->
                     <div>
                         <!-- thay các biến bắng {{}} -->
-                        <a href="javascript:void(0)" onclick="onProductDesc()"><img src="img\\product1.jpg" alt="sản phẩm"></a>
+                        <a href="javascript:void(0)" onclick="onProductDesc()">
+                            <img src="img\\product1.jpg" alt="sản phẩm" title="ấn vào để xem chi tiết">
+                        </a>
                     </div>
                     <!-- div show tiêu đề -->
                     <div class="product-content">
@@ -124,14 +125,23 @@
             <i class="fa fa-times" onclick="offProductDesc()"></i>
             <div class="show-img">
                 <!-- truyền biến -->
-                <img src="img/product1.jpg" alt="Sản phẩm" title="Sản phẩm :)">
-                <div class="more-img">
-                    <i class="fa fa-caret-left" onclick=""></i>
+                <img id="big-img" src="img/product1.jpg" alt="Sản phẩm" title="Sản phẩm :)" class="fade">
+                <div class="more-img" id="list-img">
+                    <i class="fa fa-caret-left" id="caret-left" onclick="prevImg()"></i>
                     <!-- chỗ này truyền các biến tương ứng với từng ảnh -->
-                    <img src="img/product1.jpg" alt="Sản phẩm" title="Sản phẩm :)">
-                    <img src="img/product1.jpg" alt="Sản phẩm" title="Sản phẩm :)">
-                    <img src="img/product1.jpg" alt="Sản phẩm" title="Sản phẩm :)">
-                    <i class="fa fa-caret-right" onclick=""></i>
+
+                    <img id="small-img" src="img/product1.jpg" alt="Sản phẩm" title="Sản phẩm :)">
+                    <img id="small-img" src="img/product2.jpg" alt="Sản phẩm" title="Sản phẩm :)">
+                    <img id="small-img" src="img/product3.jpg" alt="Sản phẩm" title="Sản phẩm :)">
+                    <img id="small-img" src="img/product4.jpg" alt="Sản phẩm" title="Sản phẩm :)">
+                    <div style="text-align:center;margin: 7% 0;">
+                        <!-- truyền biến truyền vào thứ tự các ảnh 0 1 2 3 4-->
+                        <span class="dot active" onclick="showClickSlide(0)"></span>
+                        <span class="dot" onclick="showClickSlide(1)"></span>
+                        <span class="dot" onclick="showClickSlide(2)"></span>
+                        <span class="dot" onclick="showClickSlide(3)"></span>
+                    </div>
+                    <i class="fa fa-caret-right" id="caret-right" onclick="nextImg()"></i>
                 </div>
             </div>
             <div class="show-infor">
@@ -150,7 +160,10 @@
                     <p>Một số mô tả khác mô tả 2</p>
                 </div>
                 <div class="buy">
-                    <button type="button" class="btn btn-dark">mua</button>
+                    <button type="button" class="btn btn-dark">
+                        <i class="fa fa-shopping-cart cart-icon"></i>
+                        buy now
+                    </button>
                 </div>
             </div>
         </div>
