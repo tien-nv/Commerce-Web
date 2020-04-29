@@ -3,17 +3,28 @@
         <div class="pageWidth">
             <div class="headerBar">
                 <div class="headerBar-left">
-                <a href="#">
-                    <img src="img\\iconHome.png" alt="Commerce_Web" class="iconImg">
-                </a>
-                <form action="javascript:void(0)" method="post" class="findForm" id="findForm" name="findForm">
-                    <!-- chỗ này dùng ajax -->
-                    {{ csrf_field() }}
-                    <div class="form-group selection">
-                        <input type="search" class="form-control inputColor" id="search" placeholder="Tìm kiếm ?" name="search">
-                        <button type="submit" class="btn btn-primary searchColor">Search</button>
-                    </div>
-                </form>
+                    <a href="#">
+                        <img src="img\\iconHome.png" alt="Commerce_Web" class="iconImg">
+                    </a>
+                    <form action="javascript:void(0)" method="post" class="findForm" id="findForm" name="findForm">
+                        <!-- chỗ này dùng ajax -->
+                        {{ csrf_field() }}
+                        <div class="form-group selection">
+                            <select class="category" id="category" name="category">
+                                <option value="null" selected>--Category--</option>
+                                <option value="book">Book</option>
+                                <option value="camera">Camera</option>
+                                <option value="fridge">Fridge</option>
+                                <option value="keyboard">keyboard</option>
+                                <option value="laptop">laptop</option>
+                                <option value="phone">phone</option>
+                                <option value="tv">television</option>
+                                <option value="wacth">watch</option>
+                            </select>
+                            <input type="text" class="form-control inputColor" id="search" placeholder="Tìm kiếm ?" name="search">
+                            <button type="submit" class="btn btn-primary searchColor">Search</button>
+                        </div>
+                    </form>
                 </div>
                 @if(isset($resultRegister) && $resultRegister === false)
                 <script>
@@ -89,8 +100,8 @@
                 </div>
                 <div id="overlayLogin">
                     <form action="{{ route('userLogin')}}" onsubmit="return validateLogin()" method="post" name="loginForm" class="formContentPopup" id="loginForm">
-                    {{ csrf_field() }}
-                    <h3 class="popupHeading">Đăng nhập như User</h3>
+                        {{ csrf_field() }}
+                        <h3 class="popupHeading">Đăng nhập như User</h3>
                         <div>
                             <span class="my-alert-input" id="usernameLogin"></span>
                             <input type="text" name="usernameLogin" class="form-control" placeholder="UserName">
@@ -145,50 +156,3 @@
         </div>
     </div>
 </header>
-<!-- script ajax -->
-<script>
-    //function ajax để check các trường mà người dùng nhập vào có bị trùng lặp hay không
-    //check từ database.
-    function checkConflicUserRegister(idInput, idError, field) {
-        var inputVal = $(idInput).val();
-        if (inputVal.length > 0) {
-            var _token = $('input[name="_token"]').val();
-
-            $.ajax({
-                url: "userInputRegister",
-                method: "post",
-                data: {
-                    _token: _token,
-                    inputVal: inputVal,
-                    field: field
-                },
-                // headers: {'X-CSRF-TOKEN': _token},
-                success: function(data) {
-                    $(idError).css("display", "block");
-                    if (data == 0) {
-                        // alert("ok");
-                        $(idError).css("color", "red");
-                        $(idError).text("Đã có người sử dụng cái này :)");
-                        $('#registerForm').onsub
-                    } else {
-                        $(idError).css("color", "green");
-                        $(idError).text('Cái này chưa ai dùng <3');
-                    }
-                },
-                error: function() {
-                    alert('Something went wrong!!!!')
-                }
-            });
-        } else {
-            $(idError).css("color", "red");
-            $(idError).css("display", "none");
-        }
-    }
-
-
-    //function khi người dùng click xem thêm thì query thêm
-
-
-
-    //function khi người dùng tìm kiếm một cái gì đó
-</script>

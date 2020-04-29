@@ -5,7 +5,7 @@ namespace App\models;
 use Illuminate\Database\Eloquent\Model;
 use App\models\QueryDB;
 
-class accountProcess extends Model
+class AccountProcess extends Model
 {
     //funtion kiểm tra tên user name đăng kí là hợp lệ hay không
     public static function isUsernameOk($userInput){
@@ -43,6 +43,17 @@ class accountProcess extends Model
         return 1;
     }
 
+    //function kiểm tra xem tên admin thêm vào có hợp lệ hay không 
+    public static function isAdminNameOk($adminInput){
+        $query = new QueryDB();
+        $obj = $query->select('admin','AdminName');
+        for($i=0;$i<count($obj);$i++){
+            if(strcmp($obj[$i]["AdminName"],$adminInput) == 0){
+                return 0;
+            }
+        }
+        return 1;
+    }
 
     //funtion kiểm tra tài khoản đăng nhập là hợp lệ không
     public static function checkUserLogin($userName,$password){
@@ -56,9 +67,14 @@ class accountProcess extends Model
         return false;
     }
 
-
-
-    public function checkAdminLogin(){
-        
+    public static function checkAdminLogin($adminName,$password){
+        $query = new QueryDB();
+        $obj = $query->select('admin','AdminName','Password');
+        for($i=0;$i<count($obj);$i++){
+            if(strcmp($obj[$i]["AdminName"],$adminName) == 0){
+                if(strcmp($obj[$i]["Password"],$password) == 0) return true;
+            }
+        }
+        return false;
     }
 }

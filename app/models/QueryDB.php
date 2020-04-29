@@ -25,6 +25,29 @@ class QueryDB extends Model
         $connect->close();
         return $accept;
     }
+    
+    public function addToTable($table,$field,$data){//mảng field và mảng chứa dữ liệu với từng trường
+        //funtion này truyền biến thì các trường query
+        // ví dụ select('user','UserName','Password')
+        $connect = self::login();
+        if ($connect->connect_error) {
+            return NULL;
+        }
+        $sql = "INSERT INTO $table (";
+        foreach($field as $element){
+            $sql .= $element.",";
+        }
+        $sql = substr($sql,0,strlen($sql)-1);
+        $sql .= ") VALUES (NULL"; //null sẽ auto increase 
+        foreach($data as $element){
+            $sql .= ",'".$element."'";
+        }
+        $sql .= ")";
+        $result = $connect->query($sql);
+        $connect->close();
+        return $result; //insert thành công hay không
+    }
+
 
     public function select($table,...$field){
         //funtion này truyền biến thì các trường query

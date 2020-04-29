@@ -6,7 +6,8 @@
         <!-- một vòng for để show hàng của các sản phẩm -->
         <div id="row-products" class="products">
             <!-- một vòng for để show sản phẩm một row là -->
-            @for($i = 0;$i < 15;$i++) <div class="thread_list">
+            @for($i = 0;$i < 15;$i++)
+            <div class="thread_list">
                 <div id="single-product" class="one-product ">
                     <!-- div show ảnh -->
                     <div>
@@ -29,10 +30,10 @@
                         <p><i class="fa fa-map-marker"></i>Hà nội</p>
                     </div>
                 </div>
-        </div>
+            </div>
         @endfor
-        <!-- vị trí này để chèn thêm các sản phẩm sau khi click xem thêm -->
-        
+    <!-- vị trí này để chèn thêm các sản phẩm sau khi click xem thêm -->
+
     </div>
     <div class="other">
         <button type="button" class="btn btn-dark" id="seeMore" onclick="">XEM THÊM</button>

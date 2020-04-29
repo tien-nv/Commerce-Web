@@ -246,3 +246,85 @@ function showSlides(n) {
     });
 
 }
+
+
+//code ajjax xử lysc các sự kiện js
+//function ajax để check các trường mà người dùng nhập vào có bị trùng lặp hay không
+//check từ database.
+function checkConflicUserRegister(idInput, idError, field) {
+    var inputVal = $(idInput).val();
+    if (inputVal.length > 0) {
+        var _token = $('input[name="_token"]').val();
+
+        $.ajax({
+            url: "userInputRegister",
+            method: "post",
+            data: {
+                _token: _token,
+                inputVal: inputVal,
+                field: field
+            },
+            // headers: {'X-CSRF-TOKEN': _token},
+            success: function(data) {
+                $(idError).css("display", "block");
+                if (data == 0) {
+                    // alert("ok");
+                    $(idError).css("color", "red");
+                    $(idError).text("Đã có người sử dụng cái này :)");
+                    $('#registerForm').attr('onsubmit', ' return false');
+                } else {
+                    $(idError).css("color", "green");
+                    $(idError).text('Cái này chưa ai dùng <3');
+                    $('#registerForm').attr('onsubmit', 'return validateRegister()');
+                }
+            },
+            error: function() {
+                alert('Something went wrong!!!!')
+            }
+        });
+    } else {
+        $(idError).css("color", "red");
+        $(idError).css("display", "none");
+    }
+};
+
+//function khi người dùng click vào content sẽ hiện ra sản phẩm tương ứng
+function getProduct(name) {
+    $(document).ready(function() {
+        id = '#' + name;
+        $(id).click(function() {
+            $.ajax({
+                url: "getProduct",
+                method: "get",
+                data: {
+                    nameProduct: name
+                },
+                // headers: {'X-CSRF-TOKEN': _token},
+                success: function(data) {
+                    $('#row-products').html('<p>vòng for duyệt các object để show sản phẩm</p>');
+                    // $('#row-products').html("");
+                    // alert(data);
+                },
+                error: function() {
+                    alert('Something went wrong!!!!')
+                }
+            });
+        });
+    });
+}
+getProduct('all');
+getProduct('laptop')
+getProduct('camera');
+getProduct('keyboard');
+getProduct('phone');
+getProduct('book');
+getProduct('tv');
+getProduct('watch');
+getProduct('fridge');
+
+//function khi người dùng click xem thêm thì query thêm
+
+
+
+//function khi người dùng tìm kiếm một cái gì đó
+//function khi người dùng tìm kiếm một cái gì đó

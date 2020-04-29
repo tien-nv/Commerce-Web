@@ -105,26 +105,26 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row" style="margin-bottom: 50px;">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
                 <div class="area">
-                    <form action="{{ url('adminRegister') }}" onsubmit="return validateAdminRegister()" method="post" name="registerAdminForm" id="registerAdminForm">
+                    <form action="javascript:void(0)" onsubmit="return validateAdminRegister()" method="post" name="registerAdminForm" id="registerAdminForm">
                         {{ csrf_field() }}
                         <label>Thêm admin</label>
                         <div>
                             <span class="my-alert-input" id="adminRegister"></span>
-                            <input type="text" name="adminRegister" class="form-control" placeholder="Admin Name">
+                            <input type="text" id="inputAdminName" name="adminRegister" class="form-control" placeholder="Admin Name" onkeyup="checkConflic()">
                         </div>
                         <div>
                             <span class="my-alert-input" id="passwordRegister"></span>
-                            <input type="password" name="passwordRegister" class="form-control" placeholder="Mật khẩu">
+                            <input type="password" id="inputPasswordRegister" name="passwordRegister" class="form-control" placeholder="Mật khẩu">
                         </div>
                         <div>
-                            <span class="my-alert-input" id="passwordRegister"></span>
+                            <span class="my-alert-input" id="checkPasswordRegister"></span>
                             <input type="password" name="checkPasswordRegister" class="form-control" placeholder="Nhập lại mật khẩu">
                         </div>
                         <div>
-                            <button type="submit" class="btn btn-primary setColor">Đăng kí admin</button>
+                            <button type="submit" id="submitRegister" class="btn btn-primary setColor">Đăng kí admin</button>
                             <button type="reset" class="btn btn-primary setColor">Cancel</button>
                         </div>
                     </form>

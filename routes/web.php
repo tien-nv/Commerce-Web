@@ -27,6 +27,10 @@ Route::get('/logOutUser','LoginController@logOutUser')->name('logOutUser');
 
 Route::get('/logOutAdmin','LoginController@logOutAdmin')->name('logOutAdmin');
 
-Route::get('/addProduct','adminController@addProduct')->name('addProduct');
-
 Route::post('/userInputRegister','LoginController@checkRegister')->name('userInputRegister');
+
+Route::post('/adminInputRegister','LoginController@checkAdminRegister')->name('adminInputRegister');
+
+Route::get('/addProduct','ProductController@addProduct')->name('addProduct');
+
+Route::get('/getProduct','ProductController@getProduct')->name('getProduct');

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\models\accountProcess; //sử dụng file này để lấy các kết quả query để check account
+use App\models\AccountProcess; //sử dụng file này để lấy các kết quả query để check account
 use App\models\QueryDB;
 
 class LoginController extends Controller
@@ -24,7 +24,7 @@ class LoginController extends Controller
 
             $password = hash("ripemd160", $password);
             //gọi đến hàm kiểm tra
-            $check = accountProcess::checkUserLogin($userName, $password);
+            $check = AccountProcess::checkUserLogin($userName, $password);
             // nếu hợp lệ
             if ($check === true)
                 return view('home', compact('userName', 'check'));
@@ -48,15 +48,15 @@ class LoginController extends Controller
         $inputVal = $request->get('inputVal');
         $field = $request->get('field');
         if ($field === 'username') {
-            $respon = accountProcess::isUsernameOk($inputVal);
+            $respon = AccountProcess::isUsernameOk($inputVal);
             return $respon;
         }
         if ($field === 'mail') {
-            $respon = accountProcess::isEmailOk($inputVal);
+            $respon = AccountProcess::isEmailOk($inputVal);
             return $respon;
         }
         if ($field === 'phone') {
-            $respon = accountProcess::isPhoneOk($inputVal);
+            $respon = AccountProcess::isPhoneOk($inputVal);
             return $respon;
         }
         return 0;
@@ -70,8 +70,6 @@ class LoginController extends Controller
         $phone = $request->input('phoneRegister');
         $userRole = $request->input('sel1');
         $address = $request->input('address');
-
-
         //mã hóa password người dùng rồi luuwu vào database để đảm bảo quyền riêng tư
         $password_hash = hash('ripemd160', $password); //password hash để lưu vào database
         $query = new QueryDB();
@@ -90,13 +88,10 @@ class LoginController extends Controller
             //mã hóa username và password
             $userName_encry = encrypt($userName);
             $password_encry = encrypt($password);
-
             //đặt cookies là cái mã hóa
             setcookie($cookie_username, $userName_encry, time() + (86400 * 30)); //1 day
             //mật khẩu
-
             setcookie($cookie_password, $password_encry, time() + (86400 * 30)); //1 day
-
             //trả về tên dạng plaintext
             //nếu thành công thì dadwndg nhập và hiện thị thông báo
             return view('home', compact('userName', 'resultRegister'));
@@ -106,9 +101,22 @@ class LoginController extends Controller
         }
     }
 
+    public function checkAdminRegister(Request $request){
+        $adminName = $request->get("inputVal");
+        $respon = AccountProcess::isAdminNameOk($adminName);
+        return $respon;
+    }
 
-    public function getAdminRegister()
-    {
+    public function getAdminRegister(Request $request){
+        $adminName = $request->get('adminName');
+        $password = $request->get('password');
+
+        $password = hash('ripemd160', $password); //mã hóa hash rồi vứt vào database
+        $query = new QueryDB();
+        $field = array('Admin_Id','AdminName','Password'); //Admin_Id là Null
+        $data = array($adminName,$password);
+        $resultRegister = $query->addToTable('admin',$field,$data);
+        return $resultRegister;
     }
 
     /**************************************************
@@ -120,7 +128,7 @@ class LoginController extends Controller
         $userName = $request->input('usernameLogin');
         $password_plaintext = $request->input('passwordLogin');
         $password = hash("ripemd160", $password_plaintext);
-        $check = accountProcess::checkUserLogin($userName, $password);
+        $check = AccountProcess::checkUserLogin($userName, $password);
         //nếu khong hợp lệ thì trả về thông báo khoogn hợp lệ
         if ($check === false) return view('home', compact('check'));
         //gọi hàm check tài khoản
@@ -154,8 +162,11 @@ class LoginController extends Controller
     {
         $adminName = $request->input('adminLogin');
         $password = $request->input('passwordAdminLogin');
+        // echo $password;
+        $password = hash('ripemd160', $password);
         //gọi hàm check account
-
+        $check = AccountProcess::checkAdminLogin($adminName,$password);
+        if ($check === false) return view('home', compact('check'));
         //nếu hợp lệ thì set sessions
 
         //set session
