@@ -68,12 +68,13 @@ class LoginController extends Controller
         $userName = $request->input('userRegister');
         $password = $request->input('passwordRegister'); //password plaintext
         $phone = $request->input('phoneRegister');
-        $userRole = $request->input('sel1');
+        $gender = $request->input('gender');
+        $birthday = $request->input('birthday');
         $address = $request->input('address');
         //mã hóa password người dùng rồi luuwu vào database để đảm bảo quyền riêng tư
         $password_hash = hash('ripemd160', $password); //password hash để lưu vào database
         $query = new QueryDB();
-        $resultRegister = $query->addUser($userRole, $userName, $password_hash, $address, $email, $phone);
+        $resultRegister = $query->addUser($userName, $password_hash, $address, $email, $phone,$gender,$birthday);
         if ($resultRegister) {
             //set session
             session_start();
@@ -113,7 +114,7 @@ class LoginController extends Controller
 
         $password = hash('ripemd160', $password); //mã hóa hash rồi vứt vào database
         $query = new QueryDB();
-        $field = array('Admin_Id','AdminName','Password'); //Admin_Id là Null
+        $field = array('Admin_Id','Admin_Name','Password'); //Admin_Id là Null
         $data = array($adminName,$password);
         $resultRegister = $query->addToTable('admin',$field,$data);
         return $resultRegister;

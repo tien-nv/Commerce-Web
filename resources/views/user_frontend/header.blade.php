@@ -82,10 +82,10 @@
                         <span class="my-alert-input" id="birthday"></span>
                         <label for="birthday">Ngày sinh:</label>
                         <div>
-                            <input type="date" name="birthday" class="form-control" style="margin: 0 0 10px 0;">
+                            <input type="date" name="birthday" id="birthday" class="form-control" style="margin: 0 0 10px 0;">
                         </div>
-                        <label for="sel1">Giới tính:</label>
-                        <select class="form-control" id="sel1" name="sel1" required>
+                        <label for="gender">Giới tính:</label>
+                        <select class="form-control" id="gender" name="gender" required>
                             <option value="men">nam</option>
                             <option value="women">nữ</option>
                             <option value="not_all">không muốn nói</option>

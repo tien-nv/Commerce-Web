@@ -1,5 +1,5 @@
 <div class="topnav" id="myTopnav">
-    <a href="#" class="active" id="all">Home</a>
+    <a href="javascript:void(0)" class="active" id="all">Home</a>
     <div class="my-drop">
         <a href="javascript:void(0)">Technical</a>
         <div class="topnav-dropdown-content">

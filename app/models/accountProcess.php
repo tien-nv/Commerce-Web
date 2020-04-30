@@ -46,9 +46,9 @@ class AccountProcess extends Model
     //function kiểm tra xem tên admin thêm vào có hợp lệ hay không 
     public static function isAdminNameOk($adminInput){
         $query = new QueryDB();
-        $obj = $query->select('admin','AdminName');
+        $obj = $query->select('admin','Admin_Name');
         for($i=0;$i<count($obj);$i++){
-            if(strcmp($obj[$i]["AdminName"],$adminInput) == 0){
+            if(strcmp($obj[$i]["Admin_Name"],$adminInput) == 0){
                 return 0;
             }
         }
@@ -69,9 +69,9 @@ class AccountProcess extends Model
 
     public static function checkAdminLogin($adminName,$password){
         $query = new QueryDB();
-        $obj = $query->select('admin','AdminName','Password');
+        $obj = $query->select('admin','Admin_Name','Password');
         for($i=0;$i<count($obj);$i++){
-            if(strcmp($obj[$i]["AdminName"],$adminName) == 0){
+            if(strcmp($obj[$i]["Admin_Name"],$adminName) == 0){
                 if(strcmp($obj[$i]["Password"],$password) == 0) return true;
             }
         }

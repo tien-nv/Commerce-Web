@@ -289,6 +289,30 @@ function checkConflicUserRegister(idInput, idError, field) {
 };
 
 //function khi người dùng click vào content sẽ hiện ra sản phẩm tương ứng
+function setHtml(obj) {
+    var defaultHtml = '<div class="thread_list"> \
+                    <div id = "single-product" class = "one-product " > \
+                    <div> <a href = "javascript:void(0)" onclick = "onProductDesc()" > \
+                     <img src = "insert_img" alt = "sản phẩm" title = "ấn vào để xem chi tiết" >\
+                     </a> </div>\
+                    <div class = "product-content" > \
+                    <div class = "content" > \
+                    <p class = "user" > insert_username </p>\
+                    <p class = "name-product" > insert_name_product </p> \
+                    </div >\ <p class = "cost"> insert_cost </p> \
+                    <p> <i class = "fa fa-map-marker" > </i> insert_location </p > \ </div> </div> </div> ';
+    var newHtml = '';
+    for (product in obj) {
+        temp = defaultHtml.replace("insert_img", obj[product]['img']);
+        temp = temp.replace('insert_username', obj[product]['userName']);
+        temp = temp.replace('insert_name_product', obj[product]['nameProduct']);
+        temp = temp.replace('insert_cost', obj[product]['cost']);
+        temp = temp.replace('insert_location', obj[product]['location']);
+        newHtml += temp;
+    }
+    return newHtml;
+}
+
 function getProduct(name) {
     $(document).ready(function() {
         id = '#' + name;
@@ -297,11 +321,12 @@ function getProduct(name) {
                 url: "getProduct",
                 method: "get",
                 data: {
-                    nameProduct: name
+                    typeProduct: name
                 },
                 // headers: {'X-CSRF-TOKEN': _token},
                 success: function(data) {
-                    $('#row-products').html('<p>vòng for duyệt các object để show sản phẩm</p>');
+                    // alert(data);
+                    $('#row-products').html(setHtml(data));
                     // $('#row-products').html("");
                     // alert(data);
                 },

@@ -1,5 +1,5 @@
 <section class="main-component">
-    <div class="fillter"></div>
+    <div class="filter"></div>
     <!-- chỗ này bị bug dùng js để show nếu mà màn hình nhỏ thì show 2 sản phẩm 1 dòng
     còn nếu màn hình lớn thì show 5 sản phẩm 1 dòng, màn hình trung bình thì show 3 sản phẩm-->
     <div class="container">
@@ -9,32 +9,24 @@
             @for($i = 0;$i < 15;$i++)
             <div class="thread_list">
                 <div id="single-product" class="one-product ">
-                    <!-- div show ảnh -->
                     <div>
-                        <!-- thay các biến bắng {{}} -->
                         <a href="javascript:void(0)" onclick="onProductDesc()">
                             <img src="img\\product2.jpg" alt="sản phẩm" title="ấn vào để xem chi tiết">
                         </a>
                     </div>
-                    <!-- div show tiêu đề -->
                     <div class="product-content">
                         <div class="content">
-                            <!-- thay biến -->
                             <p class="user">username người bán</p>
-                            <!-- thay biến -->
                             <p class="name-product">tên sản phẩm</p>
                         </div>
-                        <!-- thay biến -->
                         <p class="cost">2.000.000 vnd</p>
-                        <!-- thay biến -->
                         <p><i class="fa fa-map-marker"></i>Hà nội</p>
                     </div>
                 </div>
             </div>
         @endfor
     <!-- vị trí này để chèn thêm các sản phẩm sau khi click xem thêm -->
-
-    </div>
+        </div>
     <div class="other">
         <button type="button" class="btn btn-dark" id="seeMore" onclick="">XEM THÊM</button>
     </div>
@@ -72,7 +64,8 @@
                         <option value="blue">blue</option>
                     </select>
                 </div>
-                <div class="total">Số lượng: 1</div>
+                <div class="total">Số lượng còn lại: 1</div>
+                <div class="total">Đã bán: 1</div>
                 <div class="other">
                     <p>Một số mô tả khác mô tả 1</p>
                     <p>Một số mô tả khác mô tả 2</p>
