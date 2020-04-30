@@ -43,26 +43,60 @@ div {
 -----------------------------------------------------------*/
 
 .area-register {
-    height: 70px;
-    width: 70px;
+    height: 60px;
+    width: 60px;
     position: fixed;
     z-index: 500;
     bottom: 30px;
     right: 30px;
     border-radius: 50%;
-    background-color: rgb(123, 187, 50);
+    background-color: rgb(182, 17, 25);
     box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 8px 10px 1px rgba(0, 0, 0, 0.14);
+    animation-name: ball;
+    animation-duration: 6s;
+    animation-iteration-count: infinite;
+}
+
+.area-register:hover {
+    animation-play-state: paused;
 }
 
 .area-register>a>i {
     display: block;
-    padding: 23%;
-    font-size: 40px;
+    padding: 25%;
+    font-size: 25px;
     color: #ffffff;
 }
 
 .area-register>a:hover {
-    color: rgb(123, 187, 50);
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+}
+
+@keyframes ball {
+    0% {
+        bottom: 30px;
+        background-color: red;
+        height: 40px;
+    }
+    25% {
+        height: 60px;
+        background-color: rgb(255, 7, 40);
+    }
+    50% {
+        bottom: 90px;
+        background-color: rgb(7, 85, 255);
+        height: 60px;
+    }
+    75% {
+        height: 60px;
+        background-color: rgb(0, 174, 255);
+    }
+    100% {
+        bottom: 30px;
+        background-color: red;
+        height: 40px;
+    }
 }
 
 .pageWidth {
@@ -623,7 +657,7 @@ input:focus {
     border: 1px solid #ffffff;
     border-radius: 10px;
     background-color: rgb(255, 255, 255);
-    margin: 15px 0;
+    margin: 27px 0;
     padding: 23px;
     box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 8px 10px 1px rgba(0, 0, 0, 0.14);
 }

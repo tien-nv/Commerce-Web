@@ -4,7 +4,7 @@
             <span>Sắp xếp theo</span>
             <a href="#">Mới nhất</a>
             <a href="#">Rẻ nhất</a>
-            <a href="#">Đang đấu giá</a>
+            <a href="#">Đấu giá</a>
         </div>
         <!-- chỗ này bị bug dùng js để show nếu mà màn hình nhỏ thì show 2 sản phẩm 1 dòng
     còn nếu màn hình lớn thì show 5 sản phẩm 1 dòng, màn hình trung bình thì show 3 sản phẩm-->

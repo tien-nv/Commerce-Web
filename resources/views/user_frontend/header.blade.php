@@ -1,7 +1,4 @@
 <header>
-    <div class="area-register">
-        <a href="javascript:void(0)" onclick="onRegister()"><i class="fa fa-user-plus"></i></a>
-    </div>
     <div class="container-fluid">
         <div class="pageWidth">
             <div class="headerBar">
@@ -25,7 +22,7 @@
                                 <option value="wacth">watch</option>
                             </select>
                             <input type="text" class="form-control inputColor" id="search" placeholder="Tìm kiếm ?" name="search">
-                            <button type="submit" class="btn btn-primary searchColor">Search</button>
+                            <button type="submit" class="btn btn-primary searchColor"><i class="fa fa-search" aria-hidden="true"></i></button>
                         </div>
                     </form>
                 </div>
@@ -46,6 +43,9 @@
                 @if(!isset($userName) ||(isset($check) && $check === false))
                 <div class="headerBar-right">
                     <a href="javascript:void(0)" class="headerBar-register" onclick="onRegister()">Đăng ký</a>
+                    <div class="area-register">
+                        <a href="javascript:void(0)" onclick="onRegister()"><i class="fa fa-user-plus"></i></a>
+                    </div>
                     <div class="my-dropdown">
                         <span class="headerBar-login">Đăng nhập</span>
                         <div id="my-dropdown-content">
