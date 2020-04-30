@@ -138,6 +138,7 @@ class LoginController extends Controller
         session_start();
         $_SESSION['userName_cw'] = $userName;
         $_SESSION['password_cw'] = $password; //password này đã được mã hóa hash
+        $_SESSION['isAdmin'] = 0;
 
         //mã hóa tên các trường
         $cookie_username = 'userName_cw';
@@ -174,6 +175,7 @@ class LoginController extends Controller
         session_start();
         $_SESSION['adminName'] = $adminName;
         $_SESSION['passwordAdmin'] = $password;
+        $_SESSION['isAdmin'] = 1;
         return view('adminpage', compact('adminName'));
     }
 

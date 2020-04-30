@@ -17,20 +17,23 @@ Route::get('/','LoginController@getHomeView');
 
 Route::post('/userRegister','LoginController@getUserRegister')->name('userRegister');
 
-Route::post('/adminRegister','LoginController@getAdminRegister')->name('adminRegister');
-
 Route::post('/userLogin','LoginController@getUserLogin')->name('userLogin');
 
 Route::post('/adminLogin','LoginController@getAdminLogin')->name('adminLogin');
 
 Route::get('/logOutUser','LoginController@logOutUser')->name('logOutUser');
 
-Route::get('/logOutAdmin','LoginController@logOutAdmin')->name('logOutAdmin');
-
 Route::post('/userInputRegister','LoginController@checkRegister')->name('userInputRegister');
 
-Route::post('/adminInputRegister','LoginController@checkAdminRegister')->name('adminInputRegister');
+Route::group(['middleware' => ['verifyadmin']], function () {
+    Route::post('/adminInputRegister','LoginController@checkAdminRegister')->name('adminInputRegister');
+    Route::get('/addProduct','ProductController@addProduct')->name('addProduct');
+    Route::get('/logOutAdmin','LoginController@logOutAdmin')->name('logOutAdmin');
+    Route::post('/adminRegister','LoginController@getAdminRegister')->name('adminRegister');
+});
 
-Route::get('/addProduct','ProductController@addProduct')->name('addProduct');
+Route::group(['middleware' => ['verifyuser']], function(){
+    //những route xử lý để xác thực xem user đã đăng nhập hay chưa
+});
 
 Route::get('/getProduct','ProductController@getProduct')->name('getProduct');

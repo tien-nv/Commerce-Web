@@ -8,9 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProductProcess extends Model
 {
-    public function selectProduct($table,...$field){
+
+    //function add sản phẩm từ phía admin
+    public static function addProduct($data){
+        $test = array("xin choa","bye",$data);
+        return $test;
+    }
+
+    public static function selectProduct($table,...$field){
         $query = new QueryDB();
-        //select từ các bảng gộp lại thành 1 object
-        //select từ phone...
+        //select sản phẩm 15 sản phẩm 1
+        $object = $query->select($table,$field);
     }
 }

@@ -4,24 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\models\AdminProcess;//sử dụng file adminProcess
 use App\models\ProductProcess;
-use App\Http\Controllers\LoginController;
 
 class ProductController extends Controller{
     public function addProduct(Request $request){
         // return view('home');
         $data = $request->input('selected');
-        $process = new adminProcess();
+        $process = new ProductProcess();
         return $process->addProduct($data);
     }
     public function getProduct(Request $request){
         $type = $request->get('typeProduct');
         //query lấy sản phẩm từ chỗ này
-        // if($type == 'all') {
-        //     $home = new LoginController();
-        //     return $home->getHomeView();
-        // }
+        if($type == 'all') {
+            //query database để lấy số lượng sản phẩm
+        }
         //test ajax
         $obj = array();
         $product['img'] = 'img/product1.jpg';
