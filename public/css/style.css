@@ -21,7 +21,7 @@ body {
     background: #ddd repeat left top !important;
     font-weight: 300;
     font-size: 15px;
-    -webkit-font-smoothing: antialiased;
+    -webkit-font-smoothing: 'Nunito', sans-serif;
     overflow-y: scroll;
     overflow-x: hidden;
 }
@@ -41,6 +41,29 @@ div {
 /*-----------------------------------------------------------
                                 header css
 -----------------------------------------------------------*/
+
+.area-register {
+    height: 70px;
+    width: 70px;
+    position: fixed;
+    z-index: 500;
+    bottom: 30px;
+    right: 30px;
+    border-radius: 50%;
+    background-color: rgb(123, 187, 50);
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 8px 10px 1px rgba(0, 0, 0, 0.14);
+}
+
+.area-register>a>i {
+    display: block;
+    padding: 23%;
+    font-size: 40px;
+    color: #ffffff;
+}
+
+.area-register>a:hover {
+    color: rgb(123, 187, 50);
+}
 
 .pageWidth {
     padding-right: 1%;
@@ -442,15 +465,39 @@ input:focus {
     box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 8px 10px 1px rgba(0, 0, 0, 0.14);
 }
 
-.topnav a {
+.topnav>a {
     float: left;
     display: block;
     color: #f2f2f2;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+    font-size: 18px;
+    font-family: 'Nunito', sans-serif;
+    border-right: 1px solid #a3a3a3;
+}
+
+.topnav i {
     font-size: 20px;
-    font-family: 'Bitter', serif;
+    color: coral;
+}
+
+.topnav .my-drop>a {
+    float: left;
+    display: block;
+    color: #cecece;
+    text-align: center;
+    padding: 0 16px;
+    margin: 14px 0;
+    text-decoration: none;
+    font-size: 18px;
+    font-family: 'Nunito', sans-serif;
+    border-right: 1px solid #a3a3a3;
+}
+
+.topnav .my-drop {
+    height: 80%;
+    border-right: 1px solid #a3a3a3;
 }
 
 .topnav a:hover {
@@ -487,7 +534,7 @@ input:focus {
     display: block;
     text-align: left;
     border-radius: 10px;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 400;
 }
 
@@ -566,6 +613,40 @@ input:focus {
     margin: 30px 0 30px 0;
 }
 
+.main-component .filter {
+    display: block;
+    white-space: normal;
+    text-anchor: middle;
+    justify-self: center;
+    min-height: 70px;
+    width: auto;
+    border: 1px solid #ffffff;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    margin: 15px 0;
+    padding: 23px;
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 8px 10px 1px rgba(0, 0, 0, 0.14);
+}
+
+.filter span {
+    font-size: 14px;
+    padding: 0.9%;
+    text-align: center;
+    font-weight: 300;
+    width: max-content;
+}
+
+.filter a {
+    width: max-content;
+    background-color: #ECECEC;
+    font-size: 18px;
+    padding: 0.9%;
+    margin-left: 1.2%;
+    font-weight: 600;
+    color: #FF4F4F;
+    border-radius: 8px;
+}
+
 .main-component .products {
     display: inline-flex;
     width: 100%;
@@ -583,7 +664,7 @@ input:focus {
 .main-component .one-product {
     font-size: 15px;
     font-weight: 700;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Nunito', sans-serif;
     box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 8px 10px 1px rgba(0, 0, 0, 0.14);
     margin: 1%;
     width: 100%;
@@ -661,6 +742,9 @@ i {
     }
     .one-product img {
         height: 150px;
+    }
+    .filter span {
+        display: none;
     }
 }
 
@@ -939,7 +1023,7 @@ i {
     color: #fff;
     font-size: 14px;
     line-height: 35px;
-    font-family: 'Bitter', serif;
+    font-family: 'Nunito', sans-serif;
     margin-top: 10px;
     padding: 0 20px;
     text-transform: uppercase;
@@ -1128,7 +1212,7 @@ i {
 .admin_page label {
     font-size: 25px;
     font-weight: 600;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Nunito', sans-serif, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #dd512a;
 }
 

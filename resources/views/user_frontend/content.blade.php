@@ -1,7 +1,7 @@
 <div class="topnav" id="myTopnav">
-    <a href="javascript:void(0)" class="active" id="all">Home</a>
+    <a href="javascript:void(0)" class="active" id="all"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
     <div class="my-drop">
-        <a href="javascript:void(0)">Technical</a>
+        <a href="javascript:void(0)"><i class="fa fa-rss" aria-hidden="true"></i> Công nghệ</a>
         <div class="topnav-dropdown-content">
             <a href="javascript:void(0)" id="laptop">Laptop</a>
             <a href="javascript:void(0)" id="camera">Camera</a>
@@ -10,13 +10,13 @@
         </div>
     </div>
     <div class="my-drop">
-        <a href="javascript:void(0)">Knowledge</a>
+        <a href="javascript:void(0)"><i class="fa fa-book" aria-hidden="true"></i> Tri thức</a>
         <div class="topnav-dropdown-content">
             <a href="javascript:void(0)" id="book">Books</a>
         </div>
     </div>
     <div class="my-drop">
-        <a href="javascript:void(0)">Fashion</a>
+        <a href="javascript:void(0)"><i class="fa fa-bookmark" aria-hidden="true"></i> Thời trang</a>
         <div class="topnav-dropdown-content">
             <a href="javascript:void(0)" id="tv">Television</a>
             <a href="javascript:void(0)" id="watch">Watch</a>
@@ -24,7 +24,14 @@
         </div>
     </div>
     <div class="my-drop">
-        <a href="javascript:void(0)">Other</a>
+        <a href="javascript:void(0)"><i class="fa fa-hourglass-half" aria-hidden="true"></i> Cạnh tranh</a>
+        <div class="topnav-dropdown-content">
+            <a href="javascript:void(0)" id="dauGia">Đấu giá</a>
+            <a href="javascript:void(0)" id="notDauGia">Không đấu giá</a>
+        </div>
+    </div>
+    <div class="my-drop">
+        <a href="javascript:void(0)"><i class="fa fa-info" aria-hidden="true"></i> Other</a>
         <div class="topnav-dropdown-content">
             <a href="javascript:void(0)">Updating</a>
         </div>

@@ -26,8 +26,12 @@ class LoginController extends Controller
             //gọi đến hàm kiểm tra
             $check = AccountProcess::checkUserLogin($userName, $password);
             // nếu hợp lệ
-            if ($check === true)
-                return view('home', compact('userName', 'check'));
+            if ($check === true){
+                if(strlen($userName) > 4)
+                    $userName_show = substr($userName,0,4).'...';
+                else $userName_show = $userName;
+                return view('home', compact('userName','userName_show', 'check'));
+            }
             else {
                 //hủy bỏ cookies
                 $cookie_username = 'userName_cw';
@@ -95,7 +99,10 @@ class LoginController extends Controller
             setcookie($cookie_password, $password_encry, time() + (86400 * 30)); //1 day
             //trả về tên dạng plaintext
             //nếu thành công thì dadwndg nhập và hiện thị thông báo
-            return view('home', compact('userName', 'resultRegister'));
+            if(strlen($userName) > 4)
+            $userName_show = substr($userName,0,4).'...';
+            else $userName_show = $userName;
+            return view('home', compact('userName_show','userName', 'resultRegister'));
         } else {
             // không thì hiện thị khoogn thành công
             return view('home', compact('resultRegister'));
@@ -156,7 +163,10 @@ class LoginController extends Controller
         setcookie($cookie_password, $password_encry, time() + (86400 * 30)); //1 day
 
         //trả về tên dạng plaintext
-        return view('home', compact('userName', 'check'));
+        if(strlen($userName) > 4)
+            $userName_show = substr($userName,0,4).'...';
+        else $userName_show = $userName;
+        return view('home', compact('userName','userName_show', 'check'));
     }
 
     //funtion này check login của 1 admin

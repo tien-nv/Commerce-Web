@@ -1,12 +1,18 @@
 <section class="main-component">
-    <div class="filter"></div>
-    <!-- chỗ này bị bug dùng js để show nếu mà màn hình nhỏ thì show 2 sản phẩm 1 dòng
-    còn nếu màn hình lớn thì show 5 sản phẩm 1 dòng, màn hình trung bình thì show 3 sản phẩm-->
     <div class="container">
+        <div class="filter">
+            <span>Sắp xếp theo</span>
+            <a href="#">Mới nhất</a>
+            <a href="#">Rẻ nhất</a>
+            <a href="#">Đang đấu giá</a>
+        </div>
+        <!-- chỗ này bị bug dùng js để show nếu mà màn hình nhỏ thì show 2 sản phẩm 1 dòng
+    còn nếu màn hình lớn thì show 5 sản phẩm 1 dòng, màn hình trung bình thì show 3 sản phẩm-->
+
         <!-- một vòng for để show hàng của các sản phẩm -->
         <div id="row-products" class="products">
             <!-- một vòng for để show sản phẩm một row là -->
-            @for($i = 0;$i < 15;$i++)
+        @for($i = 0;$i < 15;$i++) 
             <div class="thread_list">
                 <div id="single-product" class="one-product ">
                     <div>
@@ -25,8 +31,9 @@
                 </div>
             </div>
         @endfor
-    <!-- vị trí này để chèn thêm các sản phẩm sau khi click xem thêm -->
+        <!-- vị trí này để chèn thêm các sản phẩm sau khi click xem thêm -->
         </div>
+    </div>
     <div class="other">
         <button type="button" class="btn btn-dark" id="seeMore" onclick="">XEM THÊM</button>
     </div>
@@ -79,5 +86,5 @@
             </div>
         </div>
     </div>
-    </div>
+
 </section>

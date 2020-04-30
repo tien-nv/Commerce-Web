@@ -1,4 +1,7 @@
 <header>
+    <div class="area-register">
+        <a href="javascript:void(0)" onclick="onRegister()"><i class="fa fa-user-plus"></i></a>
+    </div>
     <div class="container-fluid">
         <div class="pageWidth">
             <div class="headerBar">
@@ -143,13 +146,13 @@
                 @elseif(isset($userName) && ((isset($check) && $check === true) || (isset($resultRegister) && $resultRegister === true)))
                 <div class="headerBar-right">
                     <div class="my-dropdown">
-                        <a href="javascript:void(0)" class="headerBar-login" style="margin-right: 40px;color: green;">Welcome {{$userName }}</a>
+                        <a href="javascript:void(0)" class="headerBar-login" style="margin-right: 40px;color: #414141;font-size: 18px;" title="{{$userName}}"><i class="fa fa-user-circle-o" aria-hidden="true"></i> {{$userName_show }}</a>
                         <div id="my-dropdown-content">
                             <a href="#">Profile user</a>
                             <a href="{{route('logOutUser')}}">Check out</a>
                         </div>
                     </div>
-                    <a href="#"><button class="btn btn-primary searchColor">Đăng bán</button></a>
+                    <a href="#"><button class="btn btn-primary searchColor"><i class="fa fa-shopping-bag"></i> Đăng bán</button></a>
                 </div>
                 @endif
             </div>
