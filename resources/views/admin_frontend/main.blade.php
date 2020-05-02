@@ -159,7 +159,12 @@
                         <select class="form-control" id="sel4" name="sel4">
                             <option value="" aria-checked="true">Xóa 1 admin</option>
                         </select>
+                        <div class="progress" id="progress" style="display:none;padding-bottom:25px;">
+                            <div class="progress-bar"></div>
+                        </div>
                         <button type="button" name="delAdmin" id="delAdmin" class="btn btn-danger" onclick="showValue('sel4')">save</button>
+                        <button type="button" class="btn btn-danger" id="refresh">load Admin</button>
+                        <button type="reset" class="btn btn-danger">cancel</button>
                     </form>
                 </div>
             </div>

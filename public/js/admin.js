@@ -100,7 +100,6 @@ $(document).ready(function() {
             alert("chưa chọn admin");
         } else {
             var _token = $('input[name="_token"]').val();
-            alert(id);
             $.ajax({
                 url: "removeAdmin",
                 method: "POST",
@@ -123,13 +122,28 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-    $('#sel4').click(function() {
+    $('#refresh').click(function() {
         var _token = $('input[name="_token"]').val();
+        $('#progress').css('display', 'block');
         $.ajax({
+            xhr: function() {
+                var xhr = new window.XMLHttpRequest();
+                xhr.upload.addEventListener("progress", function(evt) {
+                    if (evt.lengthComputable) {
+                        var percentComplete = ((evt.loaded / evt.total) * 100);
+                        $(".progress-bar").width(percentComplete + '%');
+                        $(".progress-bar").html(percentComplete + '%');
+                    }
+                }, false);
+                return xhr;
+            },
             url: "getAdmin",
             method: "POST",
             data: {
                 _token: _token
+            },
+            beforeSend: function() {
+                $(".progress-bar").width('0%');
             },
             success: function(data) {
                 var myHtml = '<option value="" aria-checked="true">Xóa 1 admin</option>';
@@ -137,6 +151,9 @@ $(document).ready(function() {
                     myHtml += '<option value="' + data[admin]['Admin_ID'] + '">' + data[admin]['Admin_Name'] + '</option>';
                 }
                 $('#sel4').html(myHtml);
+                setTimeout(function() {
+                    $('#progress').css('display', 'none');
+                }, 2000)
             },
             error: function() {
                 alert("something went wrong!!!!");
