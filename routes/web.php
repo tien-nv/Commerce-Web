@@ -34,3 +34,5 @@ Route::post('/adminInputRegister','LoginController@checkAdminRegister')->name('a
 Route::get('/addProduct','ProductController@addProduct')->name('addProduct');
 
 Route::get('/getProduct','ProductController@getProduct')->name('getProduct');
+
+Route::get('/sell', 'ProductController@sellProduct')-> name('sellProduct');

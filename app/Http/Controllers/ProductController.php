@@ -39,4 +39,8 @@ class ProductController extends Controller{
         json_encode($obj);
         return $obj;
     }
+
+    public function sellProduct(){
+        return view('sell.description');
+    }
 }

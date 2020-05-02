@@ -1,0 +1,37 @@
+body{
+    background-color: #3f3a33ce  ;
+    color: white;
+}
+
+.form-row {
+    margin-top : 30px;
+}
+
+
+input[type='text'] {
+    background-color: #e5e6eb;
+    border-radius: 10px;
+    box-sizing: border-box;
+    transition: all 0.5s linear;
+}
+
+#image-button {
+    padding: 10px;
+    color: white;
+    background-color: #009578;
+    border: 1px solid #000;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  #image-button:hover {
+    background-color: #00b28f;
+  }
+  
+  #image-text {
+    margin-left: 10px;
+    font-family: sans-serif;
+    color: #aaa;
+  }
+  
+  

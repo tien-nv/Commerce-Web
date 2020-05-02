@@ -19,7 +19,7 @@
                         <div class="row  show">
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 show-img">
                                 <img src="img\\product2.jpg" alt="ảnh sản phẩm">
-                            </div>
+                            </div>  
                             <div class="col-lg-8 col-md-8 col-sm-8 col-xl-8">
                                 <select class="form-control" id="sel1" name="sel1" multiple size="3">
                                     <option value="thêm">sản phẩm một</option>
