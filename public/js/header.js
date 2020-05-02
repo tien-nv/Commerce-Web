@@ -1,3 +1,110 @@
+//khởi tạo các biến toàn cục
+var regEmail = /[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}/i; //dấu cộng là xuất hiện 1 lần
+var regUserName = /^([a-zA-Z0-9]{1,})([\\._]{0,1})([a-zA-Z0-9]{1,10})$/;
+var regPass = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$/;
+var regPhone = /((09|03|07|08|05)+([0-9]{8})\b)/g;
+//check dữ liệu nhập vào register
+var mess = [
+    "Trường này không thể để trống",
+    //login message
+    "Email không hợp lệ",
+    "password phải có 8 kí tự trở lên gồm cả số và chữ, 1 kí tự viết hoa",
+    //register message
+    "password không khớp",
+    "Ngày tháng không hợp lệ",
+    "Username từ  chỉ được chứa các kí tự chữ số và dấu . -, tối đa 16 kí tự và kết thúc bằng chữ hoặc số",
+    "Số điện thoại không hợp lệ hoặc đã được sử dụng"
+];
+
+
+
+
+//hiển thị thông tin cá nhân của user
+$(document).ready(function() {
+    $('#profile').click(function() {
+        $.ajax({
+            url: "userDescription",
+            method: "get",
+            data: {},
+            beforeSend: function() {
+                $('#wait').css('display', 'block');
+            },
+            success: function(data) {
+                //'UserName','Address','Mail','Phone','Gender','Birth'
+                $('#wait').css('display', 'none');
+                $('#showUsername').text(data[0]['UserName']);
+                $('#showEmail').text(data[0]['Mail']);
+                $('#showPhone').text(data[0]['Phone']);
+                $('#showGender').text(data[0]['Gender']);
+                $('#showBirth').text(data[0]['Birth']);
+                $('#showAddress').text(data[0]['Address']);
+                $('#overlayProfile').css('display', 'block');
+            },
+            error: function() {
+                $('#wait').css('display', 'none');
+                alert('something went wrong!!!');
+            }
+        });
+    });
+});
+$(document).ready(function() {
+    $('#offProfile').click(function() {
+        $('#overlayProfile').css('display', 'none');
+    })
+});
+
+
+//function khi người dùng muốn thay đổi password
+$(document).ready(function() {
+    $('#buttonChangePass').click(function() {
+        let oldp = checkField("changePass", "oldPass", regPass, 2, void(0));
+        let newp = checkField("changePass", "newPass", regPass, 2, void(0));
+        let cnewp = checkField("changePass", "checkNewPass", regPass, 2, void(0));
+        let conf = true;
+        let oldPass = $('#ioldPass').val();
+        let newPass = $('#inewPass').val();
+        let cnewPass = $('#icheckNewPass').val();
+        if (newPass != cnewPass) {
+            document.getElementById("checkNewPass").style.display = "block";
+            document.getElementById("checkNewPass").innerHTML = mess[3];
+            conf = false;
+        }
+        if (oldp && newp && cnewp && conf) {
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url: "changePassword",
+                method: "post",
+                data: {
+                    _token: _token,
+                    old: oldPass,
+                    new: newPass
+                },
+                beforeSend: function() {
+                    $('#wait').css('display', 'block');
+                },
+                // headers: {'X-CSRF-TOKEN': _token},
+                success: function(data) {
+                    $('#wait').css('display', 'none');
+                    if (data == -1) {
+                        setTimeout(function() {
+                            alert('Mật khẩu cũ không khớp.');
+                        }, 1000);
+                    } else
+                        setTimeout(function() {
+                            alert('success change pass! hooray.');
+                        }, 1000);
+                },
+                error: function() {
+                    $('#wait').css('display', 'none');
+                    alert('some thing went wrong!!!!');
+                }
+            });
+        }
+    });
+});
+
+
+
 //hiển thị đè thông tin đăng kí
 
 function onRegister() {
@@ -31,23 +138,6 @@ function offAdminLogin() {
 
 
 //login and register
-var regEmail = /[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}/i; //dấu cộng là xuất hiện 1 lần
-var regUserName = /^([a-zA-Z0-9]{1,})([\\._]{0,1})([a-zA-Z0-9]{1,10})$/;
-var regPass = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$/;
-var regPhone = /((09|03|07|08|05)+([0-9]{8})\b)/g;
-//check dữ liệu nhập vào register
-var mess = [
-    "Trường này không thể để trống",
-    //login message
-    "Email không hợp lệ",
-    "password phải có 8 kí tự trở lên gồm cả số và chữ, 1 kí tự viết hoa",
-    //register message
-    "password không khớp",
-    "Ngày tháng không hợp lệ",
-    "Username từ  chỉ được chứa các kí tự chữ số và dấu . -, tối đa 16 kí tự và kết thúc bằng chữ hoặc số",
-    "Số điện thoại không hợp lệ hoặc đã được sử dụng"
-];
-
 function checkField(nameForm, nameElement, reg, number, show) {
     let val = document.forms[nameForm][nameElement].value;
     document.forms[nameForm][nameElement].onclick = function() {
@@ -176,11 +266,16 @@ function onProductDesc() {
                 id: id,
                 //something of one product
             },
+            beforeSend: function() {
+                $('#wait').css('display', 'block');
+            },
             // headers: {'X-CSRF-TOKEN': _token},
             success: function(data) {
+                $('#wait').css('display', 'none');
                 $("#product-description").css("display", "block");
             },
             error: function() {
+                $('#wait').css('display', 'none');
                 onLogin();
             }
         });
@@ -337,21 +432,26 @@ function getProduct(name) {
                 data: {
                     typeProduct: name
                 },
+                beforeSend: function() {
+                    $('#wait').css('display', 'block');
+                },
                 // headers: {'X-CSRF-TOKEN': _token},
                 success: function(data) {
+                    $('#wait').css('display', 'none'); //không sửa cái này
                     // alert(data);
                     $('#row-products').html(setHtml(data));
                     // $('#row-products').html("");
                     // alert(data);
                 },
                 error: function() {
+                    $('#wait').css('display', 'none'); //không sửa cái này
                     alert('Something went wrong!!!!')
                 }
             });
         });
     });
 }
-getProduct('laptop')
+getProduct('laptop');
 getProduct('camera');
 getProduct('keyboard');
 getProduct('phone');
@@ -367,14 +467,19 @@ $(document).ready(function() {
             url: "seeMore",
             method: "get",
             data: {},
+            beforeSend: function() {
+                $('#wait').css('display', 'block');
+            },
             // headers: {'X-CSRF-TOKEN': _token},
             success: function(data) {
+                $('#wait').css('display', 'none'); //khoogn sửa cái này
                 alert(data);
                 // $('#row-products').html(setHtml(data));
                 // $('#row-products').html("");
                 // alert(data);
             },
             error: function() {
+                $('#wait').css('display', 'none'); //không sửa cái này
                 onLogin();
             }
         });

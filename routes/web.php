@@ -39,5 +39,7 @@ Route::group(['middleware' => ['verifyuser']], function(){
     //đăng nhập thì mới được ấn xem thêm
     Route::get('/seeMore','ProductController@getMoreProduct')->name('seeMore');
     Route::get('/productDescription','ProductController@productDescription')->name('productDescription');
+    Route::get('/userDescription','UserController@userDescription')->name('userDescription');
+    Route::post('/changePassword','UserController@changePassword')->name('changePassword');
 });
 Route::get('/getProduct','ProductController@getProduct')->name('getProduct');

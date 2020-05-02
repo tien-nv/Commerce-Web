@@ -12,7 +12,7 @@ class AdminController extends Controller{
         return $result;
     }
     public function getAdmin(Request $request){
-        $result = DB::table('admin')->select('Admin_ID','Admin_Name')->get();
+        $result = DB::table('admin')->select('Admin_ID','Admin_Name')->where('Admin_ID','<>',$_SESSION['idAdmin'])->get();
         return $result;
     }
 }
