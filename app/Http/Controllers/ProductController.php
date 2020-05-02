@@ -34,11 +34,17 @@ class ProductController extends Controller{
         json_encode($obj);
         return $obj;
     }
+<<<<<<< HEAD
     public function getMoreProduct(Request $request){
         //return object select
         return "getMoreProduct";
     }
     public function productDescription(Request $request){
         //return chi tiết 1 sản phẩm
+=======
+
+    public function sellProduct(){
+        return view('sell.description');
+>>>>>>> version2
     }
 }

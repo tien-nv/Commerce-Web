@@ -41,3 +41,5 @@ Route::group(['middleware' => ['verifyuser']], function(){
     Route::get('/productDescription','ProductController@productDescription')->name('productDescription');
 });
 Route::get('/getProduct','ProductController@getProduct')->name('getProduct');
+
+Route::get('/sell', 'ProductController@sellProduct')-> name('sellProduct');
