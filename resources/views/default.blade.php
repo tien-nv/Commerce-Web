@@ -19,6 +19,9 @@
 
 <body>
     <!-- đây là phần header -->
+    <div class="my-overlay" id="wait" style="background-color: rgba(0, 0, 0, 0.712);z-index:10000;">
+        <span class="wait">Please wait a seconds...</span>
+    </div>
     @section('header')
     @show
 

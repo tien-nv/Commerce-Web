@@ -14,9 +14,9 @@ class VerifyAdmin
      * @return mixed
      */
     public function handle($request, Closure $next)
-    {   
+    {
         session_start();
-        if(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == 1){
+        if (isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] === 'valid') {
             return $next($request);
         }
         abort(403, 'You do not access to this quest.');

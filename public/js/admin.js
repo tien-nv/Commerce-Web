@@ -13,11 +13,16 @@ function showValue(id) {
                     url: "addProduct",
                     method: "GET",
                     data: { selected: val },
+                    beforeSend: function() {
+                        $('#wait').css('display', 'block');
+                    },
                     success: function(data) {
+                        $('#wait').css('display', 'none');
                         alert(data[0].Admin_Name);
                     },
                     error: function() {
-                        alert("something went wrong!!!!" + val[0]);
+                        $('#wait').css('display', 'none');
+                        alert("something went wrong!!!!");
                     }
                 })
             });
@@ -78,13 +83,18 @@ $(document).ready(function() {
                 adminName: adminName,
                 password: password
             },
+            beforeSend: function() {
+                $('#wait').css('display', 'block'); //đồng bộ khi load
+            },
             // headers: {'X-CSRF-TOKEN': _token},
             success: function(data) {
+                $('#wait').css('display', 'none'); //không động vào cái này
                 if (data == 1)
                     alert("Thêm admin thành công hooray!!!! <3");
                 else alert("something went wrong!!!");
             },
             error: function() {
+                $('#wait').css('display', 'none'); //không động vào cái này
                 alert('Something went wrong!!!! ');
             }
         });
@@ -107,13 +117,18 @@ $(document).ready(function() {
                     _token: _token,
                     id: id
                 },
+                beforeSend: function() {
+                    $('#wait').css('display', 'block'); //đồng bộ khi load
+                },
                 success: function(data) {
+                    $('#wait').css('display', 'none');
                     if (data == '1')
                         alert("success remove admin!!!! hooray");
                     else
                         alert("Admin not invalid :(");
                 },
                 error: function() {
+                    $('#wait').css('display', 'none');
                     alert("something went wrong!!!!");
                 }
             })
@@ -153,7 +168,7 @@ $(document).ready(function() {
                 $('#sel4').html(myHtml);
                 setTimeout(function() {
                     $('#progress').css('display', 'none');
-                }, 2000)
+                }, 1500)
             },
             error: function() {
                 alert("something went wrong!!!!");

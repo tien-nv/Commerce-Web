@@ -31,7 +31,10 @@ class LoginController extends Controller
                 session_start();
                 $_SESSION['userName_cw'] = $userName;
                 $_SESSION['password_cw'] = $password; //password này đã được mã hóa hash
-                $_SESSION['isUser'] = 1;
+                $_SESSION['isUser'] = 'valid';
+                $id = DB::table('user')->select('User_ID')->where('UserName', '=', $userName)->get();
+                $id = json_decode($id, true);
+                $_SESSION['idUser'] = $id[0]['User_ID'];
                 if (strlen($userName) > 4)
                     $userName_show = substr($userName, 0, 4) . '...';
                 else $userName_show = $userName;
@@ -88,7 +91,10 @@ class LoginController extends Controller
             session_start();
             $_SESSION['userName_cw'] = $userName;
             $_SESSION['password_cw'] = $password_hash; //password này đã được mã hóa hash
-            $_SESSION['isUser'] = 1;
+            $_SESSION['isUser'] = 'valid';
+            $id = DB::table('user')->select('User_ID')->where('UserName', '=', $userName)->get();
+            $id = json_decode($id, true);
+            $_SESSION['idUser'] = $id[0]['User_ID'];
             //mã hóa tên các trường
             $cookie_username = 'userName_cw';
             $cookie_password = 'password_cw';
@@ -151,8 +157,10 @@ class LoginController extends Controller
         session_start();
         $_SESSION['userName_cw'] = $userName;
         $_SESSION['password_cw'] = $password; //password này đã được mã hóa hash
-        $_SESSION['isUser'] = 1;
-
+        $_SESSION['isUser'] = 'valid';
+        $id = DB::table('user')->select('User_ID')->where('UserName', '=', $userName)->get();
+        $id = json_decode($id, true);
+        $_SESSION['idUser'] = $id[0]['User_ID'];
         //mã hóa tên các trường
         $cookie_username = 'userName_cw';
         $cookie_password = 'password_cw';
@@ -191,7 +199,10 @@ class LoginController extends Controller
         session_start();
         $_SESSION['adminName'] = $adminName;
         $_SESSION['passwordAdmin'] = $password;
-        $_SESSION['isAdmin'] = 1;
+        $_SESSION['isAdmin'] = 'valid';
+        $adminId = DB::table('admin')->select('Admin_ID')->where('Admin_Name','=',$adminName)->get();
+        $adminId = json_decode($adminId,true);
+        $_SESSION['idAdmin'] = $adminId[0]['Admin_ID'];
         return view('adminpage', compact('adminName'));
     }
 
@@ -203,14 +214,12 @@ class LoginController extends Controller
     {
         //hủy bỏ session
         session_unset();
-
         //hủy bỏ cookies
         $cookie_username = 'userName_cw';
         $cookie_password = 'password_cw';
         setcookie($cookie_username, "", time() - 3600); //
         //mật khẩu
         setcookie($cookie_password, "", time() - 3600); //
-
         return (view('home'));
     }
 
