@@ -53,7 +53,7 @@
                             <a href="javascript:void(0)" onclick="onAdminLogin()">Admin Login</a>
                         </div>
                     </div>
-                <a href="#"><button class="btn btn-primary searchColor">Đăng bán</button></a>
+                <a href="{{ route('sellProduct') }}"><button class="btn btn-primary searchColor">Đăng bán</button></a>
                 </div>
                 <div id="overlayRegister">
                     <form action="{{ route('userRegister') }}" onsubmit="return validateRegister()" method="post" class="formContentPopup" name="registerForm" id="registerForm">
