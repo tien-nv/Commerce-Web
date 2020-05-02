@@ -16,7 +16,7 @@ window.onload = function () {
             if(image.files.length !=0){
                 customTxt.innerHTML = image.files.length +" file choosed";
                 
-            }else{  
+            }else{
                 customTxt.innerHTML = "No file chosen, yet.";
             }
       });
@@ -37,9 +37,5 @@ function addField(){
         return false;
     }
 }
-
-
-
-
 
 
