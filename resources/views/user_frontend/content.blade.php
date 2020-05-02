@@ -1,5 +1,5 @@
 <div class="topnav" id="myTopnav">
-    <a href="javascript:void(0)" class="active" id="all"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+    <a href="{{ route('/') }}" class="active" id="all"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
     <div class="my-drop">
         <a href="javascript:void(0)"><i class="fa fa-rss" aria-hidden="true"></i> Công nghệ</a>
         <div class="topnav-dropdown-content">

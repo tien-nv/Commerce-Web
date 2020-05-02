@@ -3,7 +3,7 @@
         <div class="pageWidth">
             <div class="headerBar">
                 <div class="headerBar-left">
-                    <a href="#">
+                    <a href="{{ route('/') }}">
                         <img src="img\\iconHome.png" alt="Commerce_Web" class="iconImg">
                     </a>
                     <form action="javascript:void(0)" method="post" class="findForm" id="findForm" name="findForm">

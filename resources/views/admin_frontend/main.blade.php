@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
-                <div class="my-dropdown">
+                <div class="my-dropdown" style="width:fit-content;margin-left:30%;">
                     <label> <a href="javascript:void(0)" class="headerBar-login" style="margin-right: 40px;color: green;">Welcome {{$adminName }}</a></label>
                     <div id="my-dropdown-content">
                         <a href="#">Profile</a>
@@ -17,16 +17,41 @@
                     <form action="javascript:void(0)">
                         <label for="sel1">Thêm sản phẩm</label>
                         <div class="row  show">
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 show-img">
-                                <img src="img\\product2.jpg" alt="ảnh sản phẩm">
+                            <div class="col-lg-5 col-md-5 col-sm-5 col-xl-5">
+                                <div class=" show-img">
+                                    <img src="img\\product2.jpg" alt="ảnh sản phẩm">
+                                    <img src="img\\product2.jpg" alt="ảnh sản phẩm">
+                                    <img src="img\\product2.jpg" alt="ảnh sản phẩm">
+                                    <img src="img\\product2.jpg" alt="ảnh sản phẩm">
+                                    <img src="img\\product2.jpg" alt="ảnh sản phẩm">
+                                    <img src="img\\product2.jpg" alt="ảnh sản phẩm">
+                                    <img src="img\\product2.jpg" alt="ảnh sản phẩm">
+                                    <img src="img\\product2.jpg" alt="ảnh sản phẩm">
+                                    <img src="img\\product2.jpg" alt="ảnh sản phẩm">
+                                </div>
                             </div>
-                            <div class="col-lg-8 col-md-8 col-sm-8 col-xl-8">
+                            <div class="col-lg-7 col-md-7 col-sm-7 col-xl-7">
                                 <select class="form-control" id="sel1" name="sel1" multiple size="3">
                                     <option value="thêm">sản phẩm một</option>
                                     <option value="thêm">sản phẩm một</option>
                                     <option value="thêm">sản phẩm một</option>
                                     <option value="thêm">sản phẩm một</option>
                                 </select>
+                                <div class="show-infor">
+                                    <div class="name-product">Tên sản phẩm</div>
+                                    <div class="cost">2.000.000</div>
+                                    <div class="color">
+                                        <label for="product-color">Màu sắc: </label>
+                                        <span id="colors"> đỏ, xanh</span>
+                                    </div>
+                                    <div class="total">Số lượng: 1</div>
+                                    <div class="other">
+                                        <p>Một số mô tả khác mô tả 1</p>
+                                        <p>Một số mô tả khác mô tả 2</p>
+                                        <p>Một số mô tả khác mô tả 2</p>
+                                        <p>Một số mô tả khác mô tả 2</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div>
@@ -43,16 +68,38 @@
                     <form action="javascript:void(0)">
                         <label for="sel2">Xóa sản phẩm</label>
                         <div class="row  show">
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 show-img">
-                                <img src="img\\product1.jpg" alt="ảnh sản phẩm">
+                            <div class="col-lg-5 col-md-5 col-sm-5 col-xl-5">
+                                <div class=" show-img">
+                                    <img src="img\\product1.jpg" alt="ảnh sản phẩm">
+                                    <img src="img\\product1.jpg" alt="ảnh sản phẩm">
+                                    <img src="img\\product1.jpg" alt="ảnh sản phẩm">
+                                    <img src="img\\product1.jpg" alt="ảnh sản phẩm">
+                                    <img src="img\\product1.jpg" alt="ảnh sản phẩm">
+                                    <img src="img\\product1.jpg" alt="ảnh sản phẩm">
+                                </div>
                             </div>
-                            <div class="col-lg-8 col-md-8 col-sm-8 col-xl-8 ">
+                            <div class="col-lg-7 col-md-7 col-sm-7 col-xl-7 ">
                                 <select class="form-control" id="sel2" name="sel2" multiple size="3">
                                     <option value="Xóa">sản phẩm một</option>
                                     <option value="xóa">sản phẩm một</option>
                                     <option value="xóa">sản phẩm một</option>
                                     <option value="xóa">sản phẩm một</option>
                                 </select>
+                                <div class="show-infor">
+                                    <div class="name-product">Tên sản phẩm</div>
+                                    <div class="cost">2.000.000</div>
+                                    <div class="color">
+                                        <label for="product-color">Màu sắc: </label>
+                                        <span id="colors"> đỏ, xanh</span>
+                                    </div>
+                                    <div class="total">Số lượng: 1</div>
+                                    <div class="other">
+                                        <p>Một số mô tả khác mô tả 1</p>
+                                        <p>Một số mô tả khác mô tả 2</p>
+                                        <p>Một số mô tả khác mô tả 2</p>
+                                        <p>Một số mô tả khác mô tả 2</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <button type="button" name="delProduct" id="delProduct" class="btn btn-primary" onclick="showValue('sel2')">save</button>
@@ -68,17 +115,33 @@
                         <!-- {{ csrf_field() }} -->
                         <label for="sel3">Sửa sản phẩm</label>
                         <div class="row show">
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 show-img">
-                                <img src="img\\product2.jpg" alt="ảnh sản phẩm">
+                            <div class="col-lg-5 col-md-5 col-sm-5 col-xl-5">
+                                <div class=" show-img">
+                                    <!-- <img src="img\\product2.jpg" alt="ảnh sản phẩm"> -->
+                                </div>
                             </div>
-                            <div class="col-lg-8 col-md-8 col-sm-8 col-xl-8">
+                            <div class="col-lg-7 col-md-7 col-sm-7 col-xl-7">
                                 <select class="form-control" id="sel3" name="sel3" multiple size="3">
                                     <option value="Sửa">sản phẩm một</option>
                                     <option value="sửa">sản phẩm một</option>
                                     <option value="sửa">sản phẩm một</option>
                                     <option value="sửa">sản phẩm một</option>
                                 </select>
-                                <p>chỗ này sẽ thêm những ô để có thể thay đổi sản phẩm</p>
+                                <div class="show-infor">
+                                    <div class="name-product">Tên sản phẩm</div>
+                                    <div class="cost">2.000.000</div>
+                                    <div class="color">
+                                        <label for="product-color">Màu sắc: </label>
+                                        <span id="colors"> đỏ, xanh</span>
+                                    </div>
+                                    <div class="total">Số lượng: 1</div>
+                                    <div class="other">
+                                        <p>Một số mô tả khác mô tả 1</p>
+                                        <p>Một số mô tả khác mô tả 2</p>
+                                        <p>Một số mô tả khác mô tả 2</p>
+                                        <p>Một số mô tả khác mô tả 2</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <button type="button" name="changeProduct" id="changeProduct" class="btn btn-primary" onclick="showValue('sel3')">save</button>
@@ -91,14 +154,10 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
                 <div class="area">
                     <form action="javascript:void(0)">
-                        <!-- {{ csrf_field() }} -->
+                        {{ csrf_field() }}
                         <label for="sel4">Xóa admin</label>
                         <select class="form-control" id="sel4" name="sel4">
-                            <option value="" aria-checked="true">Cảnh báo xóa 1 admin</option>
-                            <option value="Xóa admin">admin một</option>
-                            <option value="Xóa admin">admin hai</option>
-                            <option value="Xóa admin">admin hai</option>
-                            <option value="Xóa admin">admin hai</option>
+                            <option value="" aria-checked="true">Xóa 1 admin</option>
                         </select>
                         <button type="button" name="delAdmin" id="delAdmin" class="btn btn-danger" onclick="showValue('sel4')">save</button>
                     </form>

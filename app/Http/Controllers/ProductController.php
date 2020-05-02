@@ -10,15 +10,13 @@ class ProductController extends Controller{
     public function addProduct(Request $request){
         // return view('home');
         $data = $request->input('selected');
-        $process = new ProductProcess();
-        return $process->addProduct($data);
+        $query = new ProductProcess();
+        $respon = $query->addProduct($data);
+        return $respon;
     }
     public function getProduct(Request $request){
         $type = $request->get('typeProduct');
         //query lấy sản phẩm từ chỗ này
-        if($type == 'all') {
-            //query database để lấy số lượng sản phẩm
-        }
         //test ajax
         $obj = array();
         $product['img'] = 'img/product1.jpg';
@@ -35,5 +33,12 @@ class ProductController extends Controller{
         $obj[] = $product;
         json_encode($obj);
         return $obj;
+    }
+    public function getMoreProduct(Request $request){
+        //return object select
+        return "getMoreProduct";
+    }
+    public function productDescription(Request $request){
+        //return chi tiết 1 sản phẩm
     }
 }

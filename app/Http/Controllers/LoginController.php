@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\models\AccountProcess; //sử dụng file này để lấy các kết quả query để check account
 use App\models\QueryDB;
+use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
 {
@@ -26,13 +27,16 @@ class LoginController extends Controller
             //gọi đến hàm kiểm tra
             $check = AccountProcess::checkUserLogin($userName, $password);
             // nếu hợp lệ
-            if ($check === true){
-                if(strlen($userName) > 4)
-                    $userName_show = substr($userName,0,4).'...';
+            if ($check === true) {
+                session_start();
+                $_SESSION['userName_cw'] = $userName;
+                $_SESSION['password_cw'] = $password; //password này đã được mã hóa hash
+                $_SESSION['isUser'] = 1;
+                if (strlen($userName) > 4)
+                    $userName_show = substr($userName, 0, 4) . '...';
                 else $userName_show = $userName;
-                return view('home', compact('userName','userName_show', 'check'));
-            }
-            else {
+                return view('home', compact('userName', 'userName_show', 'check'));
+            } else {
                 //hủy bỏ cookies
                 $cookie_username = 'userName_cw';
                 $cookie_password = 'password_cw';
@@ -78,13 +82,13 @@ class LoginController extends Controller
         //mã hóa password người dùng rồi luuwu vào database để đảm bảo quyền riêng tư
         $password_hash = hash('ripemd160', $password); //password hash để lưu vào database
         $query = new QueryDB();
-        $resultRegister = $query->addUser($userName, $password_hash, $address, $email, $phone,$gender,$birthday);
+        $resultRegister = $query->addUser($userName, $password_hash, $address, $email, $phone, $gender, $birthday);
         if ($resultRegister) {
             //set session
             session_start();
             $_SESSION['userName_cw'] = $userName;
             $_SESSION['password_cw'] = $password_hash; //password này đã được mã hóa hash
-
+            $_SESSION['isUser'] = 1;
             //mã hóa tên các trường
             $cookie_username = 'userName_cw';
             $cookie_password = 'password_cw';
@@ -99,31 +103,33 @@ class LoginController extends Controller
             setcookie($cookie_password, $password_encry, time() + (86400 * 30)); //1 day
             //trả về tên dạng plaintext
             //nếu thành công thì dadwndg nhập và hiện thị thông báo
-            if(strlen($userName) > 4)
-            $userName_show = substr($userName,0,4).'...';
+            if (strlen($userName) > 4)
+                $userName_show = substr($userName, 0, 4) . '...';
             else $userName_show = $userName;
-            return view('home', compact('userName_show','userName', 'resultRegister'));
+            return view('home', compact('userName_show', 'userName', 'resultRegister'));
         } else {
             // không thì hiện thị khoogn thành công
             return view('home', compact('resultRegister'));
         }
     }
 
-    public function checkAdminRegister(Request $request){
+    public function checkAdminRegister(Request $request)
+    {
         $adminName = $request->get("inputVal");
         $respon = AccountProcess::isAdminNameOk($adminName);
         return $respon;
     }
 
-    public function getAdminRegister(Request $request){
+    public function getAdminRegister(Request $request)
+    {
         $adminName = $request->get('adminName');
         $password = $request->get('password');
 
         $password = hash('ripemd160', $password); //mã hóa hash rồi vứt vào database
         $query = new QueryDB();
-        $field = array('Admin_Id','Admin_Name','Password'); //Admin_Id là Null
-        $data = array($adminName,$password);
-        $resultRegister = $query->addToTable('admin',$field,$data);
+        $field = array('Admin_Id', 'Admin_Name', 'Password'); //Admin_Id là Null
+        $data = array($adminName, $password);
+        $resultRegister = $query->addToTable('admin', $field, $data);
         return $resultRegister;
     }
 
@@ -145,7 +151,7 @@ class LoginController extends Controller
         session_start();
         $_SESSION['userName_cw'] = $userName;
         $_SESSION['password_cw'] = $password; //password này đã được mã hóa hash
-        $_SESSION['isAdmin'] = 0;
+        $_SESSION['isUser'] = 1;
 
         //mã hóa tên các trường
         $cookie_username = 'userName_cw';
@@ -163,10 +169,10 @@ class LoginController extends Controller
         setcookie($cookie_password, $password_encry, time() + (86400 * 30)); //1 day
 
         //trả về tên dạng plaintext
-        if(strlen($userName) > 4)
-            $userName_show = substr($userName,0,4).'...';
+        if (strlen($userName) > 4)
+            $userName_show = substr($userName, 0, 4) . '...';
         else $userName_show = $userName;
-        return view('home', compact('userName','userName_show', 'check'));
+        return view('home', compact('userName', 'userName_show', 'check'));
     }
 
     //funtion này check login của 1 admin
@@ -177,7 +183,7 @@ class LoginController extends Controller
         // echo $password;
         $password = hash('ripemd160', $password);
         //gọi hàm check account
-        $check = AccountProcess::checkAdminLogin($adminName,$password);
+        $check = AccountProcess::checkAdminLogin($adminName, $password);
         if ($check === false) return view('home', compact('check'));
         //nếu hợp lệ thì set sessions
 

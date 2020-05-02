@@ -7,6 +7,11 @@ use App\models\QueryDB;
 
 class AccountProcess extends Model
 {
+    /**-----------------------------------------------------------------------------
+     * Những function kiểm tra người người dùng nhập vào các tài khoản có
+     * bị trùng hay không
+     * ------------------------------------------------------------------------------
+     */
     //funtion kiểm tra tên user name đăng kí là hợp lệ hay không
     public static function isUsernameOk($userInput){
         $query = new QueryDB();
@@ -43,6 +48,10 @@ class AccountProcess extends Model
         return 1;
     }
 
+    /**--------------------------------------------------------------------------------
+     * function kiểm tra xem những trường mà khi thêm mới 1 admin có bị trùng hay không
+     * --------------------------------------------------------------------------------
+     */
     //function kiểm tra xem tên admin thêm vào có hợp lệ hay không 
     public static function isAdminNameOk($adminInput){
         $query = new QueryDB();
@@ -55,6 +64,10 @@ class AccountProcess extends Model
         return 1;
     }
 
+    /**-----------------------------------------------------------------------------------
+     * function kiểm tra đăng nhập
+     * -----------------------------------------------------------------------------------
+     */
     //funtion kiểm tra tài khoản đăng nhập là hợp lệ không
     public static function checkUserLogin($userName,$password){
         $query = new QueryDB();
@@ -77,4 +90,8 @@ class AccountProcess extends Model
         }
         return false;
     }
+
+    /**
+     * 
+     */
 }

@@ -169,7 +169,21 @@ function showNavBar() {
 function onProductDesc() {
     $(document).ready(function() {
         // alert("ok");
-        $("#product-description").css("display", "block");
+        $.ajax({
+            url: "productDescription",
+            method: "get",
+            data: {
+                id: id,
+                //something of one product
+            },
+            // headers: {'X-CSRF-TOKEN': _token},
+            success: function(data) {
+                $("#product-description").css("display", "block");
+            },
+            error: function() {
+                onLogin();
+            }
+        });
 
     });
 }
@@ -337,7 +351,6 @@ function getProduct(name) {
         });
     });
 }
-getProduct('all');
 getProduct('laptop')
 getProduct('camera');
 getProduct('keyboard');
@@ -348,7 +361,25 @@ getProduct('watch');
 getProduct('fridge');
 
 //function khi người dùng click xem thêm thì query thêm
-
+$(document).ready(function() {
+    $('#seeMore').click(function() {
+        $.ajax({
+            url: "seeMore",
+            method: "get",
+            data: {},
+            // headers: {'X-CSRF-TOKEN': _token},
+            success: function(data) {
+                alert(data);
+                // $('#row-products').html(setHtml(data));
+                // $('#row-products').html("");
+                // alert(data);
+            },
+            error: function() {
+                onLogin();
+            }
+        });
+    });
+});
 
 
 //function khi người dùng tìm kiếm một cái gì đó

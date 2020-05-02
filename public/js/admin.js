@@ -14,7 +14,7 @@ function showValue(id) {
                     method: "GET",
                     data: { selected: val },
                     success: function(data) {
-                        alert(typeof(data[2]));
+                        alert(data[0].Admin_Name);
                     },
                     error: function() {
                         alert("something went wrong!!!!" + val[0]);
@@ -89,4 +89,58 @@ $(document).ready(function() {
             }
         });
     })
+});
+
+
+//script để xóa admin đã được chọn
+$(document).ready(function() {
+    $('#delAdmin').click(function() {
+        let id = $('#sel4').val();
+        if (id == '') {
+            alert("chưa chọn admin");
+        } else {
+            var _token = $('input[name="_token"]').val();
+            alert(id);
+            $.ajax({
+                url: "removeAdmin",
+                method: "POST",
+                data: {
+                    _token: _token,
+                    id: id
+                },
+                success: function(data) {
+                    if (data == '1')
+                        alert("success remove admin!!!! hooray");
+                    else
+                        alert("Admin not invalid :(");
+                },
+                error: function() {
+                    alert("something went wrong!!!!");
+                }
+            })
+        }
+    })
+});
+
+$(document).ready(function() {
+    $('#sel4').click(function() {
+        var _token = $('input[name="_token"]').val();
+        $.ajax({
+            url: "getAdmin",
+            method: "POST",
+            data: {
+                _token: _token
+            },
+            success: function(data) {
+                var myHtml = '<option value="" aria-checked="true">Xóa 1 admin</option>';
+                for (admin in data) {
+                    myHtml += '<option value="' + data[admin]['Admin_ID'] + '">' + data[admin]['Admin_Name'] + '</option>';
+                }
+                $('#sel4').html(myHtml);
+            },
+            error: function() {
+                alert("something went wrong!!!!");
+            }
+        })
+    });
 });

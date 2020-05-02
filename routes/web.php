@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/','LoginController@getHomeView');
+Route::get('/','LoginController@getHomeView')->name('/');
 
 Route::post('/userRegister','LoginController@getUserRegister')->name('userRegister');
 
@@ -26,14 +26,18 @@ Route::get('/logOutUser','LoginController@logOutUser')->name('logOutUser');
 Route::post('/userInputRegister','LoginController@checkRegister')->name('userInputRegister');
 
 Route::group(['middleware' => ['verifyadmin']], function () {
-    Route::post('/adminInputRegister','LoginController@checkAdminRegister')->name('adminInputRegister');
     Route::get('/addProduct','ProductController@addProduct')->name('addProduct');
     Route::get('/logOutAdmin','LoginController@logOutAdmin')->name('logOutAdmin');
+    Route::post('/adminInputRegister','LoginController@checkAdminRegister')->name('adminInputRegister');
     Route::post('/adminRegister','LoginController@getAdminRegister')->name('adminRegister');
+    Route::post('/removeAdmin','AdminController@removeAdmin')->name('removeAdmin');
+    Route::post('/getAdmin','AdminController@getAdmin')->name('getAdmin');
 });
 
 Route::group(['middleware' => ['verifyuser']], function(){
     //những route xử lý để xác thực xem user đã đăng nhập hay chưa
+    //đăng nhập thì mới được ấn xem thêm
+    Route::get('/seeMore','ProductController@getMoreProduct')->name('seeMore');
+    Route::get('/productDescription','ProductController@productDescription')->name('productDescription');
 });
-
 Route::get('/getProduct','ProductController@getProduct')->name('getProduct');
