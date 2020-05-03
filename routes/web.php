@@ -43,3 +43,5 @@ Route::group(['middleware' => ['verifyuser']], function(){
     Route::post('/changePassword','UserController@changePassword')->name('changePassword');
 });
 Route::get('/getProduct','ProductController@getProduct')->name('getProduct');
+
+Route::get('/sell', 'ProductController@sellProduct')-> name('sellProduct');
