@@ -1,12 +1,11 @@
-body{
-    background-color: #3f3a33ce  ;
+body {
+    background-color: rgb(119, 119, 119) !important;
     color: white;
 }
 
 .form-row {
-    margin-top : 30px;
+    margin-top: 30px;
 }
-
 
 input[type='text'] {
     background-color: #e5e6eb;
@@ -22,16 +21,14 @@ input[type='text'] {
     border: 1px solid #000;
     border-radius: 5px;
     cursor: pointer;
-  }
-  
-  #image-button:hover {
+}
+
+#image-button:hover {
     background-color: #00b28f;
-  }
-  
-  #image-text {
+}
+
+#image-text {
     margin-left: 10px;
     font-family: sans-serif;
     color: #aaa;
-  }
-  
-  
+}

@@ -41,6 +41,8 @@ class ProductController extends Controller{
     public function productDescription(Request $request){
         //return chi tiết 1 sản phẩm
     }
+
+    //funtion trả về view của trang đăng bán
     public function sellProduct(){
         return view('sell.description');
     }
