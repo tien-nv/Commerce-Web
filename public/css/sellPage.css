@@ -1,13 +1,24 @@
+<<<<<<< HEAD
 body{
     background-color: #3f3a33ce  ;
+=======
+body {
+    background-color: rgb(119, 119, 119) !important;
+>>>>>>> 07df8cc4f13b39f3067d48063e4dd93813f3f99f
     color: white;
 }
 
 .form-row {
+<<<<<<< HEAD
     margin-top : 30px;
 }
 
 
+=======
+    margin-top: 30px;
+}
+
+>>>>>>> 07df8cc4f13b39f3067d48063e4dd93813f3f99f
 input[type='text'] {
     background-color: #e5e6eb;
     border-radius: 10px;
@@ -22,6 +33,7 @@ input[type='text'] {
     border: 1px solid #000;
     border-radius: 5px;
     cursor: pointer;
+<<<<<<< HEAD
   }
   
   #image-button:hover {
@@ -35,3 +47,16 @@ input[type='text'] {
   }
   
   
+=======
+}
+
+#image-button:hover {
+    background-color: #00b28f;
+}
+
+#image-text {
+    margin-left: 10px;
+    font-family: sans-serif;
+    color: #aaa;
+}
+>>>>>>> 07df8cc4f13b39f3067d48063e4dd93813f3f99f

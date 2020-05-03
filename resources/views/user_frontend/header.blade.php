@@ -153,7 +153,7 @@
                             <a href="{{route('logOutUser')}}">Check out</a>
                         </div>
                     </div>
-                    <a href="#"><button class="btn btn-primary searchColor"><i class="fa fa-shopping-bag"></i> Đăng bán</button></a>
+                    <a href="{{ route('sellProduct') }}"><button class="btn btn-primary searchColor"><i class="fa fa-shopping-bag"></i> Đăng bán</button></a>
                 </div>
                 <div id="overlayProfile" class="my-overlay">
                     <div class="formProductPopup">

@@ -41,7 +41,12 @@ Route::group(['middleware' => ['verifyuser']], function(){
     Route::get('/productDescription','ProductController@productDescription')->name('productDescription');
     Route::get('/userDescription','UserController@userDescription')->name('userDescription');
     Route::post('/changePassword','UserController@changePassword')->name('changePassword');
+    Route::get('/sell', 'ProductController@sellProduct')-> name('sellProduct');
 });
 Route::get('/getProduct','ProductController@getProduct')->name('getProduct');
 
+<<<<<<< HEAD
 Route::get('/sell', 'ProductController@sellProduct')-> name('sellProduct');
+=======
+
+>>>>>>> 07df8cc4f13b39f3067d48063e4dd93813f3f99f
