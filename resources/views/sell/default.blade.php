@@ -10,42 +10,25 @@
     <link rel="stylesheet" href="bin\\bootstrap441\\css\\bootstrap.min.css">
     <script src="bin\\jquery341\\jquery.min.js"></script>
     <script src="bin\\bootstrap441\\js\\bootstrap.min.js"></script>
-<<<<<<< HEAD
-    <script src="js\\sell.js"></script>
-    <link rel="stylesheet" href="css/sellPage.css">
-=======
     <link rel="stylesheet" href="css/sellPage.css">
     <script src="js\\sell.js"></script>
->>>>>>> 07df8cc4f13b39f3067d48063e4dd93813f3f99f
     
 </head>
 
 <body>
     @section('navbar')
-<<<<<<< HEAD
-    <nav class="navbar navbar-expand-md navbar-light bg-warning">
-        <ul class="navbar-nav lf-auto">
-           <a class="navbar-brand" href="#"><img src="img/shoppingcart.png"></a>
-           <li class="nav-item">
-              <a class="nav-link" href="#"></a>   
-=======
     <nav class="navbar navbar-expand-md navbar-light" style="background-color: rgb(180, 180, 180);">
         <ul class="navbar-nav lf-auto">
            <a class="navbar-brand" href="javascript:void(0)"><img src="img/shoppingcart.png"></a>
            <li class="nav-item">
               <a class="nav-link" href="javascript:void(0)"></a>   
->>>>>>> 07df8cc4f13b39f3067d48063e4dd93813f3f99f
            </li>
         </ul>
         
         <ul class="navbar-nav ml-auto">
            
            <li class="nav-item ">
-<<<<<<< HEAD
-              <a class="nav-link custom" href="#"><span style="color: #E60A0A; font-size: 32px; vertical-align: middle">Exit</span><img src="img/exit2.png"></a>
-=======
               <a class="nav-link custom" href="{{ route('/') }}"><span style="color: #E60A0A; font-size: 32px; vertical-align: middle">Exit</span><img src="img/exit2.png"></a>
->>>>>>> 07df8cc4f13b39f3067d48063e4dd93813f3f99f
               {{-- <a class="navbar-brand" href="#"><img src="img/exit2.png"></a> --}}
            </li>
            
