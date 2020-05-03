@@ -19,7 +19,7 @@
       <div class="form-row">
          <div class="form-group col-md-6 offset-md-3">
             <div class="font-weight-bold"> Tên Sản Phẩm </div>
-            <input type="text" class="form-control" id="name">
+            <input type="text" class="form-control"  name = "name" id="name">
             <small name="textname" id="textname" class="text-form text-muted">
                <h6 class="text-warning">Ex: IphoneXS, S20,...</h6>
             </small>
@@ -29,7 +29,7 @@
       <div class="form-row">
          <div class="form-group col-md-6 offset-md-3">
             <div class="font-weight-bold"> Loại Sản Phẩm </div>
-            <input type="text" class="form-control" id="type">
+            <input type="text" class="form-control" name="type" id="type">
             <small name="texttype" id="texttype" class="text-form text-muted">
                <h6 class="text-warning">Ex: Phone,Laptop,...</h6>
             </small>
@@ -39,7 +39,7 @@
       <div class="form-row">
          <div class="form-group col-md-6 offset-md-3">
             <div class="font-weight-bold"> Màu sắc </div>
-            <input type="text" class="form-control" id="color">
+            <input type="text" class="form-control" name="color" id="color">
             <small name="textcolor" id="textcolor" class="text-form text-muted">
                <h6 class="text-warning">Ex: Red,Blue,...</h6>
             </small>
@@ -49,7 +49,7 @@
       <div class="form-row" id="costinput">
          <div class="form-group col-md-6 offset-md-3">
             <div class="font-weight-bold"> Gía cả</div>
-            <input type="text" class="form-control" id="cost">
+            <input type="text" class="form-control" name="cost" id="cost">
             <small name="textcost" id="textcost" class="text-form text-muted">
                <h6 class="text-warning">Đơn vị: VNĐ</h6>
             </small>
