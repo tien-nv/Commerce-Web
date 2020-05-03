@@ -72,7 +72,7 @@
       <div class="container">
          <div class="row">
             <div class="col-md-2 offset-md-4">
-               <a type="button" class="btn btn-dark" id="add" onclick="addField()">Thêm mô tả</a>
+               <a type="button" class="btn btn-dark" id="add" onclick="addField()">Add Description</a>
             </div>
             <div class="col-md-2 offset-md-1">
                <a href="javascript:void(0)" type="button" class="btn btn-danger" id="send">Đăng bán</a>

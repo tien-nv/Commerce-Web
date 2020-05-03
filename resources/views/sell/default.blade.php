@@ -28,7 +28,6 @@
         <ul class="navbar-nav ml-auto">
            
            <li class="nav-item ">
-               <h1> New </h1>
               <a class="nav-link custom" href="{{ route('/') }}"><span style="color: #E60A0A; font-size: 32px; vertical-align: middle">Exit</span><img src="img/exit2.png"></a>
               {{-- <a class="navbar-brand" href="#"><img src="img/exit2.png"></a> --}}
            </li>
