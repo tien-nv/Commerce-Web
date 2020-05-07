@@ -1,17 +1,17 @@
-<header>
-    <div class="container-fluid">
+<header id="head">
+    <div class="container-fluid my">
         <div class="pageWidth">
             <div class="headerBar">
                 <div class="headerBar-left">
                     <a href="{{ route('/') }}">
-                        <img src="img\\iconHome.png" alt="Commerce_Web" class="iconImg">
+                        <img src="img\\logo.png" alt="Commerce_Web" class="iconImg">
                     </a>
                     <form action="javascript:void(0)" method="post" class="findForm" id="findForm" name="findForm">
                         <!-- chỗ này dùng ajax -->
                         {{ csrf_field() }}
-                        <div class="form-group selection">
+                        <div class="selection">
                             <select class="category" id="category" name="category">
-                                <option value="null" selected>--Category--</option>
+                                <option value="all" selected>--Category--</option>
                                 <option value="book">Book</option>
                                 <option value="camera">Camera</option>
                                 <option value="fridge">Fridge</option>
@@ -21,10 +21,12 @@
                                 <option value="tv">television</option>
                                 <option value="wacth">watch</option>
                             </select>
-                            <input type="text" class="form-control inputColor" id="search" placeholder="Tìm kiếm ?" name="search">
-                            <button type="submit" class="btn btn-primary searchColor"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            <input type="text" class="my-form-control inputColor" name="search" id="search" placeholder="Tìm kiếm ?" name="search" style="border-radius: 2px;">
+                            <button type="button" id="search-button" class="btn btn-outline-dark searchColor" style="border-radius: 1px;"><i class="fa fa-search" aria-hidden="true" ></i></button>
+                            <div class="search-recommend" id="search-recommend">
+                            </div>
                         </div>
-                    </form>
+                    </form>   
                 </div>
                 @if(isset($resultRegister) && $resultRegister === false)
                 <script>
@@ -42,18 +44,17 @@
                 @endif
                 @if(!isset($userName) ||(isset($check) && $check === false))
                 <div class="headerBar-right">
-                    <a href="javascript:void(0)" class="headerBar-register" onclick="onRegister()">Đăng ký</a>
+                    <a href="javascript:void(0)" class="headerBar-register btn btn-outline-light" onclick="onRegister()" style="border-radius: 0;">Đăng ký</a>
                     <div class="area-register">
                         <a href="javascript:void(0)" onclick="onRegister()"><i class="fa fa-user-plus"></i></a>
                     </div>
                     <div class="my-dropdown">
-                        <span class="headerBar-login">Đăng nhập</span>
+                        <span class="headerBar-login btn btn-outline-light" style="border-radius: 0;">Đăng nhập</span>
                         <div id="my-dropdown-content">
                             <a href="javascript:void(0)" onclick="onLogin()">User Login</a>
                             <a href="javascript:void(0)" onclick="onAdminLogin()">Admin Login</a>
                         </div>
                     </div>
-                <a href="{{ route('sellProduct') }}"><button class="btn btn-primary searchColor">Đăng bán</button></a>
                 </div>
                 <div id="overlayRegister">
                     <form action="{{ route('userRegister') }}" onsubmit="return validateRegister()" method="post" class="formContentPopup" name="registerForm" id="registerForm">
@@ -146,14 +147,17 @@
                 @elseif(isset($userName) && ((isset($check) && $check === true) || (isset($resultRegister) && $resultRegister === true)))
                 <div class="headerBar-right">
                     <div class="my-dropdown">
-                        <a href="javascript:void(0)" class="headerBar-login" style="margin-right: 40px;color: #414141;font-size: 18px;" title="{{$userName}}"><i class="fa fa-user-circle-o" aria-hidden="true"></i> {{$userName_show }}</a>
+                        <a href="javascript:void(0)" class="headerBar-login" style="margin-right: 40px;font-size: 18px;" title="{{$userName}}"><i class="fa fa-user-circle-o" aria-hidden="true"></i> {{$userName_show }}</a>
                         <div id="my-dropdown-content">
                             {{ csrf_field() }}
                             <a href="javascript:void(0)" id="profile">Profile user</a>
                             <a href="{{route('logOutUser')}}">Check out</a>
                         </div>
                     </div>
-                    <a href="{{ route('sellProduct') }}"><button class="btn btn-primary searchColor"><i class="fa fa-shopping-bag"></i> Đăng bán</button></a>
+                    <a href="{{ route('sellProduct') }}"><button class="btn btn-outline-light " style="border-radius: 0;"><i class="fa fa-shopping-bag"></i> Đăng bán</button></a>
+                </div>
+                <div id="goTop" class="icon-go-top" title="Go to top">
+                    <a href="#head" style="color: black"><i class="fa fa-caret-square-o-up" aria-hidden="true"></i></a>
                 </div>
                 <div id="overlayProfile" class="my-overlay">
                     <div class="formProductPopup">

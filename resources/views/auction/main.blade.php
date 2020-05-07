@@ -2,8 +2,6 @@
     <div class="filter">
         <span>Sắp xếp theo</span>
         <a href="#">Mới nhất</a>
-        <a href="#">Rẻ nhất</a>
-        <a href="#">Đấu giá</a>
     </div>
     <div class="container" style="max-width: 98%">
 
@@ -13,16 +11,18 @@
         <!-- một vòng for để show hàng của các sản phẩm -->
         <div id="row-products" class="products">
             <!-- một vòng for để show sản phẩm một row là -->
-            @for($i = 0;$i < count($products);$i++) <?php
-                                                    //nếu sản phẩm mà không có ảnh thì cho ảnh mặc định vào
-                                                    if (!$products[$i]['Img']) {
-                                                        $temp = "img/defaultProductImg.jpg";
-                                                    } else {
-                                                        $listImg = explode(',', $products[$i]['Img']);
-                                                        $temp = $listImg[0];
-                                                    }
-                                                    ?> <div class="thread_list">
-                <a href="javascript:void(0)" onclick="onProductDesc({{ $products[$i]['Product_ID'] }})" id="link-img-product">
+            @for($i = 0;$i < count($products);$i++) 
+            <?php
+            //nếu sản phẩm mà không có ảnh thì cho ảnh mặc định vào
+                if (!$products[$i]['Img']) {
+                    $temp = "img/defaultProductImg.jpg";
+                } else {
+                    $listImg = explode(',', $products[$i]['Img']);
+                    $temp = $listImg[0];
+                }
+            ?>
+            <div class="thread_list">
+                <a href="javascript:void(0)" onclick="onProductAuction({{ $products[$i]['Product_ID'] }})" id="link-img-product">
                     <div id="single-product" class="one-product ">
                         <div>
 
@@ -34,7 +34,7 @@
                                 <p class="user">{{ $products[$i]['Seller'] }}</p>
                                 <p class="name-product">{{ $products[$i]['Product_Name'] }}</p>
                             </div>
-                            <p class="cost">{{ $products[$i]['Cost'] }}<span> vnđ</span></p>
+                            <p class="cost">{{ $products[$i]['Cost'] }} vnđ</p>
                             <p><i class="fa fa-map-marker"></i>Hà nội</p>
                         </div>
                     </div>
@@ -47,9 +47,9 @@
     <div class="other">
         <button type="button" class="btn btn-dark" id="seeMore" onclick="">XEM THÊM</button>
     </div>
-    <div class="product-description" id="product-description">
+    <div class="product-description" id="product-auction">
         <div class="formProductPopup">
-            <i class="fa fa-times" onclick="offProductDesc()"></i>
+            <i class="fa fa-times" onclick="offProductAuction()"></i>
             <div class="show-img">
                 <!-- truyền biến -->
                 <img id="big-img" src="" alt="Sản phẩm" title="Sản phẩm :)" class="fade">
@@ -66,9 +66,10 @@
                     <i class="fa fa-caret-right" id="caret-right" onclick="nextImg()"></i>
                 </div>
             </div>
-            <div class="show-infor">
+            <div class="show-infor" id="">
                 <div class="name-product" id="de-name-product">Tên sản phẩm</div>
-                <div class="cost" id="de-cost-product">2.000.000</div>
+                <div class="cost">Giá tiền kỉ lục: <span id="de-cost-product"></span> vnđ</div>
+                <div class="cost" style="text-decoration: none;" check="" id="de-time-left">Time left: <span id="de-time-left-h" style="font-size: 25px; "></span>:<span id="de-time-left-m" style="font-size: 25px;"></span>:<span id="de-time-left-s" style="font-size: 25px;"></span></div>
                 <div class="color">
                     <label for="product-color">Màu sắc: </label>
                     <select name="product-color" id="product-color" class="form-control">
@@ -84,10 +85,20 @@
                     <p id="desc3"></p>
                     <p id="desc4"></p>
                 </div>
+                <div>
+                    <small name="textcost" class="text-form text-bold">
+                        <h6 class="text-danger" id="warning"></h6>
+                    </small>
+                    <input type="number" class="form-control" id="auction-cost" placeholder="10 tỷ" min="1" max="10000000000000"></input>
+                    {{ csrf_field() }}
+                    <small name="textcost" id="textcost" class="text-form text-bold">
+                        <h6 class="text-dark">Đơn vị: VNĐ</h6>
+                    </small>
+                </div>
                 <div class="buy">
-                    <button type="button" class="btn btn-dark">
-                        <i class="fa fa-shopping-cart cart-icon"></i>
-                        buy now
+                    <button type="button" class="btn btn-dark" id="push-cost">
+                        <i class="fa fa-usd" aria-hidden="true"></i>
+                        Rao giá
                     </button>
                 </div>
             </div>

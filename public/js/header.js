@@ -1,3 +1,18 @@
+$(document).ready(function() {
+    var nav = $('#myTopnav');
+
+    $(window).scroll(function() {
+        if ($(this).scrollTop() > 10) {
+            nav.addClass("fix-nav");
+            $('#goTop').css('display', 'block').fadeIn(3000);
+        } else {
+            nav.removeClass("fix-nav");
+            $('#goTop').css('display', 'none');
+        }
+    });
+});
+
+
 //khởi tạo các biến toàn cục
 var regEmail = /[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}/i; //dấu cộng là xuất hiện 1 lần
 var regUserName = /^([a-zA-Z0-9]{1,})([\\._]{0,1})([a-zA-Z0-9]{1,10})$/;
@@ -247,16 +262,18 @@ function validateAdminRegister() {
 // xử lý reponsive navbar
 function showNavBar() {
     var x = document.getElementById("myTopnav");
-    if (x.className === "topnav") {
+    if (x.className === "topnav" || x.className === "topnav fix-nav") {
         x.className += " responsive";
+        $('#iconContent').html('<i class="fa fa-chevron-up" aria-hidden="true"></i>');
     } else {
-        x.className = "topnav";
+        x.className = x.className.replace(' responsive', '');
+        $('#iconContent').html('<i class="fa fa-chevron-down" aria-hidden="true"></i>');
     }
 }
 
 
 // xử lý hiển thị chi tiết 1 sản phẩm
-function onProductDesc() {
+function onProductDesc(id) {
     $(document).ready(function() {
         // alert("ok");
         $.ajax({
@@ -272,6 +289,29 @@ function onProductDesc() {
             // headers: {'X-CSRF-TOKEN': _token},
             success: function(data) {
                 $('#wait').css('display', 'none');
+                $('#big-img').attr('src', data['Img'][0]);
+                let myHtml = "";
+                let myHtmlDot = "";
+                for (let i = 0; i < data['Img'].length; i++) {
+                    myHtml += '<img id = "small-img" src = "' + data['Img'][i] + '" alt = "Sản phẩm " title = "Sản phẩm: )" > ';
+                    if (i == 0) {
+                        myHtmlDot += '<span class="dot active" onclick="showClickSlide(' + i + ')"></span>';
+                    } else {
+                        myHtmlDot += '<span class="dot" onclick="showClickSlide(' + i + ')"></span>';
+                    }
+                }
+                $('#list-img').html(myHtml);
+                $('#list-dot').html(myHtmlDot);
+                $('#de-name-product').text(data['Product_Name']);
+                $('#de-cost-product').text("Giá tiền: " + data['Cost'] + " vnđ");
+                myHtml = "";
+                for (let i = 0; i < data['Color'].length; i++) {
+                    myHtml += '<option value="' + data['Color'][i] + '">' + data['Color'][i] + '</option>';
+                }
+                $('#product-color').html(myHtml);
+                $('#total-product').text(data['Total']);
+                $('#sold-product').text(data['Sold']);
+                // $('#desc1').text(data['Description1']);
                 $("#product-description").css("display", "block");
             },
             error: function() {
@@ -387,9 +427,7 @@ function checkConflicUserRegister(idInput, idError, field) {
                     $('#registerForm').attr('onsubmit', 'return validateRegister()');
                 }
             },
-            error: function() {
-                alert('Something went wrong!!!!')
-            }
+            error: function() {}
         });
     } else {
         $(idError).css("color", "red");
@@ -401,22 +439,26 @@ function checkConflicUserRegister(idInput, idError, field) {
 function setHtml(obj) {
     var defaultHtml = '<div class="thread_list"> \
                     <div id = "single-product" class = "one-product " > \
-                    <div> <a href = "javascript:void(0)" onclick = "onProductDesc()" > \
+                    <div> <a href = "javascript:void(0)" onclick = "onProductDesc(insert_id)" > \
                      <img src = "insert_img" alt = "sản phẩm" title = "ấn vào để xem chi tiết" >\
                      </a> </div>\
                     <div class = "product-content" > \
                     <div class = "content" > \
                     <p class = "user" > insert_username </p>\
                     <p class = "name-product" > insert_name_product </p> \
-                    </div >\ <p class = "cost"> insert_cost </p> \
+                    </div >\ <p class = "cost"> insert_cost <span> vnđ</span></p> \
                     <p> <i class = "fa fa-map-marker" > </i> insert_location </p > \ </div> </div> </div> ';
     var newHtml = '';
-    for (product in obj) {
-        temp = defaultHtml.replace("insert_img", obj[product]['img']);
-        temp = temp.replace('insert_username', obj[product]['userName']);
-        temp = temp.replace('insert_name_product', obj[product]['nameProduct']);
-        temp = temp.replace('insert_cost', obj[product]['cost']);
-        temp = temp.replace('insert_location', obj[product]['location']);
+    for (let i = 0; i < obj.length; i++) {
+        temp = defaultHtml.replace("insert_img", obj[i]['Img']);
+        temp = temp.replace("insert_id", obj[i]['Product_ID']);
+        temp = temp.replace('insert_username', obj[i]['Seller']);
+        temp = temp.replace('insert_name_product', obj[i]['Product_Name']);
+        temp = temp.replace('insert_cost', obj[i]['Cost']);
+        temp = temp.replace('insert_location', ' Hà Nội');
+        if (obj[i]['auction'] == 1) {
+            temp = temp.replace('onProductDesc', 'onProductAuction');
+        }
         newHtml += temp;
     }
     return newHtml;
@@ -445,7 +487,7 @@ function getProduct(name) {
                 },
                 error: function() {
                     $('#wait').css('display', 'none'); //không sửa cái này
-                    alert('Something went wrong!!!!')
+                    onLogin();
                 }
             });
         });
@@ -463,17 +505,20 @@ getProduct('fridge');
 //function khi người dùng click xem thêm thì query thêm
 $(document).ready(function() {
     $('#seeMore').click(function() {
+        var currProducts = $('#row-products > .thread_list').length;
         $.ajax({
             url: "seeMore",
             method: "get",
-            data: {},
+            data: {
+                currProducts: currProducts
+            },
             beforeSend: function() {
                 $('#wait').css('display', 'block');
             },
             // headers: {'X-CSRF-TOKEN': _token},
             success: function(data) {
                 $('#wait').css('display', 'none'); //khoogn sửa cái này
-                alert(data);
+                $('#row-products').html(setHtml(data));
                 // $('#row-products').html(setHtml(data));
                 // $('#row-products').html("");
                 // alert(data);
@@ -488,4 +533,92 @@ $(document).ready(function() {
 
 
 //function khi người dùng tìm kiếm một cái gì đó
-//function khi người dùng tìm kiếm một cái gì đó
+$(document).ready(function() {
+    $('#search').keyup(function() {
+        var search = $('#search').val();
+        var type = $('#category').val();
+        if (search.length == 0) {
+            $('.search-recommend').css('display', 'none');
+            return false;
+        }
+        var _token = $('input[name="_token"]').val();
+        $.ajax({
+            url: "search",
+            method: "post",
+            data: {
+                _token: _token,
+                key: search,
+                type: type
+            },
+            // headers: {'X-CSRF-TOKEN': _token},
+            success: function(data) {
+                let len = Math.min(data.length, 9);
+                if (len > 0) {
+                    let myHtml = "";
+                    for (let i = 0; i < len; i++) {
+                        myHtml += '<div><a href="javascript:void(0)" id="' + data[i]['Product_ID'] + '" class="recommend" onclick()="setRecommend()">' + data[i]['Product_Name'] + '</a></div>'
+                    }
+                    $('#search-recommend').html(myHtml);
+                    $('.search-recommend').css('display', 'block');
+                    var commends = document.getElementsByClassName('recommend');
+                    for (let i = 0; i < commends.length; i++) {
+                        let id = '#' + commends[i].getAttribute('id');
+                        $(id).mouseover(function() {
+                            $('#search').val($(id).text());
+                        });
+                    }
+                }
+            },
+            error: function() {}
+        });
+
+    });
+
+});
+
+
+//function tìm kiếm sản phẩm
+$(document).ready(function() {
+    $('#search').focus(function() {
+        var search = $('#search').val();
+        if (search.length > 0) {
+            $('.search-recommend').css('display', 'block');
+        }
+    });
+    $('#search').focusout(function() {
+        $('.search-recommend').css('display', 'none');
+    });
+    $('#search-button').click(function() {
+        var search = $('#search').val();
+        var type = $('#category').val();
+        if (search.length == 0) {
+            $('.search-recommend').css('display', 'none');
+            return false;
+        }
+        var _token = $('input[name="_token"]').val();
+        $.ajax({
+            url: "search",
+            method: "post",
+            data: {
+                _token: _token,
+                key: search,
+                type: type
+            },
+            beforeSend: function() {
+                $('#wait').css('display', 'block');
+            },
+            // headers: {'X-CSRF-TOKEN': _token},
+            success: function(data) {
+                $('#wait').css('display', 'none');
+                if (data.length > 0) {
+                    $('#row-products').html(setHtml(data));
+                } else {
+                    $('#row-products').html('Cửa hàng thông báo: sản phẩm đã hết hoặc không có!!! :(');
+                }
+            },
+            error: function() {
+                $('#wait').css('display', 'none');
+            }
+        });
+    });
+});

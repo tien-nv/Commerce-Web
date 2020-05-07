@@ -13,36 +13,40 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/','LoginController@getHomeView')->name('/');
+Route::get('/', 'LoginController@getHomeView')->name('/');
 
-Route::post('/userRegister','LoginController@getUserRegister')->name('userRegister');
+Route::post('/userRegister', 'LoginController@getUserRegister')->name('userRegister');
 
-Route::post('/userLogin','LoginController@getUserLogin')->name('userLogin');
+Route::post('/userLogin', 'LoginController@getUserLogin')->name('userLogin');
 
-Route::post('/adminLogin','LoginController@getAdminLogin')->name('adminLogin');
+Route::post('/adminLogin', 'LoginController@getAdminLogin')->name('adminLogin');
 
-Route::get('/logOutUser','LoginController@logOutUser')->name('logOutUser');
+Route::post('/userInputRegister', 'LoginController@checkRegister')->name('userInputRegister');
 
-Route::post('/userInputRegister','LoginController@checkRegister')->name('userInputRegister');
+Route::post('/search', 'ProductController@searchProducts')->name('search');
 
 Route::group(['middleware' => ['verifyadmin']], function () {
-    Route::get('/addProduct','ProductController@addProduct')->name('addProduct');
-    Route::get('/logOutAdmin','LoginController@logOutAdmin')->name('logOutAdmin');
-    Route::post('/adminInputRegister','LoginController@checkAdminRegister')->name('adminInputRegister');
-    Route::post('/adminRegister','LoginController@getAdminRegister')->name('adminRegister');
-    Route::post('/removeAdmin','AdminController@removeAdmin')->name('removeAdmin');
-    Route::post('/getAdmin','AdminController@getAdmin')->name('getAdmin');
+    Route::get('/addProduct', 'ProductController@addProduct')->name('addProduct');
+    Route::get('/logOutAdmin', 'LoginController@logOutAdmin')->name('logOutAdmin');
+    Route::post('/adminInputRegister', 'LoginController@checkAdminRegister')->name('adminInputRegister');
+    Route::post('/adminRegister', 'LoginController@getAdminRegister')->name('adminRegister');
+    Route::post('/removeAdmin', 'AdminController@removeAdmin')->name('removeAdmin');
+    Route::post('/getAdmin', 'AdminController@getAdmin')->name('getAdmin');
 });
 
-Route::group(['middleware' => ['verifyuser']], function(){
+Route::group(['middleware' => ['verifyuser']], function () {
+    Route::get('/home', 'LoginController@resetHomeView')->name('home');
     //những route xử lý để xác thực xem user đã đăng nhập hay chưa
     //đăng nhập thì mới được ấn xem thêm
-    Route::get('/seeMore','ProductController@getMoreProduct')->name('seeMore');
-    Route::get('/productDescription','ProductController@productDescription')->name('productDescription');
-    Route::get('/userDescription','UserController@userDescription')->name('userDescription');
-    Route::post('/changePassword','UserController@changePassword')->name('changePassword');
-    Route::get('/sell', 'ProductController@sellProduct')-> name('sellProduct');
+    Route::get('/seeMore', 'ProductController@getMoreProduct')->name('seeMore');
+    Route::get('/productDescription', 'ProductController@productDescription')->name('productDescription');
+    Route::get('/userDescription', 'UserController@userDescription')->name('userDescription');
+    Route::post('/changePassword', 'UserController@changePassword')->name('changePassword');
+    Route::get('/sell', 'ProductController@sellProduct')->name('sellProduct');
+    Route::get('/auction', 'ProductController@auction')->name('auction'); //chuyển đến trang đấu giá
+    Route::get('/logOutUser', 'LoginController@logOutUser')->name('logOutUser');
+    Route::get('/productDescriptionAuction', 'ProductController@productAuctionDescription')->name('productDescriptionAuction');
+    Route::get('/getProduct', 'ProductController@getProduct')->name('getProduct');
+    Route::post('/pushCost', 'ProductController@pushCost')->name('pushCost');
+    Route::get('/updateCost', 'ProductController@updateCost')->name('updateCost');
 });
-Route::get('/getProduct','ProductController@getProduct')->name('getProduct');
-
-

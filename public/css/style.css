@@ -17,18 +17,35 @@
 Theme Default CSS (body, link color, section, ...)
 -------------------------*/
 
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Arial", Georgia, Serif !important;
+    letter-spacing: 1.1px;
+}
+
 body {
-    background: #ddd repeat left top !important;
+    background: rgb(235, 235, 235) repeat left top !important;
     font-weight: 300;
     font-size: 15px;
     -webkit-font-smoothing: 'Nunito', sans-serif;
     overflow-y: scroll;
     overflow-x: hidden;
+    letter-spacing: 1.1px;
 }
 
 div {
     margin: 0;
     padding: 0;
+}
+
+a:hover {
+    text-decoration: none !important;
 }
 
 .my-overlay {
@@ -44,6 +61,7 @@ div {
     z-index: 1000;
     cursor: pointer;
     overflow-y: scroll;
+    letter-spacing: 1.1px;
 }
 
 .my-overlay .wait {
@@ -54,6 +72,7 @@ div {
     position: fixed;
     top: 48%;
     right: 32%;
+    letter-spacing: 1.1px;
 }
 
 @media screen and (max-width:576px) {
@@ -66,6 +85,13 @@ div {
 /*-----------------------------------------------------------
                                 header css
 -----------------------------------------------------------*/
+
+.container-fluid.my {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    background-color: #0f0f0f;
+    letter-spacing: 1.1px;
+}
 
 .area-register {
     height: 60px;
@@ -80,6 +106,7 @@ div {
     animation-name: ball;
     animation-duration: 6s;
     animation-iteration-count: infinite;
+    letter-spacing: 1.1px;
 }
 
 .area-register:hover {
@@ -91,11 +118,13 @@ div {
     padding: 25%;
     font-size: 25px;
     color: #ffffff;
+    letter-spacing: 1.1px;
 }
 
 .area-register>a:hover {
     color: rgb(255, 255, 255);
     text-decoration: none;
+    letter-spacing: 1.1px;
 }
 
 @keyframes ball {
@@ -143,15 +172,15 @@ div {
 
 .headerBar .headerBar-left {
     display: flex;
-    padding: 15px 0 15px 0;
+    padding: 10px 0 10px 0;
     align-items: center;
     height: 80px;
     box-sizing: border-box;
 }
 
 .headerBar .iconImg {
-    width: 40px;
-    height: 40px;
+    width: 80px;
+    height: 80px;
 }
 
 .headerBar .findForm {
@@ -159,45 +188,155 @@ div {
     display: flex;
     align-items: center;
     flex: 1;
-    margin-left: 50px;
+    margin-left: 20px;
 }
 
 .headerBar .findForm .selection {
     display: inline-flex;
     margin-top: 15px;
-    min-width: 750px;
+    min-width: 60vw;
+    border-radius: 2px;
+    height: auto;
+    /* border: 1px solid var(--ytd-searchbox-legacy-border-color); */
+    border: 1px solid #ffffff;
+    margin-bottom: 1.2em;
+}
+
+.search-recommend {
+    background: #fff none repeat scroll 0 0;
+    border-bottom: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    padding: 5px 5px 10px 5px;
+    position: absolute;
+    z-index: 1000;
+    display: none;
+    margin-left: 18px;
+    margin-top: 34px;
+    width: calc(60vw - 90px);
+    min-height: 0;
+}
+
+.search-recommend a {
+    padding: 5px;
+    color: #242424;
+    font-weight: 600;
+    display: block;
+    font-size: 17px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .headerBar-left .category {
     display: block;
-    width: auto;
-    padding: .375rem .75rem;
+    width: 20px;
+    padding: 7px 5px;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #f9f9fa;
+    background-color: #4b4b4b;
+    background-clip: padding-box;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    letter-spacing: 1.1px;
+    margin-right: -1px;
+    height: 32px;
+}
+
+.my-form-control {
+    display: block;
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: 7px 5px;
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
     color: #495057;
-    background-color: #f0f0f0;
+    background-color: #fff;
     background-clip: padding-box;
-    border: 1px solid rgba(80, 80, 80, 0.863);
-    border-radius: .25rem;
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    margin-left: -1px;
+    border: 1px solid #fff;
+    border-radius: 1px !important;
+    height: 32px;
+}
+
+@media (prefers-reduced-motion:reduce) {
+    .my-form-control {
+        transition: none
+    }
+}
+
+.my-form-control::-ms-expand {
+    background-color: transparent;
+    border: 0
+}
+
+.my-form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    outline-color: #fff;
+}
+
+.my-form-control::-webkit-input-placeholder {
+    color: #6c757d;
+    opacity: 1
+}
+
+.my-form-control::-moz-placeholder {
+    color: #6c757d;
+    opacity: 1
+}
+
+.my-form-control:-ms-input-placeholder {
+    color: #6c757d;
+    opacity: 1
+}
+
+.my-form-control::-ms-input-placeholder {
+    color: #6c757d;
+    opacity: 1
+}
+
+.my-form-control::placeholder {
+    color: #6c757d;
+    opacity: 1
+}
+
+.my-form-control:disabled,
+.my-form-control[readonly] {
+    background-color: #e9ecef;
+    opacity: 1
+}
+
+select.my-form-control:focus::-ms-value {
+    color: #495057;
+    background-color: #fff
 }
 
 .headerBar .findForm .inputColor {
     background-color: #f0f0f0;
-    border: 1px solid rgba(80, 80, 80, 0.863);
 }
 
 .headerBar .findForm .searchColor {
-    background-color: #dd512a;
-    border: #dd512a;
+    background-color: #343a40;
+    border: #343a40;
+    color: #fff;
+    min-width: 70px;
+    height: 32px;
 }
 
 .headerBar-right {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
     margin-left: 3%;
+    letter-spacing: 1.1px;
+}
+
+.headerBar-right a {
+    color: #ffffff;
+    font-weight: 600;
+    letter-spacing: 1.1px;
 }
 
 .headerBar-right .headerBar-register {
@@ -205,15 +344,16 @@ div {
     font-weight: 500;
     letter-spacing: 0.2px;
     margin-right: 25px;
+    letter-spacing: 1.1px;
     /* margin-left: 50px; */
 }
 
 .headerBar-right .headerBar-login {
     font-size: 18px;
     font-weight: 500;
-    letter-spacing: 0.2px;
     margin-right: 25px;
-    color: #007bff;
+    color: #ffffff;
+    letter-spacing: 1.1px;
 }
 
 #my-dropdown-content {
@@ -227,6 +367,8 @@ div {
     z-index: 1;
     border-radius: 10px;
     margin-left: -15px;
+    transition: 1s;
+    opacity: 0px;
 }
 
 #my-dropdown-content a {
@@ -244,10 +386,12 @@ div {
 
 .my-dropdown:hover .headerBar-login {
     color: #33363B;
+    letter-spacing: 1.1px;
 }
 
 .my-dropdown:hover #my-dropdown-content {
     display: block;
+    opacity: 1;
 }
 
 .headerBar-right .searchColor {
@@ -272,7 +416,7 @@ div {
     box-sizing: border-box;
     padding: 12px 22px;
     position: relative;
-    ;
+    letter-spacing: 1.1px;
 }
 
 .headerBar-navInner>* {
@@ -305,6 +449,7 @@ div {
     z-index: 1000;
     cursor: pointer;
     overflow-y: scroll;
+    letter-spacing: 1.1px;
 }
 
 #overlayLogin {
@@ -426,16 +571,17 @@ input:focus {
         /*Nếu độ rộng của thiết bị tối đa là 800px thì thu ngắn div lại*/
         padding-right: 15px;
         padding-left: 15px;
+        max-width: fit-content;
     }
     .headerBar {
         display: block;
         height: auto;
     }
     .headerBar .findForm {
-        margin-left: 5%;
+        margin-left: 2%;
     }
     .headerBar .findForm .selection {
-        min-width: 80vw;
+        min-width: 70vw;
     }
     .formContentPopup {
         width: 50%;
@@ -447,6 +593,9 @@ input:focus {
     .headerBar-right {
         margin-left: 0;
     }
+    .search-recommend {
+        width: calc(70vw - 90px);
+    }
 }
 
 @media screen and (max-width:600px) {
@@ -454,13 +603,14 @@ input:focus {
         /*Nếu độ rộng của thiết bị tối đa là 800px thì thu ngắn div lại*/
         padding-right: 5px;
         padding-left: 5px;
+        max-width: fit-content;
     }
     .headerBar {
         display: block;
         height: auto;
     }
     .headerBar .findForm {
-        margin-left: 13px;
+        margin-left: 2px;
     }
     .headerBar .findForm .selection {
         min-width: 72vw;
@@ -476,6 +626,9 @@ input:focus {
     .headerBar-left .category {
         width: 20px;
     }
+    .search-recommend {
+        width: calc(72vw - 90px);
+    }
 }
 
 @media screen and (max-width:300px) {
@@ -483,6 +636,7 @@ input:focus {
         /*Nếu độ rộng của thiết bị tối đa là 800px thì thu ngắn div lại*/
         padding-right: 5px;
         padding-left: 5px;
+        max-width: fit-content;
     }
     .headerBar {
         display: block;
@@ -585,94 +739,142 @@ input:focus {
 
 .topnav {
     overflow: hidden;
-    background-color: #3A3D42;
+    background-color: #0f0f0f;
     box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 8px 10px 1px rgba(0, 0, 0, 0.14);
 }
 
-.topnav>a {
+.fix-nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.topnav>a,
+.topnav>button {
     float: left;
     display: block;
     color: #f2f2f2;
     text-align: center;
-    padding: 14px 16px;
+    padding: 10px 16px;
     text-decoration: none;
-    font-size: 18px;
-    font-family: 'Nunito', sans-serif;
-    border-right: 1px solid #a3a3a3;
+    font-size: 17px;
+    font-family: "Segoe UI", Arial, sans-serif;
+    letter-spacing: 1.1px;
+    text-transform: uppercase;
+    font-weight: 470;
 }
 
 .topnav i {
-    font-size: 20px;
+    font-size: 16px;
     color: coral;
 }
 
-.topnav .my-drop>a {
+.topnav .my-drop>a,
+.topnav .my-drop>button {
     float: left;
     display: block;
     color: #cecece;
     text-align: center;
-    padding: 0 16px;
-    margin: 14px 0;
+    padding: 0 20px;
+    margin: 10px 0;
     text-decoration: none;
-    font-size: 18px;
-    font-family: 'Nunito', sans-serif;
-    border-right: 1px solid #a3a3a3;
+    font-size: 17px;
+    font-family: "Segoe UI", Arial, sans-serif;
+    letter-spacing: 1.1px;
+    text-transform: uppercase;
+    font-weight: 470;
 }
 
 .topnav .my-drop {
     height: 80%;
-    border-right: 1px solid #a3a3a3;
 }
 
 .topnav a:hover {
-    background-color: #ddd;
-    color: black;
-}
-
-.my-drop:hover {
-    background-color: #ddd;
+    color: tomato;
 }
 
 .my-drop:hover .topnav-dropdown-content {
-    display: inline-block;
-    margin-top: 0%;
-    margin-left: 0%;
+    visibility: visible;
+    opacity: 1;
+    display: block;
 }
+
+
+/* add */
 
 .topnav-dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #726f6f;
-    min-width: 350px;
-    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 8px 10px 1px rgba(0, 0, 0, 0.14);
-    padding: 2px 3px;
-    z-index: 100;
-    border-radius: 10px;
+    background: #fff none repeat scroll 0 0;
+    border-bottom: 5px solid #585852;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    min-width: 70vw;
+    padding: 5px 5px 10px 5px;
+    position: fixed;
+    left: 30px;
+    z-index: 800;
+    transition: 0.5s;
+    visibility: hidden;
+    margin-top: 45px;
+    opacity: 0;
 }
 
-.topnav-dropdown-content a {
-    float: none;
-    color: rgb(255, 255, 255);
-    padding: 5px 7%;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-    border-radius: 10px;
+.topnav-dropdown-content .mega-menu-list {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.mega-list span {
+    font-weight: 500;
+    color: #ff0800;
+    opacity: 0;
+    transition: 0.5s;
+    visibility: hidden;
+}
+
+.topnav-dropdown-content .mega-menu-list a {
     font-size: 16px;
-    font-weight: 400;
+    color: rgb(49, 49, 49);
+    padding: 0;
+    text-transform: uppercase;
+    line-height: 30px;
+    background: none;
+    font-weight: 600;
 }
 
-.topnav a.active {
-    background-color: rgb(113, 113, 114);
-    color: white;
-    margin-left: 5%;
+.topnav-dropdown-content .mega-menu-list a:hover {
+    color: rgba(104, 253, 183, 0.897);
+}
+
+.my-drop:hover .topnav-dropdown-content {
+    display: block;
 }
 
 .topnav .icon {
     display: none;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (min-width:901px) {
+    .mega-list:hover span {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+
+/*  */
+
+@media screen and (max-width: 900px) {
+    .topnav>a {
+        border-right: 0px;
+    }
+    .mega-list span {
+        display: none;
+    }
+    .topnav-dropdown-content {
+        border-bottom: 5px solid #DD512A;
+    }
     .topnav a:not(:first-child) {
         display: none;
     }
@@ -686,22 +888,24 @@ input:focus {
     .my-drop:hover .topnav-dropdown-content {
         display: block;
         margin-top: -15px;
-        margin-left: 5%;
+        margin-left: 0;
     }
     .topnav-dropdown-content {
-        min-width: 200px;
-        margin-left: 5%;
+        min-width: 90vw;
+        margin-left: 0;
+        left: 15px;
+        padding: 0px 0;
+    }
+    .topnav-dropdown-content .mega-menu-list a {
+        font-size: 13px;
     }
 }
 
-@media screen and (max-width: 600px) {
-    .topnav.responsive {
-        position: relative;
-    }
+@media screen and (max-width: 900px) {
     .topnav.responsive .icon {
-        position: absolute;
+        position: fixed;
         right: 0;
-        top: 0;
+        background-color: #585852;
     }
     .topnav.responsive a {
         float: none;
@@ -713,9 +917,25 @@ input:focus {
         display: block;
         text-align: left;
     }
-    .topnav .shop-cart {
-        margin-right: 0%;
-    }
+}
+
+.icon-go-top {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    display: none;
+    font-size: 32px;
+    background-color: rgba(255, 172, 172, 0.842);
+    border-radius: 20px;
+    z-index: 100;
+}
+
+.icon-go-top i {
+    padding: 7px;
+}
+
+.icon-go-top i:hover {
+    transform: scale(1.2);
 }
 
 
@@ -725,7 +945,6 @@ input:focus {
 
 .topnav .shop-cart {
     float: right;
-    margin-right: 2%;
 }
 
 
@@ -734,10 +953,10 @@ input:focus {
     -------------------------------------------------------*/
 
 .main-component {
-    margin: 30px 0 30px 0;
+    margin: 0px 0 30px 0;
 }
 
-.main-component .filter {
+.filter {
     display: block;
     white-space: normal;
     text-anchor: middle;
@@ -745,11 +964,10 @@ input:focus {
     min-height: 70px;
     width: auto;
     border: 1px solid #ffffff;
-    border-radius: 10px;
+    border-radius: 3px;
     background-color: rgb(255, 255, 255);
-    margin: 27px 0;
+    margin: 0 0 27px 0;
     padding: 23px;
-    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 8px 10px 1px rgba(0, 0, 0, 0.14);
 }
 
 .filter span {
@@ -768,7 +986,6 @@ input:focus {
     margin-left: 1.2%;
     font-weight: 600;
     color: #FF4F4F;
-    border-radius: 8px;
 }
 
 .main-component .products {
@@ -780,24 +997,34 @@ input:focus {
 }
 
 .main-component .products .thread_list {
-    padding: 5px;
+    padding: 7px 10px;
     flex-basis: 20%;
     height: 400px;
+}
+
+.main-component .one-product:hover {
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 8px 10px 1px rgba(0, 0, 0, 0.14);
+    transition: 1s;
 }
 
 .main-component .one-product {
     font-size: 15px;
     font-weight: 700;
-    font-family: 'Nunito', sans-serif;
-    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 8px 10px 1px rgba(0, 0, 0, 0.14);
+    font-family: "Arial", Georgia, Serif;
     margin: 1%;
     width: 100%;
     flex-direction: column;
-    background: #fff;
-    border: 1px solid #e8ecf2;
+    background: rgb(255, 255, 255);
+    border: 0px solid #d3d3d3;
     height: 100%;
-    border-radius: 4px;
     overflow: hidden;
+    letter-spacing: 1.1px;
+    transition: 1s;
+}
+
+.main-component .one-product:hover img {
+    padding: 0px;
+    transition: 0.5s;
 }
 
 .one-product img {
@@ -806,10 +1033,12 @@ input:focus {
     object-fit: cover;
     background-position: center;
     position: relative;
+    padding: 15px;
+    transition: 0.5s;
 }
 
 .one-product .product-content {
-    color: #2D3035;
+    color: rgb(46, 46, 46);
     display: -webkit-flex;
     flex-shrink: 1;
     flex-direction: column;
@@ -829,17 +1058,21 @@ i {
 }
 
 .product-content .content .user {
-    color: #007bff;
-    font-size: 12px;
+    color: rgb(26, 50, 187);
+    font-size: 14px;
 }
 
 .product-content .content .name-product {
-    color: #555555;
-    font-size: 15px;
+    color: rgb(46, 46, 46);
+    font-size: 12px;
+    font-family: 'Verdana', sans-serif;
 }
 
 .product-content .cost {
-    font-size: 17px;
+    font-size: 18px;
+    font-family: 'Source Sans Pro', sans-serif;
+    letter-spacing: -0.5px;
+    font-weight: 600;
 }
 
 .main-component .other {
@@ -911,6 +1144,7 @@ i {
     left: 7.5%;
     height: 94vh;
     display: flex;
+    overflow-y: auto;
 }
 
 .formProductPopup>i {
@@ -949,7 +1183,10 @@ i {
     transition: background-color 0.6s ease;
 }
 
-.active,
+.active {
+    background-color: #717171;
+}
+
 .dot:hover {
     background-color: #717171;
 }
@@ -1015,7 +1252,7 @@ i {
 
 .formProductPopup .show-infor .cost {
     font-size: 20px;
-    text-decoration: underline;
+    text-decoration: none;
     font-weight: 600;
     padding: 2% 0;
     color: sienna;
@@ -1058,9 +1295,8 @@ i {
     .formProductPopup {
         width: 100%;
         left: 0;
-        max-height: 1000px;
         display: block;
-        overflow-y: auto;
+        overflow-y: scroll;
     }
     .formProductPopup .show-img {
         padding: 3%;
@@ -1147,11 +1383,12 @@ i {
     color: #fff;
     font-size: 14px;
     line-height: 35px;
-    font-family: 'Nunito', sans-serif;
+    font-family: "Arial", Georgia, Serif;
     margin-top: 10px;
     padding: 0 20px;
     text-transform: uppercase;
     transition: all 0.3s ease 0s;
+    letter-spacing: 1.1px;
 }
 
 .newsletter-form-group .newsletter-form:focus,
@@ -1326,7 +1563,7 @@ i {
 }
 
 .admin_page .area {
-    border: 1px solid rgb(144, 146, 144);
+    border: 1px solid rgb(144, 1.7, 144);
     padding: 20px;
     box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 8px 10px 1px rgba(0, 0, 0, 0.14);
     border-radius: 10px;
@@ -1364,8 +1601,9 @@ i {
 .admin_page label {
     font-size: 25px;
     font-weight: 600;
-    font-family: 'Nunito', sans-serif, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Arial", Georgia, Serif;
     color: #dd512a;
+    letter-spacing: 1.1px;
 }
 
 .admin_page option {
@@ -1385,6 +1623,7 @@ i {
 .admin_page button {
     background-color: #FF4F4F;
     border: #ff4f4f;
+    letter-spacing: 1.1px;
 }
 
 .admin_page input {

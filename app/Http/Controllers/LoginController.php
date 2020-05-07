@@ -5,18 +5,84 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\models\AccountProcess; //sử dụng file này để lấy các kết quả query để check account
+use App\models\ProductProcess;
 use App\models\QueryDB;
 use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
 {
+    /************************************************
+     * Các hàm khởi tạo,hủy bỏ vứt vào đây
+     * Khởi tạo session,cookies
+     **************************************************/
+    private $cookie_username = 'userName_cw';
+    private $cookie_password = 'password_cw';
+
+    private function initAdminSession($adminName,$password){
+        session_start();
+        $_SESSION['adminName'] = $adminName;
+        $_SESSION['passwordAdmin'] = $password;
+        $_SESSION['isAdmin'] = 'valid';
+        $adminId = DB::table('admin')->select('Admin_ID')->where('Admin_Name', '=', $adminName)->get();
+        $adminId = json_decode($adminId, true);
+        $_SESSION['idAdmin'] = $adminId[0]['Admin_ID'];
+    }
+
+    private function initUserSession($userName, $password)
+    {
+        session_start();
+        $_SESSION['userName_cw'] = $userName;
+        $_SESSION['password_cw'] = $password; //password này đã được mã hóa hash
+        $_SESSION['isUser'] = 'valid';
+        //cái biến này lưu trữ dạng sản phẩm mà người dùng đang tương tác
+        $_SESSION['type'] = 'all'; //mặc định là all
+        //cái biến này lưu trữ người dùng có đang ở trang đấu giá hay không
+        $_SESSION['isAuction'] = 0;
+        $id = DB::table('user')->select('User_ID')->where('UserName', '=', $userName)->get();
+        $id = json_decode($id, true);
+        $_SESSION['idUser'] = $id[0]['User_ID'];
+    }
+
+    private function initUserCookies($userName, $password)
+    {
+        //mã hóa username và password
+        $userName_encry = encrypt($userName);
+        $password_encry = encrypt($password);
+        //đặt cookies là cái mã hóa
+        setcookie($this->cookie_username, $userName_encry, time() + (86400 * 30)); //1 day
+        //mật khẩu
+        setcookie($this->cookie_password, $password_encry, time() + (86400 * 30)); //1 day
+    }
+
+    private function destroyUserCookies()
+    {
+        setcookie($this->cookie_username, "", time() - 3600); //
+        //mật khẩu
+        setcookie($this->cookie_password, "", time() - 3600); //
+    }
+
     /***************************************
      *              TRANG CHỦ FUNCTION
      ******************************************/
+    public function resetHomeView()
+    {
+        $check = true;
+        $userName = $_SESSION['userName_cw'];
+        //cái biến này lưu trữ dạng sản phẩm mà người dùng đang tương tác
+        $_SESSION['type'] = 'all'; //mặc định là all
+        //cái biến này lưu trữ người dùng có đang ở trang đấu giá hay không
+        $_SESSION['isAuction'] = 0;
+        if (strlen($userName) > 4)
+            $userName_show = substr($userName, 0, 4) . '...';
+        else $userName_show = $userName;
+        $products = ProductProcess::getProductByType('all');
+        return view('home', compact('userName', 'userName_show', 'check', 'products'));
+    }
     public function getHomeView()
     {
         if (!isset($_COOKIE['userName_cw']) || !isset($_COOKIE['password_cw'])) { //userName_commerceWeb
-            return view('home');
+            $products = ProductProcess::getProductByType('all');
+            return view('home', compact('products'));
         } else {
             $userName = $_COOKIE['userName_cw'];
             $password = $_COOKIE['password_cw'];
@@ -28,25 +94,18 @@ class LoginController extends Controller
             $check = AccountProcess::checkUserLogin($userName, $password);
             // nếu hợp lệ
             if ($check === true) {
-                session_start();
-                $_SESSION['userName_cw'] = $userName;
-                $_SESSION['password_cw'] = $password; //password này đã được mã hóa hash
-                $_SESSION['isUser'] = 'valid';
-                $id = DB::table('user')->select('User_ID')->where('UserName', '=', $userName)->get();
-                $id = json_decode($id, true);
-                $_SESSION['idUser'] = $id[0]['User_ID'];
+                //khởi tạo session
+                $this->initUserSession($userName, $password);
+
                 if (strlen($userName) > 4)
                     $userName_show = substr($userName, 0, 4) . '...';
                 else $userName_show = $userName;
-                return view('home', compact('userName', 'userName_show', 'check'));
+                $products = ProductProcess::getProductByType('all');
+                return view('home', compact('userName', 'userName_show', 'check', 'products'));
             } else {
-                //hủy bỏ cookies
-                $cookie_username = 'userName_cw';
-                $cookie_password = 'password_cw';
-                setcookie($cookie_username, "", time() - 3600); //
-                //mật khẩu
-                setcookie($cookie_password, "", time() - 3600); //
-                return view('home', compact('check'));
+                $this->destroyUserCookies();
+                $products = ProductProcess::getProductByType('all');
+                return view('home', compact('check', 'products'));
             }
             // nếu không hợp lệ: return view('home');
         }
@@ -87,38 +146,25 @@ class LoginController extends Controller
         $query = new QueryDB();
         $resultRegister = $query->addUser($userName, $password_hash, $address, $email, $phone, $gender, $birthday);
         if ($resultRegister) {
-            //set session
-            session_start();
-            $_SESSION['userName_cw'] = $userName;
-            $_SESSION['password_cw'] = $password_hash; //password này đã được mã hóa hash
-            $_SESSION['isUser'] = 'valid';
-            $id = DB::table('user')->select('User_ID')->where('UserName', '=', $userName)->get();
-            $id = json_decode($id, true);
-            $_SESSION['idUser'] = $id[0]['User_ID'];
-            //mã hóa tên các trường
-            $cookie_username = 'userName_cw';
-            $cookie_password = 'password_cw';
-            // $cookie_username = encrypt($cookie_username);
-            // $cookie_password = encrypt($cookie_password);
-            //mã hóa username và password
-            $userName_encry = encrypt($userName);
-            $password_encry = encrypt($password);
-            //đặt cookies là cái mã hóa
-            setcookie($cookie_username, $userName_encry, time() + (86400 * 30)); //1 day
-            //mật khẩu
-            setcookie($cookie_password, $password_encry, time() + (86400 * 30)); //1 day
+            //khởi tạo session
+            $this->initUserSession($userName, $password_hash);
+            //khởi tạo cookies
+            $this->initUserCookies($userName, $password);
             //trả về tên dạng plaintext
             //nếu thành công thì dadwndg nhập và hiện thị thông báo
             if (strlen($userName) > 4)
                 $userName_show = substr($userName, 0, 4) . '...';
             else $userName_show = $userName;
-            return view('home', compact('userName_show', 'userName', 'resultRegister'));
+            $products = ProductProcess::getProductByType('all');
+            return view('home', compact('userName_show', 'userName', 'resultRegister', 'products'));
         } else {
             // không thì hiện thị khoogn thành công
-            return view('home', compact('resultRegister'));
+            $products = ProductProcess::getProductByType('all');
+            return view('home', compact('resultRegister', 'products'));
         }
     }
 
+    //function dành cho admin
     public function checkAdminRegister(Request $request)
     {
         $adminName = $request->get("inputVal");
@@ -146,41 +192,25 @@ class LoginController extends Controller
     public function getUserLogin(Request $request)
     {
         $userName = $request->input('usernameLogin');
-        $password_plaintext = $request->input('passwordLogin');
-        $password = hash("ripemd160", $password_plaintext);
-        $check = AccountProcess::checkUserLogin($userName, $password);
+        $password = $request->input('passwordLogin'); //passsword plaintext
+        $password_hash = hash("ripemd160", $password);
+        $check = AccountProcess::checkUserLogin($userName, $password_hash);
         //nếu khong hợp lệ thì trả về thông báo khoogn hợp lệ
-        if ($check === false) return view('home', compact('check'));
-        //gọi hàm check tài khoản
-        //nếu hợp lệ thì set cookies
-        //set session
-        session_start();
-        $_SESSION['userName_cw'] = $userName;
-        $_SESSION['password_cw'] = $password; //password này đã được mã hóa hash
-        $_SESSION['isUser'] = 'valid';
-        $id = DB::table('user')->select('User_ID')->where('UserName', '=', $userName)->get();
-        $id = json_decode($id, true);
-        $_SESSION['idUser'] = $id[0]['User_ID'];
-        //mã hóa tên các trường
-        $cookie_username = 'userName_cw';
-        $cookie_password = 'password_cw';
-        // $cookie_username = encrypt($cookie_username);
-        // $cookie_password = encrypt($cookie_password);
-        //mã hóa username và password
-        $userName_encry = encrypt($userName);
-        $password_encry = encrypt($password_plaintext);
-
-        //đặt cookies là cái mã hóa
-        setcookie($cookie_username, $userName_encry, time() + (86400 * 30)); //1 day
-        //mật khẩu
-
-        setcookie($cookie_password, $password_encry, time() + (86400 * 30)); //1 day
+        if ($check === false) {
+            $products = ProductProcess::getProductByType('all');
+            return view('home', compact('check', 'products'));
+        }
+        //khởi tạo session
+        $this->initUserSession($userName, $password_hash);
+        //khởi tạo cookies
+        $this->initUserCookies($userName,$password);
 
         //trả về tên dạng plaintext
         if (strlen($userName) > 4)
             $userName_show = substr($userName, 0, 4) . '...';
         else $userName_show = $userName;
-        return view('home', compact('userName', 'userName_show', 'check'));
+        $products = ProductProcess::getProductByType('all');
+        return view('home', compact('userName', 'userName_show', 'check', 'products'));
     }
 
     //funtion này check login của 1 admin
@@ -189,20 +219,16 @@ class LoginController extends Controller
         $adminName = $request->input('adminLogin');
         $password = $request->input('passwordAdminLogin');
         // echo $password;
-        $password = hash('ripemd160', $password);
+        $password_hash = hash('ripemd160', $password);
         //gọi hàm check account
         $check = AccountProcess::checkAdminLogin($adminName, $password);
-        if ($check === false) return view('home', compact('check'));
+        if ($check === false) {
+            return view('home', compact('check', 'products'));
+        }
         //nếu hợp lệ thì set sessions
 
         //set session
-        session_start();
-        $_SESSION['adminName'] = $adminName;
-        $_SESSION['passwordAdmin'] = $password;
-        $_SESSION['isAdmin'] = 'valid';
-        $adminId = DB::table('admin')->select('Admin_ID')->where('Admin_Name','=',$adminName)->get();
-        $adminId = json_decode($adminId,true);
-        $_SESSION['idAdmin'] = $adminId[0]['Admin_ID'];
+        $this->initAdminSession($adminName,$password_hash);
         return view('adminpage', compact('adminName'));
     }
 
@@ -213,19 +239,17 @@ class LoginController extends Controller
     public function logOutUser()
     {
         //hủy bỏ session
-        session_unset();
+        session_destroy();
         //hủy bỏ cookies
-        $cookie_username = 'userName_cw';
-        $cookie_password = 'password_cw';
-        setcookie($cookie_username, "", time() - 3600); //
-        //mật khẩu
-        setcookie($cookie_password, "", time() - 3600); //
-        return (view('home'));
+        $this->destroyUserCookies();
+        $products = ProductProcess::getProductByType('all');
+        return (view('home', compact('products')));
     }
 
     public function logOutAdmin()
     {
-        session_unset();
-        return (view('home'));
+        session_destroy();
+        $products = ProductProcess::getProductByType('all');
+        return (view('home', compact('products')));
     }
 }

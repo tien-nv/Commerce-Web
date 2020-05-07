@@ -1,5 +1,6 @@
 @extends('sell.default')
 @section('title','Bán sản phẩm')
+
 <body>
    @section('navbar')
    @parent
@@ -62,7 +63,17 @@
             <input type="number" class="form-control" id="quantity" name="quantity" min="1">
          </div>
       </div>
-      
+
+      <div class="form-row" id="auction">
+         <div class="form-group col-md-6 offset-md-3">
+            <label class="font-weight-bold" for="sel1">Select one:</label>
+            <select class="form-control" id="sel1">
+               <option value="1">Bán sản phẩm ở trạng thái đấu giá</option>
+               <option value="0">Bán sản phẩm ở trạng thái bình thường( không đấu giá)</option>
+            </select>
+         </div>
+      </div>
+
       <br>
 
       <div id="next">

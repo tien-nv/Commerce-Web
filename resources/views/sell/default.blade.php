@@ -12,7 +12,6 @@
     <script src="bin\\bootstrap441\\js\\bootstrap.min.js"></script>
     <link rel="stylesheet" href="css/sellPage.css">
     <script src="js\\sell.js"></script>
-    
 </head>
 
 <body>
@@ -28,7 +27,7 @@
         <ul class="navbar-nav ml-auto">
            
            <li class="nav-item ">
-              <a class="nav-link custom" href="{{ route('/') }}"><span style="color: #E60A0A; font-size: 32px; vertical-align: middle">Exit</span><img src="img/exit2.png"></a>
+              <a class="nav-link custom" href="{{ route('home') }}"><span style="color: #E60A0A; font-size: 32px; vertical-align: middle">Exit</span><img src="img/exit2.png"></a>
               {{-- <a class="navbar-brand" href="#"><img src="img/exit2.png"></a> --}}
            </li>
            
