@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 use App\models\ProductProcess;
 
+use App\Item;
+use App\ItemDetails;
+
+
 class ProductController extends Controller{
     public function addProduct(Request $request){
         // return view('home');
@@ -46,4 +50,54 @@ class ProductController extends Controller{
     public function sellProduct(){
         return view('sell.description');
     }
-}
+
+    // fuction xử lý upload, update
+    public function sellSuccess(Request $request){
+        $this->validate($request, [
+            'images' => 'required'
+        ]);
+
+        if($request->hasFile('images')){
+            $allowFileExtension = ['jpg', 'png', 'jpeg', 'gif'];
+            $files = $request->file('images');
+            foreach($files as $file){
+                $filename = $file->getClientOriginalName();
+                $extension = $file->getClientOriginalExtension();
+
+                $check = in_array($extension, $allowFileExtension);
+                if($check){
+                    
+                    $items = Item::create([
+                        'username' => 'TienHoang',    // chỗ này ông thay bằng username hiện tại nha
+                        'name' => $request->name,
+                        'type' => $request->type,
+                        'color' => $request->color,
+                        'cost' => $request->cost,
+                        'quantity' => $request->quantity,
+                        'des1' => "Description1",  // chô này t ko dùng dc $request->description1
+                        'des2' => "Description2",   //
+                        'des3' => "Description3",   //
+                        'des4' => "Description4",   //
+                    ]);
+                    foreach($request->images as $image){
+                        $filename = $image->store('image');  // image được lưu ở storage/image
+                        ItemDetails::create([
+                            'item_id' => $items->id ,
+                            'filename' => $filename
+                        ]);
+                    }
+                    echo "Upload Succesful"; 
+                    break;
+                }
+                else
+                    {
+                    echo '<div class="alert alert-warning"><strong>Warning!</strong> Sorry Only Upload png , jpg , doc</div>';
+                    }
+            }
+        }
+
+
+    }
+
+    
+} ?>
