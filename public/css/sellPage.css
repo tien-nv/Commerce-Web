@@ -14,7 +14,7 @@ input[type='text'] {
     transition: all 0.5s linear;
 }
 
-#image-button {
+#images-button {
     padding: 10px;
     color: white;
     background-color: #009578;
@@ -23,12 +23,16 @@ input[type='text'] {
     cursor: pointer;
 }
 
-#image-button:hover {
+#images-button:hover {
     background-color: #00b28f;
 }
 
-#image-text {
+#images-text {
     margin-left: 10px;
     font-family: sans-serif;
     color: #aaa;
+}
+
+span {
+    color: crimson;
 }

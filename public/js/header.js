@@ -163,7 +163,7 @@ function checkField(nameForm, nameElement, reg, number, show) {
         document.getElementById(nameElement).innerHTML = mess[0];
         document.getElementById(nameElement).style.display = "block";
         return false;
-    }
+    }   
     if (!reg.test(val)) {
         show;
         document.getElementById(nameElement).innerHTML = mess[number];
