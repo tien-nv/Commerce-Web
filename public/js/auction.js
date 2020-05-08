@@ -92,7 +92,7 @@ function start(h, m, s) {
     //  - Dừng chương trình
     if (h == -1) {
         // clearTimeout(timeout);
-        $('#de-time-left').html("Time left: Kết thúc. Hãy chuyển đến sản phẩm khác");
+        $('#de-time-left').html("Time left: Kết thúc.");
         $('#de-time-left').attr('check', '0');
         return false;
     }
@@ -133,10 +133,6 @@ function start(h, m, s) {
 
 $(document).ready(function() {
     $('#push-cost').click(function() {
-        if ($('#de-time-left').attr('check') == '0') {
-            $('#warning').text("Thời gian đấu giá cho sản phẩm này đã hết.");
-            return false;
-        }
         var cost = $('#auction-cost').val();
         var id = $('.show-infor').attr('id');
         if (!cost) {
@@ -159,11 +155,7 @@ $(document).ready(function() {
                 // headers: {'X-CSRF-TOKEN': _token},
                 success: function(data) {
                     $('#wait').css('display', 'none');
-                    if (data == -1) {
-                        $('#warning').text("Phiên đấu giá đã kết thúc :)");
-                    } else {
-                        $('#warning').text('Ra giá thành công! hooray. <3');
-                    }
+                    $('#warning').text(data);
                 },
                 error: function() {
                     $('#wait').css('display', 'none');

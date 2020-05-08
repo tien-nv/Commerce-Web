@@ -221,8 +221,9 @@ class LoginController extends Controller
         // echo $password;
         $password_hash = hash('ripemd160', $password);
         //gọi hàm check account
-        $check = AccountProcess::checkAdminLogin($adminName, $password);
+        $check = AccountProcess::checkAdminLogin($adminName, $password_hash);
         if ($check === false) {
+            $products = ProductProcess::getProductByType('all');
             return view('home', compact('check', 'products'));
         }
         //nếu hợp lệ thì set sessions

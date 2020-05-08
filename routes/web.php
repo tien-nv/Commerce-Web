@@ -49,5 +49,6 @@ Route::group(['middleware' => ['verifyuser']], function () {
     Route::get('/getProduct', 'ProductController@getProduct')->name('getProduct');
     Route::post('/pushCost', 'ProductController@pushCost')->name('pushCost');
     Route::get('/updateCost', 'ProductController@updateCost')->name('updateCost');
-    Route::post('/sell' , 'ProductController@sellSuccess')->name('sellSuccess');
+    Route::post('/sellSuccess' , 'ProductController@sellSuccess')->name('sellSuccess');
+    Route::post('/addToCart','ProductController@addToCart')->name('addToCart');
 });

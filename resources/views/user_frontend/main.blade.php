@@ -13,20 +13,13 @@
         <!-- một vòng for để show hàng của các sản phẩm -->
         <div id="row-products" class="products">
             <!-- một vòng for để show sản phẩm một row là -->
-            @for($i = 0;$i < count($products);$i++) <?php
-                                                    //nếu sản phẩm mà không có ảnh thì cho ảnh mặc định vào
-                                                    if (!$products[$i]['Img']) {
-                                                        $temp = "img/defaultProductImg.jpg";
-                                                    } else {
-                                                        $listImg = explode(',', $products[$i]['Img']);
-                                                        $temp = $listImg[0];
-                                                    }
-                                                    ?> <div class="thread_list">
+            @for($i = 0;$i < count($products);$i++)
+             <div class="thread_list">
                 <a href="javascript:void(0)" onclick="onProductDesc({{ $products[$i]['Product_ID'] }})" id="link-img-product">
                     <div id="single-product" class="one-product ">
                         <div>
 
-                            <img src="{{ $temp }}" alt="sản phẩm" title="ấn vào để xem chi tiết">
+                            <img src="{{ $products[$i]['Img'] }}" alt="sản phẩm" title="ấn vào để xem chi tiết">
 
                         </div>
                         <div class="product-content">
@@ -45,7 +38,7 @@
     </div>
     </div>
     <div class="other">
-        <button type="button" class="btn btn-dark" id="seeMore" onclick="">XEM THÊM</button>
+        <button type="button" class="btn btn-outline-light" id="seeMore" onclick="">XEM THÊM</button>
     </div>
     <div class="product-description" id="product-description">
         <div class="formProductPopup">
@@ -67,29 +60,33 @@
                 </div>
             </div>
             <div class="show-infor">
-                <div class="name-product" id="de-name-product">Tên sản phẩm</div>
-                <div class="cost" id="de-cost-product">2.000.000</div>
-                <div class="color">
-                    <label for="product-color">Màu sắc: </label>
-                    <select name="product-color" id="product-color" class="form-control">
-                        <option value="red">red</option>
-                        <option value="blue">blue</option>
-                    </select>
-                </div>
-                <div class="total">Tổng số lượng: <span id="total-product"></span></div>
-                <div class="total">Đã bán: <span id="sold-product"></span></div>
-                <div class="other">
-                    <p id="desc1">Một số mô tả khác mô tả 1</p>
-                    <p id="desc2">Một số mô tả khác mô tả 2</p>
-                    <p id="desc3"></p>
-                    <p id="desc4"></p>
-                </div>
-                <div class="buy">
-                    <button type="button" class="btn btn-dark">
-                        <i class="fa fa-shopping-cart cart-icon"></i>
-                        buy now
-                    </button>
-                </div>
+                <form action="javascript:void(0)">
+                    {{ csrf_field() }}
+                    <div class="name-product" id="de-name-product">Tên sản phẩm</div>
+                    <div class="cost" id="de-cost-product">2.000.000</div>
+                    <div class="color">
+                        <label for="product-color">Màu sắc: </label>
+                        <select name="product-color" id="product-color" class="form-control">
+                            <option value="red">red</option>
+                            <option value="blue">blue</option>
+                        </select>
+                    </div>
+                    <div class="total">Tổng số lượng: <span id="total-product"></span></div>
+                    <div class="total">Đã bán: <span id="sold-product"></span></div>
+                    <div class="total">Mua số lượng:<span id="order-total"></span> <input type="number" class="form-control" name="getTotal" id="getTotal" min="1"></div>
+                    <div class="other">
+                        <p id="desc1">Một số mô tả khác mô tả 1</p>
+                        <p id="desc2">Một số mô tả khác mô tả 2</p>
+                        <p id="desc3"></p>
+                        <p id="desc4"></p>
+                    </div>
+                    <div class="buy">
+                        <button type="button" class="btn btn-dark" id="add-to-cart">
+                            <i class="fa fa-shopping-cart cart-icon"></i>
+                            buy now
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

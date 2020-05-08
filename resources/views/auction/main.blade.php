@@ -12,21 +12,13 @@
         <div id="row-products" class="products">
             <!-- một vòng for để show sản phẩm một row là -->
             @for($i = 0;$i < count($products);$i++) 
-            <?php
-            //nếu sản phẩm mà không có ảnh thì cho ảnh mặc định vào
-                if (!$products[$i]['Img']) {
-                    $temp = "img/defaultProductImg.jpg";
-                } else {
-                    $listImg = explode(',', $products[$i]['Img']);
-                    $temp = $listImg[0];
-                }
-            ?>
+
             <div class="thread_list">
                 <a href="javascript:void(0)" onclick="onProductAuction({{ $products[$i]['Product_ID'] }})" id="link-img-product">
                     <div id="single-product" class="one-product ">
                         <div>
 
-                            <img src="{{ $temp }}" alt="sản phẩm" title="ấn vào để xem chi tiết">
+                            <img src="{{ $products[$i]['Img'] }}" alt="sản phẩm" title="ấn vào để xem chi tiết">
 
                         </div>
                         <div class="product-content">
@@ -45,7 +37,7 @@
     </div>
     </div>
     <div class="other">
-        <button type="button" class="btn btn-dark" id="seeMore" onclick="">XEM THÊM</button>
+        <button type="button" class="btn btn-outline-light" id="seeMore" onclick="">XEM THÊM</button>
     </div>
     <div class="product-description" id="product-auction">
         <div class="formProductPopup">

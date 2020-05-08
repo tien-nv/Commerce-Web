@@ -31,19 +31,10 @@ class ProductController extends Controller
     //lấy sản phẩm theo type
     public function getProduct(Request $request)
     {
-        session_start();
-        $_SESSION['isAuction'] = 0;
         $type = $request->get('typeProduct');
-        //query lấy sản phẩm từ chỗ này
+        $_SESSION['isAuction'] = 0;
         $_SESSION['type'] = $type;
         $products = ProductProcess::getProductByType($type);
-        for ($i = 0; $i < count($products); $i++) {
-            if (!$products[$i]['Img']) { //nếu không có ảnh mô tả thì gán ảnh mặc định
-                $products[$i]['Img'] = "img/defaultProductImg.jpg";
-            } else {
-                $products[$i]['Img'] = explode(',', $products[$i]['Img'])[0];
-            }
-        }
         return $products;
     }
 
@@ -56,25 +47,12 @@ class ProductController extends Controller
             //lấy thêm 15 sản phẩm 1 lần
             $products = ProductProcess::getProductByType($_SESSION['type'], $currProducts + 15, 0);
             for ($i = 0; $i < count($products); $i++) {
-                if (!$products[$i]['Img']) {
-                    $products[$i]['Img'] = "img/defaultProductImg.jpg";
-                } else {
-                    $products[$i]['Img'] = explode(',', $products[$i]['Img'])[0];
-                }
-                // $products[$i]['Color'] = explode(',',$products[$i]['Color']);
                 $products[$i]['auction'] = 0;
             }
-
             return $products;
         } else {
             $products = ProductProcess::getProductByType($_SESSION['type'], $currProducts + 15, 1);
             for ($i = 0; $i < count($products); $i++) {
-                if (!$products[$i]['Img']) {
-                    $products[$i]['Img'] = "img/defaultProductImg.jpg";
-                } else {
-                    $products[$i]['Img'] = explode(',', $products[$i]['Img'])[0];
-                }
-                // $products[$i]['Color'] = explode(',',$products[$i]['Color']);
                 $products[$i]['auction'] = 1;
             }
             return $products;
@@ -86,6 +64,7 @@ class ProductController extends Controller
     {
         //return chi tiết 1 sản phẩm
         $id = $request->get('id');
+        $_SESSION['idProductAddOrder'] = $id;
         return ProductProcess::getProductById($id); //trả về 1 object
     }
 
@@ -139,11 +118,9 @@ class ProductController extends Controller
                 ->updateOrInsert(
                     ['User_Name' => $_SESSION['userName_cw'], 'Product_ID' => $id, 'Cost' => $cost]
                 );
-            $maxCost = DB::table('auction')->where('Product_ID', '=', $id)->max('Cost');
-            $myMax = max($product['Cost'], $maxCost);
-            return $myMax;
+            return "ra giá thành công hooray!!!! <3";
         } else
-            return -1;
+            return "Phiên đấu giá kết thúc rồi ra chỗ khác đi bạn eei :D";
     }
 
     //function cập nhật kỉ lục đấu giá mỗi 1s
@@ -171,60 +148,71 @@ class ProductController extends Controller
         } else {
             $orders = ProductProcess::getProductByNameAndType($search, $category, $auction);
         }
-        for ($i = 0; $i < count($orders); $i++) {
-            if (!$orders[$i]['Img']) {
-                $orders[$i]['Img'] = "img/defaultProductImg.jpg";
-            } else {
-                $orders[$i]['Img'] = explode(',', $orders[$i]['Img'])[0];
-            }
-            // $products[$i]['Color'] = explode(',',$products[$i]['Color']);
-            $orders[$i]['auction'] = $auction;
-        }
         return $orders;
     }
 
     // fuction xử lý upload, update
     public function sellSuccess(Request $request)
     {
-        $this->validate($request, [
-            'images' => 'required'
-        ]);
-
-        if ($request->hasFile('images')) {
+        date_default_timezone_set("Asia/Saigon");
+        $name = $request->get('name');
+        $color = $request->get('color');
+        $quantity = $request->get('quantity');
+        $cost = $request->get('cost');
+        $type = $request->get('type');
+        $descriptions = $request->get('description1');
+        $descriptions .= '[MASK]' . $request->get('description2');
+        $descriptions .= '[MASK]' . $request->get('description3');
+        $descriptions .= '[MASK]' . $request->get('description4');
+        $isAuction = $request->get('sel1');
+        $time = $request->get('time');
+        if (!$time) {
+            $time = 0;
+        }
+        $time *= 3600; //đổi ra giây
+        $files = $request->file('images');
+        if ($files) {
             $allowFileExtension = ['jpg', 'png', 'jpeg', 'gif'];
-            $files = $request->file('images');
             foreach ($files as $file) {
-                $filename = $file->getClientOriginalName();
                 $extension = $file->getClientOriginalExtension();
-
                 $check = in_array($extension, $allowFileExtension);
-                if ($check) {
-
-                    $items = Item::create([
-                        'username' => 'TienHoang',    // chỗ này ông thay bằng username hiện tại nha
-                        'name' => $request->name,
-                        'type' => $request->type,
-                        'color' => $request->color,
-                        'cost' => $request->cost,
-                        'quantity' => $request->quantity,
-                        'des1' => "Description1",  // chô này t ko dùng dc $request->description1
-                        'des2' => "Description2",   //
-                        'des3' => "Description3",   //
-                        'des4' => "Description4",   //
-                    ]);
-                    foreach ($request->images as $image) {
-                        $filename = $image->store('image');  // image được lưu ở storage/image
-                        ItemDetails::create([
-                            'item_id' => $items->id,
-                            'filename' => $filename
-                        ]);
-                    }
-                    echo "Upload Succesful";
-                    break;
-                } else {
-                    echo '<div class="alert alert-warning"><strong>Warning!</strong> Sorry Only Upload png , jpg , doc</div>';
+                if (!$check) {
+                    $result = 0;
+                    return view('sell.description', compact('result'));
                 }
             }
+            $allImg = "";
+            foreach ($files as $file) {
+                $newName = $type . date('Ymdhis');
+                sleep(1);
+                $newName .= '.' . $file->getClientOriginalExtension();
+                $file->move($_SERVER['DOCUMENT_ROOT'] . 'img/product/' . $type, $newName);  // image được lưu ở storage/image
+                $allImg .= $newName . ',';
+            }
         }
+        //ID	User_Name	User_ID	Type	Img	Create_At	Quantity	Cost	Color	Descriptions	Product_Name
+        DB::table('user_seller')->insert(
+            [
+                'User_Name' => $_SESSION['userName_cw'], 'User_ID' => $_SESSION['idUser'], 'Type' => $type,
+                'Img' => $allImg, 'Create_at' => date('Y-m-d H:i:s'), 'Quantity' => $quantity, 'Cost' => $cost,
+                'Color' => $color, 'Descriptions' => $descriptions, 'Product_Name' => $name, 'Is_Auction' => $isAuction, 'Time_Total' => $time
+            ]
+        );
+        $result = 1;
+        return view('sell.description', compact('result'));
+    }
+
+
+    //function chuyển đến trang mua sản phẩm
+    public function addToCart(Request $request)
+    {
+        $total = $request->get('total');
+        if(!isset($_SESSION['idProductAddOrder'])) return "Thao tác không hợp lệ !!!";
+        DB::table('user_product')->insert(
+            ['User_ID'=>$_SESSION['idUser'],
+            'Product_ID'=>$_SESSION['idProductAddOrder'],
+            'Count'=>$total]
+        );
+        return "Đã thêm sản phẩm vào giỏ hàng";
     }
 }

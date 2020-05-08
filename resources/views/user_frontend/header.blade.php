@@ -97,8 +97,8 @@
                         <label for="address">Địa chỉ:</label>
                         <textarea class="form-control" id="address" name="address" rows="3" placeholder="Địa chỉ nhận hàng" require></textarea>
                         <div style="margin: 30px 0 0 0;">
-                            <button type="submit" class="btn btn-primary setColor">Đăng kí tài khoản</button>
-                            <button type="button" class="btn btn-primary setColor" onclick="offRegister()">Cancel</button>
+                            <button type="submit" class="btn btn-outline-danger">Đăng kí tài khoản</button>
+                            <button type="button" class="btn btn-danger" onclick="offRegister()">Cancel</button>
                         </div>
                     </form>
                 </div>
@@ -118,8 +118,8 @@
                             <a href="#">Quên mật khẩu?</a>
                         </div>
                         <div>
-                            <button type="submit" class="btn btn-primary setColor">Đăng nhập tài khoản</button>
-                            <button type="button" class="btn btn-primary setColor" onclick="offLogin()">Cancel</button>
+                            <button type="submit" class="btn btn-outline-danger">Đăng nhập tài khoản</button>
+                            <button type="button" class="btn btn-danger" onclick="offLogin()">Cancel</button>
                         </div>
                     </form>
                 </div>
@@ -139,8 +139,8 @@
                             <a href="javascript:void(0)" onclick="offAdminLogin();onLogin();">Không phải Admin?</a>
                         </div>
                         <div>
-                            <button type="submit" class="btn btn-primary setColor">Đăng nhập tài khoản</button>
-                            <button type="button" class="btn btn-primary setColor" onclick="offAdminLogin()">Cancel</button>
+                            <button type="submit" class="btn btn-outline-danger">Đăng nhập tài khoản</button>
+                            <button type="button" class="btn btn-danger" onclick="offAdminLogin()">Cancel</button>
                         </div>
                     </form>
                 </div>
@@ -193,7 +193,7 @@
                                         <span id="checkNewPass" style="color: red;"></span>
                                         <input type="password" id="icheckNewPass" name="checkNewPass" class="form-control" placeholder="nhập lại mật khẩu mới">
                                         <div style="display:flex; justify-content: center;">
-                                            <button type="button" class="btn btn-danger" id="buttonChangePass" style="margin-right: 10px;">save</button>
+                                            <button type="button" class="btn btn-outline-danger" id="buttonChangePass" style="margin-right: 10px;">save</button>
                                             <button type="reset" class="btn btn-danger">cancel</button>
                                         </div>
                                     </form>

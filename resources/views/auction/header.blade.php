@@ -9,9 +9,9 @@
                     <form action="javascript:void(0)" method="post" class="findForm" id="findForm" name="findForm">
                         <!-- chỗ này dùng ajax -->
                         {{ csrf_field() }}
-                        <div class="form-group selection">
+                        <div class="selection">
                             <select class="category" id="category" name="category">
-                                <option value="null" selected>--Category--</option>
+                                <option value="all" selected>--Category--</option>
                                 <option value="book">Book</option>
                                 <option value="camera">Camera</option>
                                 <option value="fridge">Fridge</option>
@@ -21,8 +21,10 @@
                                 <option value="tv">television</option>
                                 <option value="wacth">watch</option>
                             </select>
-                            <input type="text" class="form-control inputColor" id="search" placeholder="Tìm kiếm ?" name="search" style="border-radius: 2px;">
-                            <button type="submit" class="btn btn-primary searchColor" style="border-radius: 1px;"><i class="fa fa-search" aria-hidden="true" ></i></button>
+                            <input type="text" class="my-form-control inputColor" name="search" id="search" placeholder="Tìm kiếm ?" name="search" style="border-radius: 2px;">
+                            <button type="button" id="search-button" class="btn btn-outline-dark searchColor" style="border-radius: 1px;"><i class="fa fa-search" aria-hidden="true" ></i></button>
+                            <div class="search-recommend" id="search-recommend">
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -74,7 +76,7 @@
                                         <span id="checkNewPass" style="color: red;"></span>
                                         <input type="password" id="icheckNewPass" name="checkNewPass" class="form-control" placeholder="nhập lại mật khẩu mới">
                                         <div style="display:flex; justify-content: center;">
-                                            <button type="button" class="btn btn-danger" id="buttonChangePass" style="margin-right: 10px;">save</button>
+                                            <button type="button" class="btn btn-outline-danger" id="buttonChangePass" style="margin-right: 10px;">save</button>
                                             <button type="reset" class="btn btn-danger">cancel</button>
                                         </div>
                                     </form>

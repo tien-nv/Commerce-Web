@@ -163,7 +163,7 @@ function checkField(nameForm, nameElement, reg, number, show) {
         document.getElementById(nameElement).innerHTML = mess[0];
         document.getElementById(nameElement).style.display = "block";
         return false;
-    }   
+    }
     if (!reg.test(val)) {
         show;
         document.getElementById(nameElement).innerHTML = mess[number];
@@ -621,4 +621,44 @@ $(document).ready(function() {
             }
         });
     });
+});
+
+
+//function add to cart
+$(document).ready(function() {
+    // $('#getTotal').keypress(function() {
+    //     var total = $('#getTotal').val();
+    //     $('#order-total').text('Hãy điền đầy đủ thông tin!!!');
+    // }); //hiển thị số tiền
+    $('#add-to-cart').click(function() {
+        var total = $('#getTotal').val();
+        if (!total) {
+            $('#order-total').text('Hãy điền đầy đủ thông tin!!!');
+            return false;
+        }
+        if (total > $('#total-product') || total <= 0) {
+            $('#order-total').text('Số lượng không hợp lệ!!!!');
+            return false;
+        }
+        var _token = $('input[name="_token"]').val();
+        $.ajax({
+            url: "addToCart",
+            method: "post",
+            data: {
+                _token: _token,
+                total: total
+            },
+            beforeSend: function() {
+                $('#wait').css('display', 'block');
+            },
+            // headers: {'X-CSRF-TOKEN': _token},
+            success: function(data) {
+                $('#wait').css('display', 'none');
+                alert(data);
+            },
+            error: function() {
+                $('#wait').css('display', 'none');
+            }
+        });
+    })
 });
