@@ -173,6 +173,9 @@ class ProductController extends Controller
         $check = ProductProcess::checkAuctionTime($product['Created_at'], $auctionTime);
         //nếu kiểm tra time mà vẫn còn khoảng thời gian đấu giá
         if ($check > 0) {
+            $maxCost = DB::table('auction')->where('Product_ID', '=', $id)->max('Cost');
+            $myMax = max($product['Cost'], $maxCost);
+            if($cost <= $myMax) return "Bạn phải ra giá lớn hơn";
             DB::table('auction')
                 ->updateOrInsert(
                     ['User_Name' => $_SESSION['userName_cw'], 'Product_ID' => $id, 'Cost' => $cost]
