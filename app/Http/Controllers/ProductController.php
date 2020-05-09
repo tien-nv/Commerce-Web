@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 use App\models\ProductProcess;
 use App\models\QueryDB;
 use Illuminate\Support\Facades\DB;
-use App\Item;
-use App\ItemDetails;
+use App\models\Item;
+use App\models\ItemDetails;
 
 class ProductController extends Controller
 {
@@ -16,6 +16,7 @@ class ProductController extends Controller
      * quan trọng
     ///lưu ý khi nào cần set giá trị cho session cần gọi session_start();
      **********************************************************************/
+
 
     //function này thêm sản phẩm từ phía admin ko phải user
     public function addProduct(Request $request)
@@ -32,11 +33,69 @@ class ProductController extends Controller
     public function getProduct(Request $request)
     {
         $type = $request->get('typeProduct');
-        $_SESSION['isAuction'] = 0;
         $_SESSION['type'] = $type;
         $products = ProductProcess::getProductByType($type);
         return $products;
     }
+
+    //sắp xếp sản phẩm theo mới nhất
+    public function sortNewest(Request $request){
+        session_start();
+        $currProducts = $request->get('currProducts');
+        if ($_SESSION['isAuction'] == 0) {
+            //lấy thêm 15 sản phẩm 1 lần
+            $products = ProductProcess::getProductByType($_SESSION['type'], $currProducts, 0);
+            for ($i = 0; $i < count($products); $i++) {
+                $products[$i]['auction'] = 0;
+            }
+            return $products;
+        } else {
+            $products = ProductProcess::getProductByType($_SESSION['type'], $currProducts, 1);
+            for ($i = 0; $i < count($products); $i++) {
+                $products[$i]['auction'] = 1;
+            }
+            return $products;
+        }
+    }
+
+    //sắp xếp sản phẩm theo rẻ nhất
+    public function sortCheapest(Request $request){
+        session_start();
+        $currProducts = $request->get('currProducts');
+        if ($_SESSION['isAuction'] == 0) {
+            //lấy thêm 15 sản phẩm 1 lần
+            $products = ProductProcess::getProductByType($_SESSION['type'], $currProducts, 0);
+            for ($i = 0; $i < count($products); $i++) {
+                $products[$i]['auction'] = 0;
+            }
+            for($i=0; $i < count($products); $i++){
+                for($j=$i+1; $j < count($products); $j++){
+                    if($products[$i]['Cost'] > $products[$j]['Cost']){
+                        $temp = $products[$i];
+                        $products[$i] = $products[$j];
+                        $products[$j] = $temp;
+                    }
+                }
+            }
+            return $products;
+        } else {
+            $products = ProductProcess::getProductByType($_SESSION['type'], $currProducts, 1);
+            for ($i = 0; $i < count($products); $i++) {
+                $products[$i]['auction'] = 1;
+            }
+            for($i=0; $i < count($products); $i++){
+                for($j=$i+1; $j < count($products); $j++){
+                    if($products[$i]['Cost'] > $products[$j]['Cost']){
+                        $temp = $products[$i];
+                        $products[$i] = $products[$j];
+                        $products[$j] = $temp;
+                    }
+                }
+            }
+            return $products;
+        }
+    }
+
 
     //function lấy thêm sản phẩm
     public function getMoreProduct(Request $request)
@@ -190,6 +249,8 @@ class ProductController extends Controller
                 $allImg .= $newName . ',';
             }
         }
+        //cắt dấu , ở cuối
+        $allImg = substr($allImg,0,strlen($allImg)-1);
         //ID	User_Name	User_ID	Type	Img	Create_At	Quantity	Cost	Color	Descriptions	Product_Name
         DB::table('user_seller')->insert(
             [
@@ -214,5 +275,14 @@ class ProductController extends Controller
             'Count'=>$total]
         );
         return "Đã thêm sản phẩm vào giỏ hàng";
+    }
+
+
+    //function lấy ra các sản phẩm đã mua của người dùng
+    public function boughtProduct(){
+        $orders = DB::table('order_detail')->select('Order_ID','Name','Cost','Count','Total','Create_At')
+        ->where('User_ID','=',$_SESSION['idUser'])->latest('Create_At')->get();
+        $orders = json_decode($orders,true);
+        return $orders;
     }
 }

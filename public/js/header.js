@@ -311,7 +311,14 @@ function onProductDesc(id) {
                 $('#product-color').html(myHtml);
                 $('#total-product').text(data['Total']);
                 $('#sold-product').text(data['Sold']);
-                // $('#desc1').text(data['Description1']);
+                for (let i = 0; i < 4; i++) {
+                    let id = '#' + 'desc' + (i + 1);
+                    $(id).text("");
+                }
+                for (let i = 0; i < data['Description'].length; i++) {
+                    let id = '#' + 'desc' + (i + 1);
+                    $(id).text(data['Description'][i]);
+                }
                 $("#product-description").css("display", "block");
             },
             error: function() {
@@ -531,6 +538,62 @@ $(document).ready(function() {
     });
 });
 
+//function khi người dùng muốn filter theo mới nhất
+$(document).ready(function() {
+    $('#sortNewest').click(function() {
+        var currProducts = $('#row-products > .thread_list').length;
+        $.ajax({
+            url: "sortNewest",
+            method: "get",
+            data: {
+                currProducts: currProducts
+            },
+            beforeSend: function() {
+                $('#wait').css('display', 'block');
+            },
+            // headers: {'X-CSRF-TOKEN': _token},
+            success: function(data) {
+                $('#wait').css('display', 'none'); //khoogn sửa cái này
+                $('#row-products').html(setHtml(data));
+                // $('#row-products').html(setHtml(data));
+                // $('#row-products').html("");
+                // alert(data);
+            },
+            error: function() {
+                $('#wait').css('display', 'none'); //không sửa cái này
+                onLogin();
+            }
+        });
+    });
+});
+//function khi người dùng muốn filter theo giá tiền
+$(document).ready(function() {
+    $('#sortCheapest').click(function() {
+        var currProducts = $('#row-products > .thread_list').length;
+        $.ajax({
+            url: "sortCheapest",
+            method: "get",
+            data: {
+                currProducts: currProducts
+            },
+            beforeSend: function() {
+                $('#wait').css('display', 'block');
+            },
+            // headers: {'X-CSRF-TOKEN': _token},
+            success: function(data) {
+                $('#wait').css('display', 'none'); //khoogn sửa cái này
+                $('#row-products').html(setHtml(data));
+                // $('#row-products').html(setHtml(data));
+                // $('#row-products').html("");
+                // alert(data);
+            },
+            error: function() {
+                $('#wait').css('display', 'none'); //không sửa cái này
+                onLogin();
+            }
+        });
+    });
+});
 
 //function khi người dùng tìm kiếm một cái gì đó
 $(document).ready(function() {
@@ -614,6 +677,7 @@ $(document).ready(function() {
                     $('#row-products').html(setHtml(data));
                 } else {
                     $('#row-products').html('Cửa hàng thông báo: sản phẩm đã hết hoặc không có!!! :(');
+                    $('#row-products').css('color', 'white');
                 }
             },
             error: function() {
@@ -661,4 +725,42 @@ $(document).ready(function() {
             }
         });
     })
+});
+
+
+//function xem đơn hàng
+$(document).ready(function() {
+    $('#show-order').click(function() {
+        $('#show-order').css('display', 'none');
+        $('#order-detail').css('display', 'block');
+        $.ajax({
+            url: "boughtProduct",
+            method: "get",
+            data: {},
+            beforeSend: function() {
+                $('#wait').css('display', 'block');
+            },
+            // headers: {'X-CSRF-TOKEN': _token},
+            success: function(data) {
+                $('#wait').css('display', 'none'); //khoogn sửa cái này
+                let temp = "<tr>[mask]</tr>";
+                let myHtml = '<tr><th>Mã đơn hàng</th><th>Tên sản phẩm</th><th>Đơn giá</th><th>Số lượng</th><th>Tổng tiền</th><th>Thời gian giao dịch</th></tr>';
+                for (let i = 0; i < data.length; i++) {
+                    let tmp = "";
+                    for (field in data[i]) {
+                        tmp += '<td>' + data[i][field] + '</td>';
+                    }
+                    myHtml += temp.replace('[mask]', tmp);
+                }
+                $('#get-detail').html(myHtml);
+            },
+            error: function() {
+                $('#wait').css('display', 'none'); //không sửa cái này
+            }
+        });
+    });
+    $('#off-order').click(function() {
+        $('#show-order').css('display', 'block');
+        $('#order-detail').css('display', 'none');
+    });
 });

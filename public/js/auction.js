@@ -40,6 +40,14 @@ function onProductAuction(id) {
                 $('#product-color').html(myHtml);
                 $('#total-product').text(data['Total']);
                 $('#sold-product').text(data['Sold']);
+                for (let i = 0; i < 4; i++) {
+                    let id = '#' + 'desc' + (i + 1);
+                    $(id).text("");
+                }
+                for (let i = 0; i < data['Description'].length; i++) {
+                    let id = '#' + 'desc' + (i + 1);
+                    $(id).text(data['Description'][i]);
+                }
                 // $('#desc1').text(data['Description1']);
                 //tính toán truyền tham số thời gian còn lại vào đây để hiện thị đếm ngược
                 let h = data['h'];

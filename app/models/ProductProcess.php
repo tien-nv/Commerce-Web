@@ -25,6 +25,13 @@ class ProductProcess extends Model
         }
         return $products;
     }
+
+    public static function getDescription($products){
+        for ($i = 0; $i < count($products); $i++) {
+            $products[$i]['Description'] = explode('[MASK]',$products[$i]['Description']);
+        }
+        return $products;
+    }
     //function add sản phẩm từ phía admin không phải từ phía user
     //đừng dùng function này cho user
     public static function addProduct($data)
@@ -32,6 +39,10 @@ class ProductProcess extends Model
         $test2 = DB::table('admin')->get();
         return $test2;
     }
+
+    //function lấy sản phẩm theo giá rẻ nhất
+    
+
 
 
     //function này cho phép lấy $num sản phẩm có $type = ...
@@ -63,6 +74,7 @@ class ProductProcess extends Model
         }
         $listColor = $products[0]['Color'];
         $products[0]['Color'] = explode(',', $listColor);
+        $products = ProductProcess::getDescription($products);
         return $products[0];
     }
 

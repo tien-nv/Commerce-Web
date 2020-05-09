@@ -25,6 +25,10 @@ Route::post('/userInputRegister', 'LoginController@checkRegister')->name('userIn
 
 Route::post('/search', 'ProductController@searchProducts')->name('search');
 
+Route::get('/sortNewest', 'ProductController@sortNewest')->name('sortNewest');
+
+Route::get('/sortCheapest', 'ProductController@sortCheapest')->name('sortCheapest');
+
 Route::group(['middleware' => ['verifyadmin']], function () {
     Route::get('/addProduct', 'ProductController@addProduct')->name('addProduct');
     Route::get('/logOutAdmin', 'LoginController@logOutAdmin')->name('logOutAdmin');
@@ -51,4 +55,5 @@ Route::group(['middleware' => ['verifyuser']], function () {
     Route::get('/updateCost', 'ProductController@updateCost')->name('updateCost');
     Route::post('/sellSuccess' , 'ProductController@sellSuccess')->name('sellSuccess');
     Route::post('/addToCart','ProductController@addToCart')->name('addToCart');
+    Route::get('/boughtProduct','ProductController@boughtProduct')->name('boughtProduct');
 });

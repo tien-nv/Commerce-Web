@@ -162,7 +162,7 @@
                 <div id="overlayProfile" class="my-overlay">
                     <div class="formProductPopup">
                         <i class="fa fa-times" id="offProfile"></i>
-                        <div class="user-infor">
+                        <div class="user-infor col-12">
                             <h1>Thông tin người dùng</h1>
                             <div class="row">
                                 <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
@@ -197,6 +197,20 @@
                                             <button type="reset" class="btn btn-danger">cancel</button>
                                         </div>
                                     </form>
+                                </div>
+                            </div>
+                            <div style="display:flex;justify-content: center">
+                                <button type="button" class="btn btn-outline-dark" id="show-order" style="margin-top: 20px">Xem sản phẩm đã mua</button>
+                                <div class="col-12" id="order-detail" style="display: none;">
+                                    <h1>Các sản phẩm đã mua</h1>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <table id="get-detail">
+                                                
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-outline-dark" id="off-order" style="margin-top:20px">Ẩn chi tiết</button>
                                 </div>
                             </div>
                         </div>

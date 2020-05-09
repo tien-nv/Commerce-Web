@@ -1,9 +1,9 @@
 <section class="main-component">
     <div class="filter">
         <span>Sắp xếp theo</span>
-        <a href="#">Mới nhất</a>
-        <a href="#">Rẻ nhất</a>
-        <a href="#">Đấu giá</a>
+        <a href="javascript:void(0)" id="sortNewest">Mới nhất</a>
+        <a href="javascript:void(0)" id="sortCheapest">Rẻ nhất</a>
+        <a href="{{ route('auction') }}">Đấu giá</a>
     </div>
     <div class="container" style="max-width: 98%">
 
@@ -75,8 +75,8 @@
                     <div class="total">Đã bán: <span id="sold-product"></span></div>
                     <div class="total">Mua số lượng:<span id="order-total"></span> <input type="number" class="form-control" name="getTotal" id="getTotal" min="1"></div>
                     <div class="other">
-                        <p id="desc1">Một số mô tả khác mô tả 1</p>
-                        <p id="desc2">Một số mô tả khác mô tả 2</p>
+                        <p id="desc1"></p>
+                        <p id="desc2"></p>
                         <p id="desc3"></p>
                         <p id="desc4"></p>
                     </div>

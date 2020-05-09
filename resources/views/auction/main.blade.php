@@ -1,7 +1,8 @@
 <section class="main-component">
     <div class="filter">
         <span>Sắp xếp theo</span>
-        <a href="#">Mới nhất</a>
+        <a href="javascript:void(0)" id="sortNewest">Mới nhất</a>
+        <a href="javascript:void(0)" id="sortCheapest">Rẻ nhất</a>
     </div>
     <div class="container" style="max-width: 98%">
 
@@ -72,8 +73,8 @@
                 <div class="total">Tổng số lượng: <span id="total-product"></span></div>
                 <div class="total">Đã bán: <span id="sold-product"></span></div>
                 <div class="other">
-                    <p id="desc1">Một số mô tả khác mô tả 1</p>
-                    <p id="desc2">Một số mô tả khác mô tả 2</p>
+                    <p id="desc1"></p>
+                    <p id="desc2"></p>
                     <p id="desc3"></p>
                     <p id="desc4"></p>
                 </div>
