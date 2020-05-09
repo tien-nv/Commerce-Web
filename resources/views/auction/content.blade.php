@@ -1,6 +1,6 @@
 <div class="topnav" id="myTopnav">
     <a href="{{ route('home') }}" id="all"><i class="fa fa-home" aria-hidden="true"></i> Trang chủ</a>
-    <a href="#" class="shop-cart" title="View shopping cart">
+    <a href="{{ route('showCart') }}" class="shop-cart" title="View shopping cart">
         <i class="fa fa-shopping-cart cart-icon"></i>
         <b>Giỏ hàng</b>
     </a>

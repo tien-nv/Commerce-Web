@@ -60,4 +60,5 @@ Route::group(['middleware' => ['verifyuser']], function () {
     Route::get('/showCart', 'CartController@showCart')->name('showCart');
     Route::get('/removeCart', 'CartController@removeCart')->name('removeCart');
     Route::get('/showPayment', 'CartController@showPayment')->name('showPayment');
+    Route::post('/payCart', 'CartController@payCart')->name('payCart');
 });
