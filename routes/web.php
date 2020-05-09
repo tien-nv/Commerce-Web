@@ -29,6 +29,7 @@ Route::get('/sortNewest', 'ProductController@sortNewest')->name('sortNewest');
 
 Route::get('/sortCheapest', 'ProductController@sortCheapest')->name('sortCheapest');
 
+
 Route::group(['middleware' => ['verifyadmin']], function () {
     Route::get('/addProduct', 'ProductController@addProduct')->name('addProduct');
     Route::get('/logOutAdmin', 'LoginController@logOutAdmin')->name('logOutAdmin');
@@ -56,4 +57,6 @@ Route::group(['middleware' => ['verifyuser']], function () {
     Route::post('/sellSuccess' , 'ProductController@sellSuccess')->name('sellSuccess');
     Route::post('/addToCart','ProductController@addToCart')->name('addToCart');
     Route::get('/boughtProduct','ProductController@boughtProduct')->name('boughtProduct');
+    Route::get('/showCart', 'CartController@showCart')->name('showCart');
+    Route::get('/showPayment', 'CartController@showPayment')->name('showPayment');
 });
