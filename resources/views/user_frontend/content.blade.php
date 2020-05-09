@@ -74,7 +74,7 @@
         </div>
     </div>
     <a href="{{ route('auction') }}" style="margin-left:0;"><i class="fa fa-hourglass-half" aria-hidden="true"></i> Đấu giá</a>
-    <a href="#" class="shop-cart" title="View shopping cart">
+    <a href="{{ route('showCart') }}" class="shop-cart" title="View shopping cart">
         <i class="fa fa-shopping-cart cart-icon"></i>
         <b>Giỏ hàng</b>
     </a>
