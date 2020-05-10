@@ -14,13 +14,13 @@ class QueryDB extends Model
         return mysqli_connect($host,$username,$password,$database);   
     }
 
-    public function addUser($userName,$password,$address,$email,$phone,$gender,$birthday){
+    public function addUser($userName,$password,$address,$email,$phone,$gender,$birthday,$code){
         $connect = self::login();
         if ($connect->connect_error) {
             return false;
         }
-        $sql = "INSERT INTO user (User_ID, UserName, Password, Address, Mail, Phone, Gender, Birth)
-        VALUES (NULL,'".$userName."','".$password."','".$address."','".$email."','".$phone."','".$gender."','".$birthday."')";
+        $sql = "INSERT INTO user_not_active (User_ID, UserName, Password, Address, Mail, Phone, Gender, Birth,Code)
+        VALUES (NULL,'".$userName."','".$password."','".$address."','".$email."','".$phone."','".$gender."','".$birthday."','".$code."')";
         $accept = $connect->query($sql);
         $connect->close();
         return $accept;

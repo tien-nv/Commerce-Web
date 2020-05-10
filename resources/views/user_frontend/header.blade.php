@@ -34,7 +34,7 @@
                 </script>
                 @elseif(isset($resultRegister) && $resultRegister === true)
                 <script>
-                    alert("Success Register bạn đã đăng nhập thành công");
+                    alert("Success Register bạn đã đăng ký thành công, hãy xác thực email để đăng nhập");
                 </script>
                 @endif
                 @if(isset($check) && $check === false)
@@ -144,7 +144,7 @@
                         </div>
                     </form>
                 </div>
-                @elseif(isset($userName) && ((isset($check) && $check === true) || (isset($resultRegister) && $resultRegister === true)))
+                @elseif(isset($userName) && ((isset($check) && $check === true)))
                 <div class="headerBar-right">
                     <div class="my-dropdown">
                         <a href="javascript:void(0)" class="headerBar-login" style="margin-right: 40px;font-size: 18px;" title="{{$userName}}"><i class="fa fa-user-circle-o" aria-hidden="true"></i> {{$userName_show }}</a>

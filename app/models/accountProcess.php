@@ -15,7 +15,7 @@ class AccountProcess extends Model
     //funtion kiểm tra tên user name đăng kí là hợp lệ hay không
     public static function isUsernameOk($userInput){
         $query = new QueryDB();
-        $obj = $query->select('user','UserName');
+        $obj = $query->select('user_not_active','UserName');
         for($i=0;$i<count($obj);$i++){
             if(strcmp($obj[$i]["UserName"],$userInput) == 0){
                 return 0;
@@ -27,7 +27,7 @@ class AccountProcess extends Model
     //funtion kiểm tra tên email người dùng đăng kí là hợp lệ hay không đã tồn tại hay chưa
     public static function isEmailOk($userInput){
         $query = new QueryDB();
-        $obj = $query->select('user','Mail');
+        $obj = $query->select('user_not_active','Mail');
         for($i=0;$i<count($obj);$i++){
             if(strcmp($obj[$i]["Mail"],$userInput) == 0){
                 return 0;
@@ -39,7 +39,7 @@ class AccountProcess extends Model
     //funtion kiểm tra xem số điện thoại người dùng nhập vào có bị trùng ko
     public static function isPhoneOk($userInput){
         $query = new QueryDB();
-        $obj = $query->select('user','Phone');
+        $obj = $query->select('user_not_active','Phone');
         for($i=0;$i<count($obj);$i++){
             if(strcmp($obj[$i]["Phone"],$userInput) == 0){
                 return 0;
@@ -80,6 +80,19 @@ class AccountProcess extends Model
         return false;
     }
 
+    //kiểm tra đăng nhập với tài khoản chưa active email
+    public static function isActive($userName,$password){
+        $query = new QueryDB();
+        $obj = $query->select('user_not_active','UserName','Password');
+        for($i=0;$i<count($obj);$i++){
+            if(strcmp($obj[$i]["UserName"],$userName) == 0){
+                if(strcmp($obj[$i]["Password"],$password) == 0) return true;
+            }
+        }
+        return false;
+    }
+
+    //kiểm tra admin dăng nhập
     public static function checkAdminLogin($adminName,$password){
         $query = new QueryDB();
         $obj = $query->select('admin','Admin_Name','Password');

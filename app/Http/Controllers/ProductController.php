@@ -178,7 +178,7 @@ class ProductController extends Controller
             if($cost <= $myMax) return "Bạn phải ra giá lớn hơn";
             DB::table('auction')
                 ->updateOrInsert(
-                    ['User_Name' => $_SESSION['userName_cw'], 'Product_ID' => $id, 'Cost' => $cost]
+                    ['User_Name' => $_SESSION['userName_cw'], 'Product_ID' => $id, 'Cost' => $cost,'User_ID'=>$_SESSION['idUser']]
                 );
             return "ra giá thành công hooray!!!! <3";
         } else

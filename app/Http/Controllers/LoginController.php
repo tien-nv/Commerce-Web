@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\VerifyEmail;
 use Illuminate\Http\Request;
 
 use App\models\AccountProcess; //sử dụng file này để lấy các kết quả query để check account
 use App\models\ProductProcess;
 use App\models\QueryDB;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class LoginController extends Controller
 {
@@ -143,20 +145,22 @@ class LoginController extends Controller
         $address = $request->input('address');
         //mã hóa password người dùng rồi luuwu vào database để đảm bảo quyền riêng tư
         $password_hash = hash('ripemd160', $password); //password hash để lưu vào database
+        $token_plaintext = $userName.$email;
+        $code = hash('ripemd160',$token_plaintext);
         $query = new QueryDB();
-        $resultRegister = $query->addUser($userName, $password_hash, $address, $email, $phone, $gender, $birthday);
+        $resultRegister = $query->addUser($userName, $password_hash, $address, $email, $phone, $gender, $birthday,$code);
         if ($resultRegister) {
-            //khởi tạo session
-            $this->initUserSession($userName, $password_hash);
-            //khởi tạo cookies
-            $this->initUserCookies($userName, $password);
             //trả về tên dạng plaintext
             //nếu thành công thì dadwndg nhập và hiện thị thông báo
-            if (strlen($userName) > 4)
-                $userName_show = substr($userName, 0, 4) . '...';
-            else $userName_show = $userName;
+           
+            $token = [
+                'token'=> $code,
+                'userName' => $userName,
+                'email' => $email
+            ];
+            Mail::to($email)->send(new VerifyEmail($token));
             $products = ProductProcess::getProductByType('all');
-            return view('home', compact('userName_show', 'userName', 'resultRegister', 'products'));
+            return view('home', compact('resultRegister', 'products'));
         } else {
             // không thì hiện thị khoogn thành công
             $products = ProductProcess::getProductByType('all');
@@ -197,6 +201,11 @@ class LoginController extends Controller
         $check = AccountProcess::checkUserLogin($userName, $password_hash);
         //nếu khong hợp lệ thì trả về thông báo khoogn hợp lệ
         if ($check === false) {
+            $checkActive = AccountProcess::isActive($userName, $password_hash);
+            if($checkActive === true){
+                abort(403,'Bạn hãy xác thực email để đăng nhập');
+                return;
+            }
             $products = ProductProcess::getProductByType('all');
             return view('home', compact('check', 'products'));
         }

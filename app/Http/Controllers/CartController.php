@@ -11,6 +11,8 @@ class CartController extends Controller
 {
     public function showCart(Request $request)
     {
+        //available = 1 là những sản phẩm đã thêm vào giỏ hàng sẽ mua
+        //xóa đi thì avaiable là 0
         $cart = DB::table('user_product')->select('ID','Product_ID', 'Count')
             ->where('Available', '=', 1)
             ->where('User_ID', '=', $_SESSION['idUser'])->get();

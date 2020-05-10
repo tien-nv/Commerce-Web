@@ -29,6 +29,7 @@ Route::get('/sortNewest', 'ProductController@sortNewest')->name('sortNewest');
 
 Route::get('/sortCheapest', 'ProductController@sortCheapest')->name('sortCheapest');
 
+Route::get('/verifyEmail','MailController@verifyEmail')->name('verifyEmail');
 
 Route::group(['middleware' => ['verifyadmin']], function () {
     Route::get('/addProduct', 'ProductController@addProduct')->name('addProduct');
