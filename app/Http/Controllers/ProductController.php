@@ -50,7 +50,7 @@ class ProductController extends Controller
             }
             return $products;
         } else {
-            $products = ProductProcess::getProductByType($_SESSION['type'], $currProducts, 1);
+            $products = ProductProcess::getProductByType('all', $currProducts, 1);
             for ($i = 0; $i < count($products); $i++) {
                 $products[$i]['auction'] = 1;
             }
@@ -79,7 +79,7 @@ class ProductController extends Controller
             }
             return $products;
         } else {
-            $products = ProductProcess::getProductByType($_SESSION['type'], $currProducts, 1);
+            $products = ProductProcess::getProductByType('all', $currProducts, 1);
             for ($i = 0; $i < count($products); $i++) {
                 $products[$i]['auction'] = 1;
             }
@@ -110,7 +110,7 @@ class ProductController extends Controller
             }
             return $products;
         } else {
-            $products = ProductProcess::getProductByType($_SESSION['type'], $currProducts + 15, 1);
+            $products = ProductProcess::getProductByType('all', $currProducts + 15, 1);
             for ($i = 0; $i < count($products); $i++) {
                 $products[$i]['auction'] = 1;
             }

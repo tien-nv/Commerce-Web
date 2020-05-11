@@ -17,11 +17,6 @@
             <div class="thread_list">
                 <a href="javascript:void(0)" onclick="onProductAuction({{ $products[$i]['Product_ID'] }})" id="link-img-product">
                     <div id="single-product" class="one-product ">
-                        <div>
-
-                            <img src="{{ $products[$i]['Img'] }}" alt="sản phẩm" title="ấn vào để xem chi tiết">
-
-                        </div>
                         <div class="product-content">
                             <div class="content">
                                 <p class="user">{{ $products[$i]['Seller'] }}</p>
@@ -29,6 +24,11 @@
                             </div>
                             <p class="cost">{{ $products[$i]['Cost'] }} vnđ</p>
                             <p><i class="fa fa-map-marker"></i>Hà nội</p>
+                        </div>
+                        <div>
+
+                            <img src="{{ $products[$i]['Img'] }}" alt="sản phẩm" title="ấn vào để xem chi tiết">
+
                         </div>
                     </div>
                 </a>
@@ -38,7 +38,7 @@
     </div>
     </div>
     <div class="other">
-        <button type="button" class="btn btn-outline-light" id="seeMore" onclick="">XEM THÊM</button>
+        <button type="button" class="btn btn-outline-light dark-color-outline" id="seeMore" onclick="">XEM THÊM</button>
     </div>
     <div class="product-description" id="product-auction">
         <div class="formProductPopup">

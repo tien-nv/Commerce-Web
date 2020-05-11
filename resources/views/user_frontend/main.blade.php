@@ -13,23 +13,23 @@
         <!-- một vòng for để show hàng của các sản phẩm -->
         <div id="row-products" class="products">
             <!-- một vòng for để show sản phẩm một row là -->
-            @for($i = 0;$i < count($products);$i++)
-             <div class="thread_list">
+            @for($i = 0;$i < count($products);$i++) <div class="thread_list">
                 <a href="javascript:void(0)" onclick="onProductDesc({{ $products[$i]['Product_ID'] }})" id="link-img-product">
-                    <div id="single-product" class="one-product ">
-                        <div>
+                    <div id="single-product" class="one-product">
+                        <div class="product-content">
+                            <div class="content">
+                                <p class="user"><span>Người bán: </span>{{ $products[$i]['Seller'] }}</p>
+                                <p class="name-product">{{ $products[$i]['Product_Name'] }}</p>
+                            </div>
+                            <p class="cost"><span>Giá tiền: </span>{{ $products[$i]['Cost'] }}<span> vnđ</span></p>
+                            <p><i class="fa fa-map-marker"></i>Hà nội</p>
+                        </div>
+                        <div class="">
 
                             <img src="{{ $products[$i]['Img'] }}" alt="sản phẩm" title="ấn vào để xem chi tiết">
 
                         </div>
-                        <div class="product-content">
-                            <div class="content">
-                                <p class="user">{{ $products[$i]['Seller'] }}</p>
-                                <p class="name-product">{{ $products[$i]['Product_Name'] }}</p>
-                            </div>
-                            <p class="cost">{{ $products[$i]['Cost'] }}<span> vnđ</span></p>
-                            <p><i class="fa fa-map-marker"></i>Hà nội</p>
-                        </div>
+
                     </div>
                 </a>
         </div>
@@ -38,7 +38,7 @@
     </div>
     </div>
     <div class="other">
-        <button type="button" class="btn btn-outline-light" id="seeMore" onclick="">XEM THÊM</button>
+        <button type="button" class="btn btn-outline-light dark-color-outline" id="seeMore" onclick="">XEM THÊM</button>
     </div>
     <div class="product-description" id="product-description">
         <div class="formProductPopup">

@@ -445,16 +445,18 @@ function checkConflicUserRegister(idInput, idError, field) {
 //function khi người dùng click vào content sẽ hiện ra sản phẩm tương ứng
 function setHtml(obj) {
     var defaultHtml = '<div class="thread_list"> \
+    <a href = "javascript:void(0)" onclick = "onProductDesc(insert_id)" >\
                     <div id = "single-product" class = "one-product " > \
-                    <div> <a href = "javascript:void(0)" onclick = "onProductDesc(insert_id)" > \
-                     <img src = "insert_img" alt = "sản phẩm" title = "ấn vào để xem chi tiết" >\
-                     </a> </div>\
                     <div class = "product-content" > \
                     <div class = "content" > \
-                    <p class = "user" > insert_username </p>\
-                    <p class = "name-product" > insert_name_product </p> \
-                    </div >\ <p class = "cost"> insert_cost <span> vnđ</span></p> \
-                    <p> <i class = "fa fa-map-marker" > </i> insert_location </p > \ </div> </div> </div> ';
+                    <p class = "user" ><span>Người bán:</span> insert_username </p>\
+                    <p class = "name-product" > insert_name_product </p></div> \
+                     <p class = "cost"><span>Giá tiền:</span> insert_cost <span> vnđ</span></p> \
+                    <p> <i class = "fa fa-map-marker" > </i> insert_location </p > </div> \
+                    <div>  \
+                     <img src = "insert_img" alt = "sản phẩm" title = "ấn vào để xem chi tiết" >\
+                     </div></div>\
+                     </a> </div> ';
     var newHtml = '';
     for (let i = 0; i < obj.length; i++) {
         temp = defaultHtml.replace("insert_img", obj[i]['Img']);
