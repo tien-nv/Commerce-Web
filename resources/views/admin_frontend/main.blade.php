@@ -1,9 +1,11 @@
+
+
 <section class="admin_page">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
                 <div class="my-dropdown" style="width:fit-content;margin-left:30%;">
-                    <label> <a href="javascript:void(0)" class="headerBar-login" style="margin-right: 40px;color: green;">Welcome {{$adminName }}</a></label>
+                    <label> <a href="javascript:void(0)" class="headerBar-login" style="margin-right: 40px;color: #FF4F4F;">Welcome {{$adminName }}</a></label>
                     <div id="my-dropdown-content">
                         <a href="#">Profile</a>
                         <a href="{{route('logOutAdmin')}}">Check out</a>
@@ -11,7 +13,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
                 <div class=" area">
                     <form action="javascript:void(0)">
@@ -61,7 +63,56 @@
                     </form>
                 </div>
             </div>
+        </div> --}}
+
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
+                <div class=" area">
+                    <form action="javascript:void(0)">
+                        <label for="sel1">Thêm sản phẩm</label>
+                        <div class="row  show">
+                            <div class="col-12">
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <tr class="text-warning">
+                                            <th> Tên Sản phâm</th>
+                                            <th> Loại Sản phẩm </th>
+                                            <th> Màu sắc </th>
+                                            <th> Giá cả </th>
+                                            <th class="text-center"> Số lượng </th>
+                                            <th class="text-center"> isAuction </th>
+                                            <th class="text-center"> Time </th>
+                                            <th> </th>
+                                            <th> </th>
+                                        </tr>
+                                        <tr class="text-white font-weight-bold">
+                                            <td> Sản phẩm 1 </td>
+                                            <td> Kiểu 1 </td>
+                                            <td> Màu 1 </td>
+                                            <td> Giá 1 </td>
+                                            <td class="text-center"> Số lượng </td>
+                                            <td class="text-center"> 1  </td>
+                                            <td class="text-center"> 12 </td>
+                                            <td class="text-right"><button class="btn btn-sm btn-warning"><i class="fa fa-plus">Add </i> </button></td>
+                                            <td class="text-left"><button class="btn btn-sm btn-danger"><i class="fa fa-trash">Remove</i> </button></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                            
+                        <div>
+                            <button type="button" name="addProduct" id="addProduct" class="btn btn-success" onclick="showValue('sel1')">save</button>
+                            
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
+
+        
+        
+
         
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
@@ -75,9 +126,21 @@
                         <div class="progress" id="progress" style="display:none;padding-bottom:25px;">
                             <div class="progress-bar"></div>
                         </div>
-                        <button type="button" name="delAdmin" id="delAdmin" class="btn btn-danger" onclick="showValue('sel4')">save</button>
-                        <button type="button" class="btn btn-danger" id="refresh">load Admin</button>
-                        <button type="reset" class="btn btn-danger">cancel</button>
+                        
+                        <div class="list-group">
+                            <a href="#" class="list-group-item list-group-item-action list-group-item-danger">Admin1</a>
+                            <a href="#" class="list-group-item list-group-item-action list-group-item-warning">Admin2</a>
+                            <a href="#" class="list-group-item list-group-item-action list-group-item-info">Admin3</a>
+                            <a href="#" class="list-group-item list-group-item-action list-group-item-danger">Admin4</a>
+                            <a href="#" class="list-group-item list-group-item-action list-group-item-warning">Admin5</a>
+                            <a href="#" class="list-group-item list-group-item-action list-group-item-info">Admin6</a>
+                        </div>
+                        <br>
+                        <button type="button" name="delAdmin" id="delAdmin" class="btn btn-success" onclick="showValue('sel4')">save</button>
+                        {{-- <button type="button" class="btn btn-danger" id="refresh">load Admin</button>
+                        <button type="reset" class="btn btn-danger">cancel</button> --}}
+                    
+                        
                     </form>
                 </div>
             </div>
@@ -101,7 +164,7 @@
                             <input type="password" name="checkPasswordRegister" class="form-control" placeholder="Nhập lại mật khẩu">
                         </div>
                         <div>
-                            <button type="submit" id="submitRegister" class="btn btn-primary setColor">Đăng kí admin</button>
+                            <button type="submit" id="submitRegister" class="btn btn-success setColor">Đăng kí admin</button>
                             <button type="reset" class="btn btn-primary setColor">Cancel</button>
                         </div>
                     </form>
