@@ -36,7 +36,7 @@
                                 <th scope="col">Tên sản phẩm</th>
                                 <th scope="col" class="text-center">Số lượng</th>
                                 <th scope="col" class="text-right">Đơn giá</th>
-                                <th> </th>
+                                <th>     </th>
                             </tr>
                             <!-- -->
                             @for($i = 0;$i < $len;$i++)
