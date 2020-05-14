@@ -32,7 +32,7 @@ Route::get('/sortCheapest', 'ProductController@sortCheapest')->name('sortCheapes
 Route::get('/verifyEmail','MailController@verifyEmail')->name('verifyEmail');
 
 Route::group(['middleware' => ['verifyadmin']], function () {
-    Route::get('/addProduct', 'ProductController@addProduct')->name('addProduct');
+    Route::get('/addProduct', 'AdminController@addProduct')->name('addProduct');
     Route::get('/logOutAdmin', 'LoginController@logOutAdmin')->name('logOutAdmin');
     Route::post('/adminInputRegister', 'LoginController@checkAdminRegister')->name('adminInputRegister');
     Route::post('/adminRegister', 'LoginController@getAdminRegister')->name('adminRegister');

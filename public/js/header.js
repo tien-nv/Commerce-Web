@@ -632,6 +632,8 @@ $(document).ready(function() {
                             $('#search').val($(id).text());
                         });
                     }
+                } else {
+                    $('#search-recommend').html("");
                 }
             },
             error: function() {}

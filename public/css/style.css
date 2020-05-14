@@ -36,7 +36,7 @@ h6 {
 }
 
 body {
-    background: rgba(181, 185, 187, 0.466) repeat left top !important;
+    background: rgba(181, 185, 187, 0.11) repeat left top !important;
     font-weight: 300;
     font-size: 15px;
     -webkit-font-smoothing: 'Nunito', sans-serif;
@@ -117,7 +117,7 @@ tr:hover {
 .container-fluid.my {
     padding-left: 0px !important;
     padding-right: 0px !important;
-    background-color: #5d5c61;
+    background-color: #242526f5;
     letter-spacing: 1.1px;
 }
 
@@ -231,7 +231,7 @@ tr:hover {
 }
 
 .search-recommend {
-    background: #fff none repeat scroll 0 0;
+    background: rgb(255, 255, 255) none repeat scroll 0 0;
     border-bottom: 1px solid #ddd;
     border-left: 1px solid #ddd;
     border-right: 1px solid #ddd;
@@ -326,7 +326,7 @@ tr:hover {
 }
 
 .my-form-control::placeholder {
-    color: #6c757d;
+    color: #6e7d6c;
     opacity: 1
 }
 
@@ -1007,12 +1007,17 @@ input:focus {
 
 .filter a {
     width: max-content;
-    background-color: #ECECEC;
+    background-color: rgb(251, 255, 14);
     font-size: 18px;
     padding: 0.9%;
     margin-left: 1.2%;
     font-weight: 600;
-    color: #ff5e00;
+    color: #000000;
+}
+
+.main-component .container {
+    min-width: 99%;
+    padding: 0px;
 }
 
 .main-component .products {
@@ -1025,7 +1030,7 @@ input:focus {
 
 .main-component .products .thread_list {
     padding: 7px 10px;
-    flex-basis: 33%;
+    flex-basis: 25%;
     height: auto;
 }
 
@@ -1121,7 +1126,13 @@ i {
 @media(max-width:800px) {
     .main-component .products .thread_list {
         flex-basis: 50% !important;
-        padding: 4px;
+        padding: 0.5px;
+    }
+    .container {
+        padding: 0px !important;
+        margin-right: 0px !important;
+        margin-left: 0px !important;
+        max-width: 100% !important;
     }
     /* .main-component .one-product {
         flex-basis: 50% !important;
@@ -1129,10 +1140,16 @@ i {
 }
 
 @media(max-width:576px) {
+    .container {
+        padding: 0px !important;
+        margin-right: 0px !important;
+        margin-left: 0px !important;
+        width: 100%;
+    }
     .main-component .products .thread_list {
         flex-basis: 50% !important;
-        padding: 5px;
-        height: 320px;
+        /* padding: 5px; */
+        height: auto;
     }
     .one-product img {
         height: 150px;

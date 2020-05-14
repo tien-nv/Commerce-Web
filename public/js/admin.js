@@ -18,7 +18,7 @@ function showValue(id) {
                     },
                     success: function(data) {
                         $('#wait').css('display', 'none');
-                        alert(data[0].Admin_Name);
+                        alert(data);
                     },
                     error: function() {
                         $('#wait').css('display', 'none');

@@ -5,7 +5,7 @@
         <a href="javascript:void(0)" id="sortCheapest">Rẻ nhất</a>
         <a href="{{ route('auction') }}">Đấu giá</a>
     </div>
-    <div class="container" style="max-width: 98%">
+    <div class="container" >
 
         <!-- chỗ này bị bug dùng js để show nếu mà màn hình nhỏ thì show 2 sản phẩm 1 dòng
     còn nếu màn hình lớn thì show 5 sản phẩm 1 dòng, màn hình trung bình thì show 3 sản phẩm-->
@@ -27,11 +27,11 @@
                         <div class="">
 
                             <img src="{{ $products[$i]['Img'] }}" alt="sản phẩm" title="ấn vào để xem chi tiết">
-
-                        </div>
-
+                            
+                        </div>               
                     </div>
                 </a>
+                
         </div>
         @endfor
         <!-- vị trí này để chèn thêm các sản phẩm sau khi click xem thêm -->

@@ -18,16 +18,7 @@ class ProductController extends Controller
      **********************************************************************/
 
 
-    //function này thêm sản phẩm từ phía admin ko phải user
-    public function addProduct(Request $request)
-    {
-
-        // return view('home');
-        $data = $request->input('selected');
-        $query = new ProductProcess();
-        $respon = $query->addProduct($data);
-        return $respon;
-    }
+    
 
     //lấy sản phẩm theo type
     public function getProduct(Request $request)
