@@ -45,7 +45,7 @@
          <div class="font-weight-bold"> Loại Sản Phẩm <span id="type"></span></div>
          <input type="text" class="form-control" id="input-type" name="type" required>
          <small name="texttype" id="texttype" class="text-form text-muted">
-            <h6 class="text-warning">Ex: Phone,Laptop,...</h6>
+            <h6 class="text-warning">Các loại hợp lệ: phone, laptop, camera, tv, fridge, keyboard, book, watch</h6>
          </small>
       </div>
    </div>
@@ -55,7 +55,7 @@
          <div class="font-weight-bold"> Màu sắc <span id="color"></span> </div>
          <input type="text" class="form-control" id="input-color" name="color" required>
          <small name="textcolor" id="textcolor" class="text-form text-muted">
-            <h6 class="text-warning">Ex: Red,Blue,...</h6>
+            <h6 class="text-warning">Các màu hợp lệ: Red,Blue, black, gray, white, yellow, pink, purple, orange</h6>
          </small>
       </div>
    </div>

@@ -32,7 +32,11 @@ Route::get('/sortCheapest', 'ProductController@sortCheapest')->name('sortCheapes
 Route::get('/verifyEmail','MailController@verifyEmail')->name('verifyEmail');
 
 Route::group(['middleware' => ['verifyadmin']], function () {
-    Route::get('/addProduct', 'AdminController@addProduct')->name('addProduct');
+    Route::get('/addAllProduct', 'AdminController@addAllProduct')->name('addAllProduct');
+    Route::get('/delAllProduct','AdminController@delAllProduct')->name('delAllProduct');
+    Route::get('/getSellProduct', 'AdminController@getSellProduct')->name('getSellProduct');
+    Route::get('/delSingleProduct', 'AdminController@delSingleProduct')->name('delSingleProduct');
+    Route::get('/addSingleProduct', 'AdminController@addSingleProduct')->name('addSingleProduct');
     Route::get('/logOutAdmin', 'LoginController@logOutAdmin')->name('logOutAdmin');
     Route::post('/adminInputRegister', 'LoginController@checkAdminRegister')->name('adminInputRegister');
     Route::post('/adminRegister', 'LoginController@getAdminRegister')->name('adminRegister');
@@ -58,6 +62,7 @@ Route::group(['middleware' => ['verifyuser']], function () {
     Route::post('/sellSuccess' , 'ProductController@sellSuccess')->name('sellSuccess');
     Route::post('/addToCart','ProductController@addToCart')->name('addToCart');
     Route::get('/boughtProduct','ProductController@boughtProduct')->name('boughtProduct');
+    Route::get('/soldProduct','ProductController@soldProduct')->name('soldProduct');
     Route::get('/showCart', 'CartController@showCart')->name('showCart');
     Route::get('/removeCart', 'CartController@removeCart')->name('removeCart');
     Route::get('/showPayment', 'CartController@showPayment')->name('showPayment');

@@ -279,4 +279,16 @@ class ProductController extends Controller
         $orders = json_decode($orders,true);
         return $orders;
     }
+
+    //function lấy ra các sản phẩm đã bán của người dùng
+    public function soldProduct(){
+        $sold = DB::table('product')->select('Product_ID','Product_Name','Type','Cost','Total','Sold','Color','isAuction','Created_at')
+        ->where('Seller','like',$_SESSION['userName_cw'])->get();
+        $sold = json_decode($sold,true);
+        for($i=0;$i<count($sold);$i++){
+            if($sold[$i]['isAuction']==1)$sold[$i]['isAuction']='Có';
+            else $sold[$i]['isAuction']="Không";
+        }
+        return $sold;
+    }
 }

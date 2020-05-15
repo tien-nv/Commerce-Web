@@ -748,7 +748,7 @@ $(document).ready(function() {
             success: function(data) {
                 $('#wait').css('display', 'none'); //khoogn sửa cái này
                 let temp = "<tr>[mask]</tr>";
-                let myHtml = '<tr><th>Mã đơn hàng</th><th>Tên sản phẩm</th><th>Đơn giá</th><th>Số lượng</th><th>Tổng tiền</th><th>Thời gian giao dịch</th></tr>';
+                let myHtml = '<tr><th>Mã đơn hàng</th><th>Tên sản phẩm</th><th>Đơn giá(VNĐ)</th><th>Số lượng</th><th>Tổng tiền</th><th>Thời gian giao dịch</th></tr>';
                 for (let i = 0; i < data.length; i++) {
                     let tmp = "";
                     for (field in data[i]) {
@@ -766,5 +766,38 @@ $(document).ready(function() {
     $('#off-order').click(function() {
         $('#show-order').css('display', 'block');
         $('#order-detail').css('display', 'none');
+    });
+    $('#show-sell').click(function() {
+        $('#show-sell').css('display', 'none');
+        $('#sell-detail').css('display', 'block');
+        $.ajax({
+            url: "soldProduct",
+            method: "get",
+            data: {},
+            beforeSend: function() {
+                $('#wait').css('display', 'block');
+            },
+            // headers: {'X-CSRF-TOKEN': _token},
+            success: function(data) {
+                $('#wait').css('display', 'none'); //khoogn sửa cái này
+                let temp = "<tr>[mask]</tr>";
+                let myHtml = '<tr><th>Mã sản phẩm</th><th>Tên sản phẩm</th><th>Loại sản phẩm</th><th>Đơn giá(VNĐ)</th><th>Số lượng</th><th>Đã bán được</th><th>Màu sắc</th><th>Đấu giá</th><th>Thời gian được duyệt</th></tr>';
+                for (let i = 0; i < data.length; i++) {
+                    let tmp = "";
+                    for (field in data[i]) {
+                        tmp += '<td>' + data[i][field] + '</td>';
+                    }
+                    myHtml += temp.replace('[mask]', tmp);
+                }
+                $('#get-detail-sell').html(myHtml);
+            },
+            error: function() {
+                $('#wait').css('display', 'none'); //không sửa cái này
+            }
+        });
+    });
+    $('#off-sell').click(function() {
+        $('#show-sell').css('display', 'block');
+        $('#sell-detail').css('display', 'none');
     });
 });

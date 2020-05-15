@@ -199,7 +199,7 @@
                                     </form>
                                 </div>
                             </div>
-                            <div style="display:flex;justify-content: center">
+                            <div style="display:flex;justify-content: center;margin-bottom:50px">
                                 <button type="button" class="btn btn-outline-dark" id="show-order" style="margin-top: 20px">Xem sản phẩm đã mua</button>
                                 <div class="col-12" id="order-detail" style="display: none;">
                                     <h1>Các sản phẩm đã mua</h1>
@@ -211,6 +211,20 @@
                                         </div>
                                     </div>
                                     <button type="button" class="btn btn-outline-dark" id="off-order" style="margin-top:20px">Ẩn chi tiết</button>
+                                </div>
+                            </div>
+                            <div style="display:flex;justify-content: center">
+                                <button type="button" class="btn btn-outline-dark" id="show-sell" style="margin-top: 20px">Xem sản phẩm đã bán</button>
+                                <div class="col-12" id="sell-detail" style="display: none;">
+                                    <h1>Các sản phẩm đã bán</h1>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <table id="get-detail-sell">
+                                                
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-outline-dark" id="off-sell" style="margin-top:20px">Ẩn chi tiết</button>
                                 </div>
                             </div>
                         </div>

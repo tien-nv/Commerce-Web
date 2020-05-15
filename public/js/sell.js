@@ -53,7 +53,7 @@ var color = [
 ];
 
 var type = [
-    'phone', 'laptop', 'camera', 'tv', 'fridge', 'keyboard', 'book', 'clothes', 'watch'
+    'phone', 'laptop', 'camera', 'tv', 'fridge', 'keyboard', 'book', 'watch'
 ];
 
 var checkName = false;
@@ -120,21 +120,25 @@ $(document).ready(function() {
     $("#input-color").keyup(function() {
         let val = document.forms['sell-form']['color'].value.toLowerCase();
         let des = document.getElementById('color');
-        let pos = color.indexOf(val);
+        arr = val.split(',');
+        for (let i = 0; i < arr.length; i++) {
+            let pos = color.indexOf(arr[i].trim());
 
-        if (pos < 0) {
-            des.innerHTML = "==> Màu này không hợp lệ, vui lòng điền lại";
-            checkColor = false;
-        } else {
-            des.innerHTML = "";
-            checkColor = true;
+            if (pos < 0) {
+                des.innerHTML = "==> Màu này không hợp lệ, vui lòng điền lại";
+                checkColor = false;
+                break;
+            } else {
+                des.innerHTML = "";
+                checkColor = true;
+            }
         }
     });
 });
 
 $(document).ready(function() {
     $('#input-type').keyup(function() {
-        let val = document.forms['sell-form']['type'].value.toLowerCase();
+        let val = document.forms['sell-form']['type'].value.toLowerCase().trim();
         let des = document.getElementById('type');
         let pos = type.indexOf(val);
         des.innerHTML = "TYPE";

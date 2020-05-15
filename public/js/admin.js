@@ -1,34 +1,167 @@
-//<!-- this script để lấy giá trị sản phẩm trả về cho server -->
-function showValue(id) {
-    let element = '#' + id;
-    let query = '#' + id + ' option:checked';
-    let selected = document.querySelectorAll(query);
-    var val = Array.from(selected).map(el => el.value);
-    if (val.length == 0) alert("hãy chọn sản phẩm");
-    else { //send request về server theo dạng ajax
-        if (id === 'sel1') {
-            $(document).ready(function() {
-                // var _token = $('input[name="_token"]').val();
-                $.ajax({
-                    url: "addProduct",
-                    method: "GET",
-                    data: { selected: val },
-                    beforeSend: function() {
-                        $('#wait').css('display', 'block');
-                    },
-                    success: function(data) {
-                        $('#wait').css('display', 'none');
-                        alert(data);
-                    },
-                    error: function() {
-                        $('#wait').css('display', 'none');
-                        alert("something went wrong!!!!");
-                    }
-                })
-            });
-        }
+function setRowHtml(obj) {
+    var originHtml = ' \
+    <tr class="text-white font-weight-bold" id="Product_id"> \
+        <td> Product_Name </td> \
+        <td> Type </td> \
+        <td> Color </td> \
+        <td class="text-center"> Cost VNĐ</td> \
+        <td class="text-center"> Quantity </td> \
+        <td class="text-center"> Auction </td> \
+        <td class="text-center"> Total_time </td> \
+        <td class="text-right"><button class="btn btn-sm btn-warning" onclick="addSingleProduct(Product_id)"><i class="fa fa-plus"> Add </i> </button></td> \
+        <td class="text-left"><button class="btn btn-sm btn-danger" onclick="delSingleProduct(Product_id)"><i class="fa fa-trash"> Remove</i> </button></td> \
+    </tr>';
+    var Html = "";
+
+    for (let i = 0; i < obj.length; i++) {
+        let auction = "Không";
+        Html += originHtml.replace('Product_id', obj[i]['ID']);
+        Html = Html.replace('Product_Name', obj[i]['Product_Name']);
+        Html = Html.replace('Type', obj[i]['Type']);
+        Html = Html.replace('Color', obj[i]['Color']);
+        Html = Html.replace('Cost', obj[i]['Cost']);
+        Html = Html.replace('Quantity', obj[i]['Quantity']);
+        if (obj[i]['Is_Auction'] == 1) auction = "Có";
+        Html = Html.replace('Auction', auction);
+        Html = Html.replace('Total_Time', obj[i]['Time_Total']);
+        Html = Html.replace('Product_id', obj[i]['ID']);
+        Html = Html.replace('Product_id', obj[i]['ID']);
     }
+    return Html;
 }
+
+//function lấy sản phẩm từ bảng seller
+$(document).ready(function() {
+    $('#getProduct').click(function() {
+        $.ajax({
+            url: "getSellProduct",
+            method: "GET",
+            data: {},
+            beforeSend: function() {
+                $('#wait').css('display', 'block');
+            },
+            success: function(data) {
+                $('#wait').css('display', 'none');
+                let content = '<tr class="text-warning">\
+                <th> Tên Sản phâm</th>\
+                <th> Loại Sản phẩm </th>\
+                <th> Màu sắc </th>\
+                <th> Giá cả </th>\
+                <th class="text-center"> Số lượng </th>\
+                <th class="text-center"> Đấu giá </th>\
+                <th class="text-center"> Thời gian đấu giá</th>\
+                <th> </th>\
+                <th> </th>\
+            </tr>';
+                $('#table-product').html(content + setRowHtml(data));
+            },
+            error: function() {
+                $('#wait').css('display', 'none');
+                alert("something went wrong!!!!");
+            }
+        })
+    })
+});
+//fucntion để thêm từng sản phẩm 1
+function addSingleProduct(id) {
+    $(document).ready(function() {
+        $.ajax({
+            url: "addSingleProduct",
+            method: "GET",
+            data: {
+                id: id
+            },
+            beforeSend: function() {
+                $('#wait').css('display', 'block');
+            },
+            success: function(data) {
+                $('#wait').css('display', 'none');
+                $(('#' + id)).html("");
+                alert("Đã cập nhật thành công " + data + " sản phẩm!!!hooray ");
+            },
+            error: function() {
+                $('#wait').css('display', 'none');
+                alert("something went wrong!!!!");
+            }
+        })
+    });
+}
+
+
+
+//function để xoas từng sản phẩm 1
+function delSingleProduct(id) {
+    $(document).ready(function() {
+        $.ajax({
+            url: "delSingleProduct",
+            method: "GET",
+            data: {
+                id: id
+            },
+            beforeSend: function() {
+                $('#wait').css('display', 'block');
+            },
+            success: function(data) {
+                $('#wait').css('display', 'none');
+                $(('#' + id)).html("");
+                alert("Đã xóa thành công " + data + " sản phẩm!!!hooray ");
+            },
+            error: function() {
+                $('#wait').css('display', 'none');
+                alert("something went wrong!!!!");
+            }
+        })
+    });
+}
+//function để thêm từng sản phẩm 1
+//<!-- this script để lấy giá trị sản phẩm trả về cho server -->
+//xong
+
+$(document).ready(function() {
+    // var _token = $('input[name="_token"]').val();
+    $('#addAllProduct').click(function() {
+        $.ajax({
+            url: "addAllProduct",
+            method: "GET",
+            data: {},
+            beforeSend: function() {
+                $('#wait').css('display', 'block');
+            },
+            success: function(data) {
+                $('#wait').css('display', 'none');
+                alert("Đã thêm thành công " + data + " sản phẩm vào bảng hàng chính!!! hooray");
+            },
+            error: function() {
+                $('#wait').css('display', 'none');
+                alert("something went wrong!!!!");
+            }
+        });
+    });
+    $('#deleteAllProduct').click(function() {
+        $.ajax({
+            url: "delAllProduct",
+            method: "GET",
+            data: {},
+            beforeSend: function() {
+                $('#wait').css('display', 'block');
+            },
+            success: function(data) {
+                $('#wait').css('display', 'none');
+                $('#table-product').html("");
+                alert("Đã xóa thành công " + data + " ở cơ sở dữ liệu!!! hooray");
+            },
+            error: function() {
+                $('#wait').css('display', 'none');
+                alert("something went wrong!!!!");
+            }
+        })
+    });
+});
+
+
+//function để xóa tất cả sản phẩm
+
+
 
 //<!-- this script để lấy giá trị tên admin và password để register -->
 function checkConflic() {
