@@ -53,14 +53,6 @@
 
                             </tr>
 
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td class="text-right"><strong>Tổng</strong></td>
-                                <td class="text-right"><strong>{{ $total }}</strong><span><strong> VNĐ</strong></span></td>
-                                <td></td>
-                            </tr>
-
                         </tbody>
                     </table>
                 </div>

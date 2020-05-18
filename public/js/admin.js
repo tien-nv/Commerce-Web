@@ -23,7 +23,7 @@ function setRowHtml(obj) {
         Html = Html.replace('Quantity', obj[i]['Quantity']);
         if (obj[i]['Is_Auction'] == 1) auction = "Có";
         Html = Html.replace('Auction', auction);
-        Html = Html.replace('Total_Time', obj[i]['Time_Total']);
+        Html = Html.replace('Total_time', obj[i]['Time_Total']);
         Html = Html.replace('Product_id', obj[i]['ID']);
         Html = Html.replace('Product_id', obj[i]['ID']);
     }

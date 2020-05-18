@@ -310,7 +310,7 @@ function onProductDesc(id) {
                 }
                 $('#product-color').html(myHtml);
                 $('#total-product').text(data['Total']);
-                $('#sold-product').text(data['Sold']);
+                $('#sold-product').text(data['Total'] - data['Available']);
                 for (let i = 0; i < 4; i++) {
                     let id = '#' + 'desc' + (i + 1);
                     $(id).text("");

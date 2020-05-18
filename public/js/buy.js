@@ -8,7 +8,7 @@ function remove(id) {
             },
             // headers: {'X-CSRF-TOKEN': _token},
             success: function(data) {
-                $(data).html("");
+                $(data['id']).html("");
             },
             error: function() {}
         });

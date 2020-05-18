@@ -221,7 +221,7 @@ class ProductController extends Controller
         $time = $request->get('time');
         if (!$time) {
             $time = 0;
-        }
+        }else $time += 7; //cộng thêm 7 tiếng vì time của mình bị lệch 7 tiếng
         $time *= 3600; //đổi ra giây
         $files = $request->file('images');
         if ($files) {
@@ -263,10 +263,15 @@ class ProductController extends Controller
     {
         $total = $request->get('total');
         if(!isset($_SESSION['idProductAddOrder'])) return "Thao tác không hợp lệ !!!";
+        $product = ProductProcess::getProductById($_SESSION['idProductAddOrder']); //trả về 1 mảng 2 chiều
+        if($total > $product["Available"]) return "Số lượng còn lại không đủ đáp ứng";
         DB::table('user_product')->insert(
             ['User_ID'=>$_SESSION['idUser'],
             'Product_ID'=>$_SESSION['idProductAddOrder'],
             'Count'=>$total]
+        );
+        DB::table('product')->where('Product_ID','=',$_SESSION['idProductAddOrder'])->update(
+            ['Available'=>($product["Available"] - $total)]
         );
         return "Đã thêm sản phẩm vào giỏ hàng";
     }
@@ -282,7 +287,7 @@ class ProductController extends Controller
 
     //function lấy ra các sản phẩm đã bán của người dùng
     public function soldProduct(){
-        $sold = DB::table('product')->select('Product_ID','Product_Name','Type','Cost','Total','Sold','Color','isAuction','Created_at')
+        $sold = DB::table('product')->select('Product_ID','Product_Name','Type','Cost','Total','Color','isAuction','Created_at')
         ->where('Seller','like',$_SESSION['userName_cw'])->get();
         $sold = json_decode($sold,true);
         for($i=0;$i<count($sold);$i++){

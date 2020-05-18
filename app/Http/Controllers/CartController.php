@@ -34,7 +34,15 @@ class CartController extends Controller
     {
         $id = $request->get('id');
         DB::table('user_product')->where('ID', '=', $id)->update(['Available' => 0]);
-        return '#' . $id;
+        $user_product = DB::table('user_product')->select()->where('ID', '=', $id)->get();
+        $user_product = json_decode($user_product,true);
+        $product = ProductProcess::getProductById($user_product[0]['Product_ID']);
+        DB::table('product')->where('Product_ID','=',$user_product[0]['Product_ID'])->update(
+            ['Available'=>($product['Available'] + $user_product[0]['Count'])]
+        );
+        $res = [];
+        $res['id'] = '#'.$id; 
+        return $res;
     }
 
 
