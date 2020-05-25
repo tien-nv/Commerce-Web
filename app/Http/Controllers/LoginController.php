@@ -68,23 +68,30 @@ class LoginController extends Controller
      ******************************************/
     public function resetHomeView()
     {
-        $check = true;
+        session_start();
+        $products = ProductProcess::getProductByType('all');
+        if(!isset($_SESSION['idUser'])){
+            $check = false;
+            $alert = 'Xin chào người lạ! Bạn đang ở trạng thái thăm quan hãy đăng nhập để sử dụng.';
+            return view('home', compact('products','alert','check'));
+        }
         $userName = $_SESSION['userName_cw'];
         //cái biến này lưu trữ dạng sản phẩm mà người dùng đang tương tác
         $_SESSION['type'] = 'all'; //mặc định là all
         //cái biến này lưu trữ người dùng có đang ở trang đấu giá hay không
         $_SESSION['isAuction'] = 0;
-        if (strlen($userName) > 4)
-            $userName_show = substr($userName, 0, 4) . '...';
+        if (strlen($userName) > 6)
+            $userName_show = substr($userName, 0, 6) . '...';
         else $userName_show = $userName;
-        $products = ProductProcess::getProductByType('all');
-        return view('home', compact('userName', 'userName_show', 'check', 'products'));
+        return view('home', compact('userName', 'userName_show', 'products'));
     }
     public function getHomeView()
     {
         if (!isset($_COOKIE['userName_cw']) || !isset($_COOKIE['password_cw'])) { //userName_commerceWeb
+            $check = false;
             $products = ProductProcess::getProductByType('all');
-            return view('home', compact('products'));
+            $alert = 'Xin chào người lạ! Bạn đang ở trạng thái thăm quan hãy đăng nhập để sử dụng.';
+            return view('home', compact('products','alert','check'));
         } else {
             $userName = $_COOKIE['userName_cw'];
             $password = $_COOKIE['password_cw'];
@@ -99,15 +106,16 @@ class LoginController extends Controller
                 //khởi tạo session
                 $this->initUserSession($userName, $password);
 
-                if (strlen($userName) > 4)
-                    $userName_show = substr($userName, 0, 4) . '...';
+                if (strlen($userName) > 6)
+                    $userName_show = substr($userName, 0, 6) . '...';
                 else $userName_show = $userName;
                 $products = ProductProcess::getProductByType('all');
-                return view('home', compact('userName', 'userName_show', 'check', 'products'));
+                return view('home', compact('userName', 'userName_show', 'products'));
             } else {
                 $this->destroyUserCookies();
+                $alert = 'Xin chào người lạ! Tôi đã đọc cookies và nó không hợp lệ bạn hãy thử đăng nhập lại xem.';
                 $products = ProductProcess::getProductByType('all');
-                return view('home', compact('check', 'products'));
+                return view('home', compact('check', 'alert','products'));
             }
             // nếu không hợp lệ: return view('home');
         }
@@ -160,11 +168,15 @@ class LoginController extends Controller
             ];
             Mail::to($email)->send(new VerifyEmail($token));
             $products = ProductProcess::getProductByType('all');
-            return view('home', compact('resultRegister', 'products'));
+            $checkRegister =  true;
+            $alert = 'Chúc mừng bạn đã đăng kí thành công. Hãy xác thực email rồi đăng nhập để mua sắm nào. :D';
+            return view('home', compact('checkRegister', 'alert','products'));
         } else {
             // không thì hiện thị khoogn thành công
             $products = ProductProcess::getProductByType('all');
-            return view('home', compact('resultRegister', 'products'));
+            $checkRegister =  false;
+            $alert = 'Lỗi đăng kí người dùng. Bạn hãy thử lại xem. Chắc là do tên tài khoản hoặc mật khẩu đã có người dùng. :D';
+            return view('home', compact('checkRegister','alert' ,'products'));
         }
     }
 
@@ -200,14 +212,15 @@ class LoginController extends Controller
         $password_hash = hash("ripemd160", $password);
         $check = AccountProcess::checkUserLogin($userName, $password_hash);
         //nếu khong hợp lệ thì trả về thông báo khoogn hợp lệ
+        $products = ProductProcess::getProductByType('all');
         if ($check === false) {
             $checkActive = AccountProcess::isActive($userName, $password_hash);
             if($checkActive === true){
-                abort(403,'Bạn hãy xác thực email để đăng nhập');
-                return;
+                $alert = 'Chào bạn! Tài khoản này đã được đăng kí nhưng chưa xác thực. Bạn hãy xác thực email.';
+                return view('home', compact('check','alert','products'));
             }
-            $products = ProductProcess::getProductByType('all');
-            return view('home', compact('check', 'products'));
+            $alert =  'Chào người lạ! Tài khoản hoặc mật khẩu bạn nhập không đúng.';
+            return view('home', compact('check', 'alert','products'));
         }
         //khởi tạo session
         $this->initUserSession($userName, $password_hash);
@@ -215,11 +228,11 @@ class LoginController extends Controller
         $this->initUserCookies($userName,$password);
 
         //trả về tên dạng plaintext
-        if (strlen($userName) > 4)
-            $userName_show = substr($userName, 0, 4) . '...';
+        if (strlen($userName) > 6)
+            $userName_show = substr($userName, 0, 6) . '...';
         else $userName_show = $userName;
-        $products = ProductProcess::getProductByType('all');
-        return view('home', compact('userName', 'userName_show', 'check', 'products'));
+        $alert = 'Chào '.$userName.'! Bạn đã đăng nhập thành công. Hãy mua sắm thôi nào.';
+        return view('home', compact('userName', 'userName_show', 'check','alert', 'products'));
     }
 
     //funtion này check login của 1 admin
@@ -233,7 +246,8 @@ class LoginController extends Controller
         $check = AccountProcess::checkAdminLogin($adminName, $password_hash);
         if ($check === false) {
             $products = ProductProcess::getProductByType('all');
-            return view('home', compact('check', 'products'));
+            $alert = 'Chào người lạ! Tài khoản và mật khẩu admin của bạn không đúng.';
+            return view('home', compact('check', 'alert','products'));
         }
         //nếu hợp lệ thì set sessions
 
@@ -253,7 +267,9 @@ class LoginController extends Controller
         //hủy bỏ cookies
         $this->destroyUserCookies();
         $products = ProductProcess::getProductByType('all');
-        return (view('home', compact('products')));
+        $check = true;
+        $alert = 'Bạn đã đăng xuất thành công. Hẹn gặp bạn trong lần mua sắm tiếp theo.';
+        return (view('home', compact('products','check','alert')));
     }
 
     public function logOutAdmin()

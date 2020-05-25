@@ -24,6 +24,7 @@ class UserController extends Controller
         $result = json_decode($result, true);
         if ($oldPass !== $result[0]['Password']) return -1;
         DB::table('user')->where('User_ID', '=', $_SESSION['idUser'])->update(['Password' => $newPass]);
+        DB::table('user_not_active')->where('User_ID', '=', $_SESSION['idUser'])->update(['Password' => $newPass]);
         $_SESSION['password_cw'] = $newPass;
         setcookie('password_cw', $newPass_encry, time() + (86400 * 30)); //1 day
         return 1;

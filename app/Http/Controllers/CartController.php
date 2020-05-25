@@ -23,11 +23,13 @@ class CartController extends Controller
             $product = ProductProcess::getProductById($cart[$i]['Product_ID']);
             $cart[$i]['Img'] = $product['Img'];
             $cart[$i]['Product_Name'] = $product['Product_Name'];
+            $cart[$i]['Type'] = $product['Type'];
             $cart[$i]['Cost'] = $product['Cost'];
             $cart[$i]['Total'] = $product['Cost'] * $cart[$i]['Count'];
             $total += $cart[$i]['Total'];
         }
-        return view('cart.showCart', compact('cart', 'len', 'total'));
+        $userName = $_SESSION['userName_cw'];
+        return view('cart.showCart', compact('userName','cart', 'len', 'total'));
     }
 
     public function removeCart(Request $request)
@@ -56,12 +58,15 @@ class CartController extends Controller
         $total = 0;
         for ($i = 0; $i < $len; $i++) {
             $product = ProductProcess::getProductById($cart[$i]['Product_ID']);
+            $cart[$i]['Img'] = $product['Img'];
             $cart[$i]['Product_Name'] = $product['Product_Name'];
+            $cart[$i]['Type'] = $product['Type'];
             $cart[$i]['Cost'] = $product['Cost'];
             $cart[$i]['Total'] = $product['Cost'] * $cart[$i]['Count'];
             $total += $cart[$i]['Total'];
         }
-        return view('cart.payment',compact('cart','len','total'));
+        $userName = $_SESSION['userName_cw'];
+        return view('cart.payment',compact('userName','cart','len','total'));
     }
 
 

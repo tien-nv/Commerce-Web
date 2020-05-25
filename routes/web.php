@@ -31,6 +31,8 @@ Route::get('/sortCheapest', 'ProductController@sortCheapest')->name('sortCheapes
 
 Route::get('/verifyEmail','MailController@verifyEmail')->name('verifyEmail');
 
+Route::get('/home', 'LoginController@resetHomeView')->name('home');
+
 Route::group(['middleware' => ['verifyadmin']], function () {
     Route::get('/addAllProduct', 'AdminController@addAllProduct')->name('addAllProduct');
     Route::get('/delAllProduct','AdminController@delAllProduct')->name('delAllProduct');
@@ -45,7 +47,7 @@ Route::group(['middleware' => ['verifyadmin']], function () {
 });
 
 Route::group(['middleware' => ['verifyuser']], function () {
-    Route::get('/home', 'LoginController@resetHomeView')->name('home');
+    
     //những route xử lý để xác thực xem user đã đăng nhập hay chưa
     //đăng nhập thì mới được ấn xem thêm
     Route::get('/seeMore', 'ProductController@getMoreProduct')->name('seeMore');

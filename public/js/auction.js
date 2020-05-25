@@ -19,6 +19,7 @@ function onProductAuction(id) {
                 $('#wait').css('display', 'none');
                 $('.show-infor').attr('id', data['Product_ID']);
                 $('#big-img').attr('src', data['Img'][0]);
+                $('#view-larger').attr('href', data['Img'][0]);
                 let myHtml = "";
                 let myHtmlDot = "";
                 for (let i = 0; i < data['Img'].length; i++) {
@@ -32,7 +33,7 @@ function onProductAuction(id) {
                 $('#list-img').html(myHtml);
                 $('#list-dot').html(myHtmlDot);
                 $('#de-name-product').text(data['Product_Name']);
-                $('#de-cost-product').text(data['Cost']);
+                $('#de-cost-product').text(data['Cost'] + " vnđ");
                 myHtml = "";
                 for (let i = 0; i < data['Color'].length; i++) {
                     myHtml += '<option value="' + data['Color'][i] + '">' + data['Color'][i] + '</option>';
@@ -44,10 +45,13 @@ function onProductAuction(id) {
                     let id = '#' + 'desc' + (i + 1);
                     $(id).text("");
                 }
+                var deText = "";
                 for (let i = 0; i < data['Description'].length; i++) {
-                    let id = '#' + 'desc' + (i + 1);
-                    $(id).text(data['Description'][i]);
+                    if (data['Description'][i].length > 0)
+                        deText += data['Description'][i] + "<br>";
                 }
+                $('#de-desc-product').html(deText);
+                $("#product-description").css("display", "block");
                 // $('#desc1').text(data['Description1']);
                 //tính toán truyền tham số thời gian còn lại vào đây để hiện thị đếm ngược
                 let h = data['h'];
@@ -116,7 +120,7 @@ function start(h, m, s) {
             },
             // headers: {'X-CSRF-TOKEN': _token},
             success: function(data) {
-                $('#de-cost-product').text(data);
+                $('#de-cost-product').text(data + ' vnđ');
             },
             error: function() {
                 // alert('some thing went wrong!!!');

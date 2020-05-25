@@ -30,6 +30,20 @@ function setRowHtml(obj) {
     return Html;
 }
 
+
+function validateAdminRegister() {
+    if (!checkField("registerAdminForm", "adminRegister", regUserName, 5, void(0))) return false;
+    if (!checkField("registerAdminForm", "passwordRegister", regPass, 2, void(0))) return false;
+    if (!checkField("registerAdminForm", "checkPasswordRegister", regPass, 2, void(0))) return false;
+    let pass = document.forms["registerAdminForm"]["passwordRegister"].value;
+    let pass_ = document.forms["registerAdminForm"]["checkPasswordRegister"].value;
+    if (pass != pass_) {
+        document.getElementById("checkPasswordRegister").style.display = "block";
+        document.getElementById("checkPasswordRegister").innerHTML = mess[3];
+        return false;
+    }
+    return true;
+}
 //function lấy sản phẩm từ bảng seller
 $(document).ready(function() {
     $('#getProduct').click(function() {
