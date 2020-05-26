@@ -145,74 +145,6 @@
     </div>
 </div>
 <!-- HEADER-TOP END -->
-<!-- HEADER-MIDDLE START -->
-<section class="header-middle">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <!-- LOGO START -->
-                <div class="logo">
-                    <img src="img/logo.png" alt="bstore logo" style="width:140px;height:100px" />
-                </div>
-                <!-- LOGO END -->
-                <!-- HEADER-RIGHT-CALLUS START -->
-                <a href="{{ route('sellProduct') }}">
-                    <div class="header-right-callus">
-                        <h3>BÁN SẢN PHẨM</h3>
-                        <span>theo cách của bạn</span>
-                    </div>
-                </a>
-                <!-- HEADER-RIGHT-CALLUS END -->
-
-            </div>
-        </div>
-    </div>
-</section>
-<!-- HEADER-MIDDLE END -->
-<!-- MAIN-MENU-AREA START -->
-<header class="main-menu-area" id="myTopnav">
-    <div class="container">
-        <div class="row">
-            <!-- MAINMENU START -->
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding-right menuarea">
-                <div class="mainmenu">
-                    <nav>
-                        <ul class="list-inline mega-menu">
-                            <li class="active"><a href="javascript:void(0)">Trang chủ</a>
-                                <!-- DROPDOWN MENU START -->
-                                <div class="home-var-menu">
-                                    <ul class="home-menu">
-                                        <li><a href="{{ route('home') }}" id="all">Trang chủ</a></li>
-                                    </ul>
-                                </div>
-                                <!-- DROPDOWN MENU END -->
-                            </li>
-
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-            <!-- MAINMENU END -->
-        </div>
-        <div class="row">
-            <!-- MOBILE MENU START -->
-            <div class="col-sm-12 mobile-menu-area">
-                <div class="mobile-menu hidden-md hidden-lg" id="mob-menu">
-                    <span class="mobile-menu-title">MENU</span>
-                    <nav>
-                        <ul>
-                            <li><a href="{{ route('home') }}" id="all">Trang chủ</a>
-                            </li>
-
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-            <!-- MOBILE MENU END -->
-        </div>
-    </div>
-</header>
-<!-- MAIN-MENU-AREA END -->
 @endsection
 
 @section('main')
@@ -344,7 +276,7 @@
                 <!-- RETURNE-CONTINUE-SHOP START -->
                 <div class="returne-continue-shop">
                     <a href="{{ route('home') }}" class="continueshoping"><i class="fa fa-chevron-left"></i>Tiếp tục mua sắm</a>
-                    <a href="{{ route('showPayment') }}" class="procedtocheckout">Chuyển tới thanh toán<i class="fa fa-chevron-right"></i></a>
+                    <a href="{{ route('showPayment') }}" class="procedtocheckout">Thanh toán<i class="fa fa-chevron-right"></i></a>
                 </div>
                 <!-- RETURNE-CONTINUE-SHOP END -->
             </div>

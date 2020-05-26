@@ -119,95 +119,34 @@
         <!-- TOW-COLUMN-PRODUCT START -->
         <div class="featured-products-area">
             <div class="row">
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 mobile-catelog">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 mobile-catelog" style="position: sticky;top: 54px">
                     <!-- PRODUCT-LEFT-SIDEBAR START -->
                     <div class="product-left-sidebar">
-                        <h2 class="left-title pro-g-page-title">Catalog</h2>
-                        <!-- SINGLE SIDEBAR ENABLED FILTERS START -->
-                        <div class="product-single-sidebar">
-                            <span class="sidebar-title">ENABLED FILTERS:</span>
-                            <ul class="filtering-menu">
-                                <li>
-                                    Categories: Dresses
-                                    <a href="#"><i class="fa fa-remove"></i></a>
-                                </li>
-                                <li>
-                                    Avaiale: In stock
-                                    <a href="#"><i class="fa fa-remove"></i></a>
-                                </li>
-                                <li>
-                                    Categories: Dresses
-                                    <a href="#"><i class="fa fa-remove"></i></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- SINGLE SIDEBAR ENABLED FILTERS END -->
-                        <!-- SINGLE SIDEBAR CATEGORIES START -->
-                        <div class="product-single-sidebar">
-                            <span class="sidebar-title">Categories</span>
-                            <ul>
-                                <li>
-                                    <label class="cheker">
-                                        <input type="checkbox" name="categories" />
-                                        <span></span>
-                                    </label>
-                                    <a href="#">Tops<span> (12)</span></a>
-                                </li>
-                                <li>
-                                    <label class="cheker">
-                                        <input type="checkbox" name="categories" />
-                                        <span></span>
-                                    </label>
-                                    <a href="#">Dresses<span> (13)</span></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- SINGLE SIDEBAR CATEGORIES END -->
-                        <!-- SINGLE SIDEBAR AVAILABILITY START -->
-                        <div class="product-single-sidebar">
-                            <span class="sidebar-title">Availability</span>
-                            <ul>
-                                <li>
-                                    <label class="cheker">
-                                        <input type="checkbox" name="availability" />
-                                        <span></span>
-                                    </label>
-                                    <a href="#">In stock<span> (13)</span></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- SINGLE SIDEBAR AVAILABILITY END -->
+                        <h2 class="left-title pro-g-page-title">Lọc sản phẩm</h2>
                         <!-- SINGLE SIDEBAR CONDITION START -->
                         <div class="product-single-sidebar">
-                            <span class="sidebar-title">Condition</span>
+                            <span class="sidebar-title">Sắp xếp theo</span>
                             <ul>
                                 <li>
                                     <label class="cheker">
                                         <input type="checkbox" name="condition" />
                                         <span></span>
                                     </label>
-                                    <a href="#">new<span> (13)</span></a>
+                                    <a href="javascript:void(0)" id="sortNewest">Mới nhất</a>
+                                </li>
+                                <li>
+                                    <label class="cheker">
+                                        <input type="checkbox" name="condition" />
+                                        <span></span>
+                                    </label>
+                                    <a href="javascript:void(0)" id="sortCheapest">Rẻ nhất</a>
                                 </li>
                             </ul>
                         </div>
                         <!-- SINGLE SIDEBAR CONDITION END -->
-                        <!-- SINGLE SIDEBAR MANUFACTURER START -->
-                        <div class="product-single-sidebar">
-                            <span class="sidebar-title">Manufacturer</span>
-                            <ul>
-                                <li>
-                                    <label class="cheker">
-                                        <input type="checkbox" name="manufacturer" />
-                                        <span></span>
-                                    </label>
-                                    <a href="#">Fashion Manufacturer<span> (13)</span></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- SINGLE SIDEBAR MANUFACTURER END -->
                         <!-- SINGLE SIDEBAR PRICE START -->
                         <div class="product-single-sidebar">
-                            <span class="sidebar-title">Price</span>
+                            <span class="sidebar-title">Giá</span>
                             <ul>
                                 <li>
                                     <label><strong>Range:</strong><input type="text" id="slidevalue" /></label>
@@ -218,36 +157,8 @@
                             </ul>
                         </div>
                         <!-- SINGLE SIDEBAR PRICE END -->
-                        <!-- SINGLE SIDEBAR SIZE START -->
-                        <div class="product-single-sidebar">
-                            <span class="sidebar-title">Size</span>
-                            <ul>
-                                <li>
-                                    <label class="cheker">
-                                        <input type="checkbox" name="Size" />
-                                        <span></span>
-                                    </label>
-                                    <a href="#">S<span> (10)</span></a>
-                                </li>
-                                <li>
-                                    <label class="cheker">
-                                        <input type="checkbox" name="Size" />
-                                        <span></span>
-                                    </label>
-                                    <a href="#">m<span> (10)</span></a>
-                                </li>
-                                <li>
-                                    <label class="cheker">
-                                        <input type="checkbox" name="Size" />
-                                        <span></span>
-                                    </label>
-                                    <a href="#">l<span> (10)</span></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- SINGLE SIDEBAR SIZE END -->
                         <!-- SINGLE SIDEBAR COLOR START -->
-                        <div class="product-single-sidebar">
+                        <!-- <div class="product-single-sidebar">
                             <span class="sidebar-title">Color</span>
                             <ul class="product-color-var">
                                 <li>
@@ -283,106 +194,8 @@
                                     <a href="#">pink<span> (6)</span></a>
                                 </li>
                             </ul>
-                        </div>
+                        </div> -->
                         <!-- SINGLE SIDEBAR COLOR END -->
-                        <!-- SINGLE SIDEBAR COMPOSITIONS START -->
-                        <div class="product-single-sidebar">
-                            <span class="sidebar-title">Compositions</span>
-                            <ul>
-                                <li>
-                                    <label class="cheker">
-                                        <input type="checkbox" name="compositions" />
-                                        <span></span>
-                                    </label>
-                                    <a href="#">Cotton<span>(8)</span></a>
-                                </li>
-                                <li>
-                                    <label class="cheker">
-                                        <input type="checkbox" name="compositions" />
-                                        <span></span>
-                                    </label>
-                                    <a href="#"> Polyester<span>(3)</span></a>
-                                </li>
-                                <li>
-                                    <label class="cheker">
-                                        <input type="checkbox" name="compositions" />
-                                        <span></span>
-                                    </label>
-                                    <a href="#"> Viscose<span>(2)</span></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- SINGLE SIDEBAR COMPOSITIONS END -->
-                        <!-- SINGLE SIDEBAR STYLES START -->
-                        <div class="product-single-sidebar">
-                            <span class="sidebar-title">Styles</span>
-                            <ul>
-                                <li>
-                                    <label class="cheker">
-                                        <input type="checkbox" name="styles" />
-                                        <span></span>
-                                    </label>
-                                    <a href="#">Casual<span>(5)</span></a>
-                                </li>
-                                <li>
-                                    <label class="cheker">
-                                        <input type="checkbox" name="styles" />
-                                        <span></span>
-                                    </label>
-                                    <a href="#">Dressy<span>(1)</span></a>
-                                </li>
-                                <li>
-                                    <label class="cheker">
-                                        <input type="checkbox" name="styles" />
-                                        <span></span>
-                                    </label>
-                                    <a href="#">Girly<span>(7)</span></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- SINGLE SIDEBAR STYLES END -->
-                        <!-- SINGLE SIDEBAR PROPERTIES START -->
-                        <div class="product-single-sidebar">
-                            <span class="sidebar-title">Properties</span>
-                            <ul>
-                                <li>
-                                    <label class="cheker">
-                                        <input type="checkbox" name="properties" />
-                                        <span></span>
-                                    </label>
-                                    <a href="#">Colorful Dress<span>(4)</span></a>
-                                </li>
-                                <li>
-                                    <label class="cheker">
-                                        <input type="checkbox" name="properties" />
-                                        <span></span>
-                                    </label>
-                                    <a href="#">Maxi Dress <span>(1)</span></a>
-                                </li>
-                                <li>
-                                    <label class="cheker">
-                                        <input type="checkbox" name="properties" />
-                                        <span></span>
-                                    </label>
-                                    <a href="#">Midi Dress<span>(2)</span></a>
-                                </li>
-                                <li>
-                                    <label class="cheker">
-                                        <input type="checkbox" name="properties" />
-                                        <span></span>
-                                    </label>
-                                    <a href="#">Short Dress<span>(2)</span></a>
-                                </li>
-                                <li>
-                                    <label class="cheker">
-                                        <input type="checkbox" name="properties" />
-                                        <span></span>
-                                    </label>
-                                    <a href="#"> Short Sleeve<span>(4)</span></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- SINGLE SIDEBAR PROPERTIES END -->
                     </div>
                     <!-- PRODUCT-LEFT-SIDEBAR END -->
                     <!-- SINGLE SIDEBAR TAG START -->
@@ -405,17 +218,6 @@
                 <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                     <div class="center-title-area">
                         <h2 class="center-title">Các mặt hàng đấu giá</h2>
-                    </div>
-                    <div class="product-shooting-area">
-                        <div class="product-shooting-bar">
-                            <div class="show-page" style="display:flex">
-                                <label for="perPage">Sắp xếp theo: </label>
-                                <ul style="display: inline-flex; margin-left:10px;">
-                                    <li style="margin-left: 30px"><a href="javascript:void(0)" id="sortNewest">Mới nhất</a></li>
-                                    <li style="margin-left: 30px"><a href="javascript:void(0)" id="sortCheapest">Rẻ nhất</a></li>
-                                </ul>
-                            </div>
-                        </div>
                     </div>
                     <div class="my-products" id="row-products">
                         @for($i = 0;$i < count($products);$i++) <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 one-product">

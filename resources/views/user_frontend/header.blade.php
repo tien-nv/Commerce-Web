@@ -1,4 +1,53 @@
 <!-- HEADER-TOP START -->
+<!-- HEADER-MIDDLE START -->
+<section class="header-middle">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <!-- LOGO START -->
+                <div class="logo">
+                    <img src="img/logo.png" alt="bstore logo" style="width:140px;height:100px" />
+                </div>
+                <!-- LOGO END -->
+                <!-- HEADER-RIGHT-CALLUS START -->
+                <a href="{{ route('sellProduct') }}">
+                    <div class="header-right-callus">
+                        <h3>BÁN SẢN PHẨM</h3>
+                        <span>theo cách của bạn</span>
+                    </div>
+                </a>
+                <!-- HEADER-RIGHT-CALLUS END -->
+                <!-- CATEGORYS-PRODUCT-SEARCH START -->
+                <div class="categorys-product-search">
+                    <form class="search-form-cat" action="javascript:void(0)" method="post" class="findForm" id="findForm" name="findForm">
+                        {{ csrf_field() }}
+                        <div class="search-product form-group">
+                            <select class="cat-search" id="category" name="category">
+                                <option value="all" selected>--Tất cả--</option>
+                                <option value="book">Book</option>
+                                <option value="camera">Camera</option>
+                                <option value="fridge">Fridge</option>
+                                <option value="keyboard">keyboard</option>
+                                <option value="laptop">laptop</option>
+                                <option value="phone">phone</option>
+                                <option value="tv">television</option>
+                                <option value="wacth">watch</option>
+                            </select>
+                            <input type="text" class="form-control search-form" name="search" id="search" placeholder="Nhập từ khóa tìm kiếm ... " />
+                            <button class="search-button" value="Search" id="search-button" type="button">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            <div class="search-recommend" id="search-recommend">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- CATEGORYS-PRODUCT-SEARCH END -->
+            </div>
+        </div>
+    </div>
+</section>
+<!-- HEADER-MIDDLE END -->
 <div class="header-top">
     <div class="container">
         @if(isset($check))
@@ -102,7 +151,7 @@
                                                         <table style="width: 100%">
                                                             <tr>
                                                                 <th colspan="3">User: </th>
-                                                                <td ><span class="username" id="showUsername"></span></td>
+                                                                <td><span class="username" id="showUsername"></span></td>
                                                             </tr>
                                                             <tr>
                                                                 <th colspan="3">Email: </th>
@@ -285,73 +334,12 @@
     </div>
 </div>
 <!-- HEADER-TOP END -->
-<!-- HEADER-MIDDLE START -->
-<section class="header-middle">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <!-- LOGO START -->
-                <div class="logo">
-                    <img src="img/logo.png" alt="bstore logo" style="width:140px;height:100px" />
-                </div>
-                <!-- LOGO END -->
-                <!-- HEADER-RIGHT-CALLUS START -->
-                <a href="{{ route('sellProduct') }}">
-                    <div class="header-right-callus">
-                        <h3>BÁN SẢN PHẨM</h3>
-                        <span>theo cách của bạn</span>
-                    </div>
-                </a>
-                <!-- HEADER-RIGHT-CALLUS END -->
-                <!-- CATEGORYS-PRODUCT-SEARCH START -->
-                <div class="categorys-product-search">
-                    <form class="search-form-cat" action="javascript:void(0)" method="post" class="findForm" id="findForm" name="findForm">
-                        {{ csrf_field() }}
-                        <div class="search-product form-group">
-                            <select class="cat-search" id="category" name="category">
-                                <option value="all" selected>--Tất cả--</option>
-                                <option value="book">Book</option>
-                                <option value="camera">Camera</option>
-                                <option value="fridge">Fridge</option>
-                                <option value="keyboard">keyboard</option>
-                                <option value="laptop">laptop</option>
-                                <option value="phone">phone</option>
-                                <option value="tv">television</option>
-                                <option value="wacth">watch</option>
-                            </select>
-                            <input type="text" class="form-control search-form" name="search" id="search" placeholder="Nhập từ khóa tìm kiếm ... " />
-                            <button class="search-button" value="Search" id="search-button" type="button">
-                                <i class="fa fa-search"></i>
-                            </button>
-                            <div class="search-recommend" id="search-recommend">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <!-- CATEGORYS-PRODUCT-SEARCH END -->
-            </div>
-        </div>
-    </div>
-</section>
-<!-- HEADER-MIDDLE END -->
+
 <!-- MAIN-MENU-AREA START -->
 <header class="main-menu-area" id="myTopnav">
     <div class="container">
         <div class="row">
-            <!-- SHOPPING-CART START -->
-            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right shopingcartarea">
-                <div class="shopping-cart-out pull-right">
-                    <div class="shopping-cart">
-                        <a class="shop-link" href="{{ route('showCart') }}" title="View my shopping cart">
-                            <i class="fa fa-shopping-cart cart-icon"></i>
-                            <b>My Cart</b>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <!-- SHOPPING-CART END -->
-            <!-- MAINMENU START -->
-            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 no-padding-right menuarea">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding-right menuarea">
                 <div class="mainmenu">
                     <nav>
                         <ul class="list-inline mega-menu">
@@ -444,6 +432,12 @@
                                 <!-- DRODOWN-MEGA-MENU END -->
                             </li>
                             <li><a href="{{ route('auction') }}"><i class="fa fa-hourglass-half" aria-hidden="true"></i> Đấu giá</a></li>
+                            <li style="float: right">
+                                    <a href="{{ route('showCart') }}" title="View my shopping cart">
+                                        <i class="fa fa-shopping-cart cart-icon"></i>
+                                        <b>My Cart</b>
+                                    </a>
+                            </li>
                         </ul>
                     </nav>
                 </div>
@@ -498,7 +492,12 @@
                                 </ul>
                             </li>
                             <li><a href="{{ route('auction') }}"><i class="fa fa-hourglass-half" aria-hidden="true"></i> Đấu giá</a></li>
-
+                            <li style="float: right">
+                                    <a href="{{ route('showCart') }}" title="View my shopping cart">
+                                        <i class="fa fa-shopping-cart cart-icon"></i>
+                                        <b>My Cart</b>
+                                    </a>
+                            </li>
                         </ul>
                     </nav>
                 </div>
