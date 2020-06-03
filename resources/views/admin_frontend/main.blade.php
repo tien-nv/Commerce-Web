@@ -1,13 +1,11 @@
 <section class="admin_page">
     <div class="container">
         <div class="row" style="margin-top:0;padding:50px">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
-                <div class="my-dropdown" style="width:fit-content;margin-left:30%;">
-                    <label> <a href="javascript:void(0)" class="headerBar-login" style="margin-right: 40px;color: #fff;">Welcome {{$adminName }}</a></label>
-                    <div id="my-dropdown-content">
-                        <a href="#">Profile</a>
-                        <a href="{{route('logOutAdmin')}}">Check out</a>
-                    </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12" style="display: flex;justify-content: center">
+                <div class="my-dropdown" style="width:fit-content;">
+                    <label> <a href="javascript:void(0)" class="headerBar-login" style="color: #fff;">Welcome {{$adminName }}</a></label>
+                    <br/>
+                    <label><a class="headerBar-login" style="color: #fff;" href="{{route('logOutAdmin')}}">Đăng xuất</a></label>
                 </div>
             </div>
         </div>

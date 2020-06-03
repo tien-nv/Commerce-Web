@@ -229,6 +229,8 @@
                             <!-- 
                                 Thêm file js xử lý phần đăng nhập
                              -->
+                            <script src="bin/crypto-js/aes.js"></script>
+                            <script src="bin/crypto-js/md5.js"></script>
                             <script src="js/login.js"></script>
                             <!-- 
                                 Phần xử hiển thị cho người chưa đăng nhập
@@ -292,7 +294,7 @@
                                     </div>
                                     <div>
                                         <span class="my-alert-input" id="passwordLogin"></span>
-                                        <input type="password" name="passwordLogin" class="form-control" placeholder="Mật khẩu">
+                                        <input type="password" name="passwordLogin" id="userPasswordLogin" class="form-control" placeholder="Mật khẩu">
                                     </div>
                                     <div class="divider">
                                         <a href="#">Quên mật khẩu?</a>

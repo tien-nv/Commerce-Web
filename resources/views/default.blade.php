@@ -110,6 +110,10 @@
   @section('main')
   @show
 
+  <!-- đây là phần biểu diễn thành phần chat chỉ hiển thị phần giao diện này nếu người dùng đã đăng nhập -->
+  @section('chat')
+  @show
+
   <!-- đây là phần biểu diễn footer -->
   @section('footer')
   @show

@@ -1,25 +1,4 @@
-@extends('default')
-
-@section('title','Admin Pornhub of VietNamese')
-<!-- thêm thư viện -->
-@section('addlib')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="bin\\bootstrap441\\css\\bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <script src="bin\\jquery341\\jquery.min.js"></script>
-    <script src="bin\\bootstrap441\\js\\bootstrap.min.js"></script>
-    <script src="bin/crypto-js/aes.js"></script>
-    <script src="bin/crypto-js/md5.js"></script>
-    <script src="js/login.js"></script>
-    <script type="text/javascript" src="js\\admin.js"></script>
-@endsection
-
-@section('main')
-@include('admin_frontend/main')
-@endsection
-
-@section('chat')
-<script src="js/chatAdmin.js"></script>
+<script src="js/chat.js"></script>
 <style>
     .chat-icon {
         position: fixed;
@@ -68,12 +47,9 @@
     }
     .chat-content{
         height: 60px;
-        display: flex;
-        justify-content: center;
     }
-    .chat-content h4{
-        margin: 15px
-        
+    .chat-content h1,h2{
+        margin: 10px
     }
     .admin-mess {
         max-width: 170px;
@@ -138,9 +114,7 @@
         <a href="javascript:void(0)"><i class="fa fa-times" aria-hidden="true" onclick="exitChat()"></i></a>
     </div>
     <div class="chat-content">
-        <span>Người dùng ID: <h4 id="User_ID" value_chat_ID=""></h4>
-        </span>
-        <a href="javascript:void(0)" onclick="startGetMess()"><i class="fa fa-refresh" aria-hidden="true"></i></a>
+        <h1>Hãy gửi phản hồi của bạn</h1>
     </div>
     <div>
         <div class="container-chat" id="message">
@@ -154,4 +128,3 @@
             <a href="javascript:void(0)" id="send-mess"><i class="fa fa-paper-plane" aria-hidden="true"></i></a>
         </div>
 </div>
-@endsection

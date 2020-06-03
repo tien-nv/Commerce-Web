@@ -1,4 +1,8 @@
+// import { genSaltSync, hashSync } from './bcrypt.min.js';
+
+
 //hiển thị đè thông tin đăng kí
+
 
 function onRegister() {
     document.getElementById("overlayRegister").style.display = "block";
@@ -86,13 +90,18 @@ function checkDate() {
 function validateLogin() {
     if (!checkField("loginForm", "usernameLogin", regUserName, 5, onLogin())) return false;
     if (!checkField("loginForm", "passwordLogin", regPass, 2, onLogin())) return false;
+    let pass = document.forms["loginForm"]["passwordLogin"].value;
+    var h_pass = CryptoJS.MD5(pass).toString();
+    document.forms["loginForm"]["passwordLogin"].value = h_pass;
     return true;
 }
 
 function validateAdminLogin() {
     if (!checkField("loginAdminForm", "adminLogin", regUserName, 5, onAdminLogin())) return false;
     if (!checkField("loginAdminForm", "passwordAdminLogin", regPass, 2, onAdminLogin())) return false;
-
+    let pass = document.forms["loginAdminForm"]["passwordAdminLogin"].value;
+    var h_pass = CryptoJS.MD5(pass).toString();
+    document.forms["loginAdminForm"]["passwordAdminLogin"].value = h_pass;
     return true;
 }
 
@@ -117,6 +126,8 @@ function validateRegister() {
         document.getElementById("birthday").innerHTML = mess[4];
         return false;
     }
+    var h_pass = CryptoJS.MD5(pass).toString();
+    document.forms["registerForm"]["passwordRegister"].value = h_pass;
     return true;
 }
 

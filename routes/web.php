@@ -44,6 +44,8 @@ Route::group(['middleware' => ['verifyadmin']], function () {
     Route::post('/adminRegister', 'LoginController@getAdminRegister')->name('adminRegister');
     Route::post('/removeAdmin', 'AdminController@removeAdmin')->name('removeAdmin');
     Route::post('/getAdmin', 'AdminController@getAdmin')->name('getAdmin');
+    Route::post('/adminSendMess','ChatController@adminSendMess')->name('adminSendMess');
+    Route::get('/getMessForAdmin','ChatController@getMessForAdmin')->name('getMessForAdmin');
 });
 
 Route::group(['middleware' => ['verifyuser']], function () {
@@ -69,4 +71,6 @@ Route::group(['middleware' => ['verifyuser']], function () {
     Route::get('/removeCart', 'CartController@removeCart')->name('removeCart');
     Route::get('/showPayment', 'CartController@showPayment')->name('showPayment');
     Route::post('/payCart', 'CartController@payCart')->name('payCart');
+    Route::post('/sendMess','ChatController@sendMess')->name('sendMess');
+    Route::get('/getMess','ChatController@getMess')->name('getMess');
 });

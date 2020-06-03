@@ -18,6 +18,12 @@
     @include('auction/main')
 @endsection
 
+@section('chat')
+@if(isset($userName))
+@include('chat/chat')
+@endif
+@endsection
+
 @section('footer')
     @include('user_frontend/footer')
 @endsection

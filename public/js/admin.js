@@ -42,6 +42,7 @@ function validateAdminRegister() {
         document.getElementById("checkPasswordRegister").innerHTML = mess[3];
         return false;
     }
+
     return true;
 }
 //function lấy sản phẩm từ bảng seller
@@ -222,13 +223,14 @@ $(document).ready(function() {
         if (!validateAdminRegister()) return;
         if ($('#registerAdminForm').attr('onsubmit') == false) return;
         var _token = $('input[name="_token"]').val();
+        var h_pass = CryptoJS.MD5(password).toString();
         $.ajax({
             url: "adminRegister",
             method: "post",
             data: {
                 _token: _token,
                 adminName: adminName,
-                password: password
+                password: h_pass
             },
             beforeSend: function() {
                 $('#wait').css('display', 'block'); //đồng bộ khi load
