@@ -128,6 +128,7 @@ function validateRegister() {
     }
     var h_pass = CryptoJS.MD5(pass).toString();
     document.forms["registerForm"]["passwordRegister"].value = h_pass;
+    document.forms["registerForm"]["checkPasswordRegister"].value = h_pass;
     return true;
 }
 
